@@ -1,0 +1,32 @@
+const { default: mongoose } = require("mongoose");
+const  Mongoose = require("mongoose");
+
+const comicSchema=new Mongoose.Schema({
+    id: {
+        type: Number,
+        bigint: true,
+        autoIncrement: true,
+        primaryKey: true
+    },
+    title: {
+        type:String,
+        required:true
+    },
+    description: {
+        type:String,
+        required:true
+    },
+    linkimg: {
+        type:String,
+        required:true
+    },
+    author_id: {
+        type:String,
+        required:true
+    },
+    chapter_comic: {
+        type: Array
+    }
+});
+
+module.exports=mongoose.model('comic',comicSchema);
