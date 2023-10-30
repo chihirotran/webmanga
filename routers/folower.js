@@ -26,22 +26,33 @@ router.post("/history:id",async(req,res)=>{
     
     const id=req.params.id.split(":")[1];
     const targetObjectId = new ObjectId(id);
-    User.find({ 'history': targetObjectId }, async (err, history) => {
+    console.log(targetObjectId.toString());
+    User.find({ 'history': targetObjectId }, async (err, historys) => {
         if (err) {
             console.error(err);
             // Xử lý lỗi tại đây
         } else {
-            if (history.length === 0) {
+            if(historys.length === 0 ){
                 const u = await User.findOneAndUpdate({ username: user }, {
                     $push: {
-                        history: id,
+                        history: targetObjectId,
+                    }
+                });
+            }
+            else {
+            console.log(historys);
+            console.log(historys[0].history.length);
+            if (historys[0].history.length === 0) {
+                const u = await User.findOneAndUpdate({ username: user }, {
+                    $push: {
+                        history: targetObjectId,
                     }
                 });
                 // Xử lý sau khi thực hiện findOneAndUpdate
             } else {
                 // Xử lý khi tìm thấy kết quả
             }
-        }
+        }}
     });
 
 })
