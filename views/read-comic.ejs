@@ -1,0 +1,487 @@
+<%- include('partials/header') %>
+
+    <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style3.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./assets/font/fontawesome-free-6.2.1-web/css/all.min.css">
+    <!-- <link rel="stylesheet" href="./assetss/img"> -->
+    <script src="docchuyen.js"></script>
+    </head>
+    <div class="main" style="margin: 8px 0">
+
+        <div class="container">
+            
+            <div class="top">
+                <ul class="breadcrumb" itemscope itemtype="http://schema.org/BreadcrumbList">
+                    <li itemprop="itemList" itemscope itemtype="http://schema.org/ListItem">
+                        <a href="index.html" class="itemcrumb" itemprop="item" itemtype="http:yện//schema.org/Thing">
+                            <span itemprop="name">Trang chủ</span>
+                        </a>
+                        <meta itemprop="position" content="1">
+                    </li>
+                    <li itemprop="itemList" itemscope="" itemtype="http://schema.org/ListItem">
+                        <a href="https://www.nettruyenus.com/tim-truyen" class="itemcrumb" itemprop="item" itemtype="http://schema.org/Thing">
+                        <span itemprop="name">Thể loại</span>
+                        </a>
+                        <meta itemprop="position" content="2">
+                    </li>
+                    <li itemprop="itemList" itemscope="" itemtype="http://schema.org/ListItem">
+                        <a href="https://www.nettruyenus.com/truyen-tranh/vo-luyen-dinh-phong-176960" class="itemcrumb" itemprop="item" itemtype="http://schema.org/Thing">
+                            <span itemprop="name"><%= comic.title %></span>
+                        </a>
+                        <meta itemprop="position" content="3">
+                    </li>
+                    <li itemprop="itemList" itemscope="" itemtype="http://schema.org/ListItem">
+                        <a href="https://www.nettruyenus.com/truyen-tranh/vo-luyen-dinh-phong/chap-1/361803" class="itemcrumb active" itemprop="item" itemtype="http://schema.org/Thing">
+                            <span itemprop="name"> Chapter <%= number %></span>
+                        </a>
+                        <meta itemprop="position" content="4">
+                    </li>
+
+                </ul>
+
+                <h1 class="txt-primary">
+                    <a href="https://www.nettruyenus.com/truyen-tranh/vo-luyen-dinh-phong-176960"><%= comic.title%></a>
+                     <span>- Chapter <%= number %></span>
+                </h1>
+
+                <i>[Cập nhật lúc: 16:54 02/01/2018]</i>
+
+            
+            </div>
+
+            <div class="control">
+                <div class="chooseSever">
+                    "Nếu không xem được truyện vui lòng đổi "SERVER ẢNH" bên dưới"
+                </div>
+                <div class="sever">
+                    <a rel="nofollow" href="javascript:void(0)" data-server="1" class="loadchapter btn btn-success control">Server 1</a>
+                    <a rel="nofollow" href="javascript:void(0)" data-server="2" class="loadchapter btn btn-primary control">Server 2</a>
+                    <a rel="nofollow" href="javascript:void(0)" data-server="4" class="loadchapter btn btn-primary control"> Server VIP</a>
+                    <a rel="nofollow" href="javascript:void(0)" data-server="5" class="loadchapter btn btn-primary control"> Server VIP 2</a>
+                </div>
+                <div class="error">
+                    <a rel="nofollow" href="javascript:void(0)" class="alertError btn btn-warning">
+                        <i class="fa fa-exclamation-triangle">
+                        </i> Báo lỗi</a>
+                </div>
+                <div class="alert alert-info error hidden-xs hidden-sm">
+                    <i class="fa fa-info-circle"></i> <em>Sử dụng mũi tên trái (←) hoặc phải (→) để chuyển chapter</em>
+                    </div>
+
+                    <div class="chapter-nav" id="chapterNav" style="z-index: auto; position: static; top: auto;">
+                        <a class="home" href="/" title="Trang chủ">
+                            <i class="fa fa-home"></i>
+                        </a>
+                        <a class="home backward" href="https://www.nettruyenus.com/truyen-tranh/vo-luyen-dinh-phong-176960#nt_listchapter" title="<%= comic.title%>">
+                            <i class="fa fa-list"></i>
+                        </a>
+                        <a class="home changeserver" href="#" title="Đổi server">
+                            <i class="fa fa-undo change"></i>
+                    
+                        </a>
+                        <a href="#" class="prev a_prev disabled">
+                            <i class="fa fa-chevron-left"></i>
+                        </a>
+                        <select name="ctl00$mainContent$ddlSelectChapter" id="ctl00_mainContent_ddlSelectChapter" class="select-chapter">
+                        <option value="/truyen-tranh/vo-luyen-dinh-phong/chap-1/361803">Chapter 1</option></select>
+                        <a href="https://www.nettruyenus.com/truyen-tranh/vo-luyen-dinh-phong/chap-2/361892" class="next a_next">
+                            <i class="fa fa-chevron-right"></i>
+                        </a>
+                        <a class="follow-link btn btn-success" href="javascript:void(0)" data-id="17696">
+                            <i class="fa fa-heart"></i> 
+                            <span>Theo dõi</span>
+                        </a>
+                        </div>    
+            </div>
+            <script>gOpts.comicId=17696;gOpts.chapterId=361803;gOpts.key="72869ef1-129c-f5fd-dc2b-0cdc7df19e35";gOpts.siteRoot="https://www.nettruyenus.com";gOpts.cdn="//cdn.ntcdntempv26.com";gOpts.cdn2="//cdn.ntcdntempv3.com";</script>    
+        </div>
+
+        <div class="reading_box">
+            <%
+            let count = 1;
+            for(const element of chapters.linkimg) {
+                
+                %>
+            
+            <div id="page_<%= count %>" class="page-chapter"><img alt="<%= chapters.title  %>" data-index="1" src="<%= element  %>"></div>
+                <%
+                count++;
+             }%>
+        </div>
+
+        <div class="quangcao">
+            <div class="row">
+                <div class="mrt5 chooseSever text-center col-sm-6">
+                    <a target="_blank" rel="nofollow noopener noreferrer" href="https://url.rw/?https%3A%2F%2Frebrand.ly%2Fwin79a%2F%3Fa%3Dwin1_cpd-nettruyen_mimi%26utm_source%3Dnettruyen.com%26utm_medium%3DTop_1%26utm_campaign%3DCPD">
+                    <img alt="win79" class="lazy" src="assets/img/win79.gif" width="320" style="aspect-ratio:1.28">
+                    </a>
+                </div>
+                <div class="mrt5 chooseSever text-center col-sm-6">
+                    <a target="_blank" rel="nofollow noopener noreferrer" href="https://url.rw/?https%3A%2F%2Frebrand.ly%2Fwin79a%2F%3Fa%3Dwin1_cpd-nettruyen_mimi%26utm_source%3Dnettruyen.com%26utm_medium%3DTop_1%26utm_campaign%3DCPD">
+                    <img alt="win79" class="lazy" src="assets/img/b52.gif" width="320" style="aspect-ratio:1.28">
+                    </a>
+                </div>
+            </div>
+            <div class="top bottom">
+                <div class="chapter-nav-bottom text-center" id="chapterNavBottom">
+                <a href="#" class="btn btn-danger prev disabled"><em class="fa fa-chevron-left"></em> Chap trước</a>
+                <a href="https://www.nettruyenus.com/truyen-tranh/vo-luyen-dinh-phong/chap-2/361892" class="btn btn-danger next">Chap sau <em class="fa fa-chevron-right"></em></a>
+                </div>
+                <ul class="breadcrumb" itemscope="" itemtype="http://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem"><a href="https://www.nettruyenus.com" class="itemcrumb" itemprop="item" itemtype="http://schema.org/Thing"><span itemprop="name">Trang chủ</span></a><meta itemprop="position" content="1"></li><li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem"><a href="https://www.nettruyenus.com/tim-truyen" class="itemcrumb" itemprop="item" itemtype="http://schema.org/Thing"><span itemprop="name">Thể loại</span></a><meta itemprop="position" content="2"></li><li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem"><a href="https://www.nettruyenus.com/truyen-tranh/vo-luyen-dinh-phong-176960" class="itemcrumb" itemprop="item" itemtype="http://schema.org/Thing"><span itemprop="name"><%= comic.title%></span></a><meta itemprop="position" content="3"></li><li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem"><a href="https://www.nettruyenus.com/truyen-tranh/vo-luyen-dinh-phong/chap-1/361803" class="itemcrumb active" itemprop="item" itemtype="http://schema.org/Thing"><span itemprop="name">Chapter <%= number %></span></a><meta itemprop="position" content="4"></li></ul>
+                <div class="social hidden">
+                </div>
+            </div>
+            <div class="row">
+                <div class="mrt5 chooseSever text-center col-sm-6"><a target="_blank" rel="nofollow noopener noreferrer" href="https://url.rw/?https%3A%2F%2Fqc.789g.club%2F%3Fa%3D789_cpd-nettruyen_mimi%26utm_source%3Dnettruyen.com%26utm_medium%3DTop_3%26utm_campaign%3DCPD"><img alt="789club" class="lazy" width="320" style="aspect-ratio:1.28" src="assets/img/789club.gif" ></a></div>
+                <div class="mrt5 chooseSever text-center col-sm-6"><a target="_blank" rel="nofollow noopener noreferrer" href="https://url.rw/?https%3A%2F%2Ftai.rik.bet%2F%3Fa%3Drik_cpd-nettruyen_mimi%26utm_source%3Dnettruyen.com%26utm_medium%3DTop_4%26utm_campaign%3DCPD"><img alt="Rik" src="assets/img/rikvip2.gif" width="320" style="aspect-ratio:1.28"></a></div>
+                </div>    
+        </div>
+
+        <div class="comment">
+            <div class="hay">
+                <ul class="nav nav-tabs main-tab lazy-module" data-type="facebook">
+                    <li class="active">
+                    <a data-toggle="tab" href="#nt_comments">
+                    <i class="fa fa-comments"></i> NetTruyen (<span class="comment-count">1.154</span>)
+                    </a>
+                    </li>
+                    <li>
+                    <a data-toggle="tab" href="#fb_comments">
+                    <i class="fa fa-facebook-official"></i> Facebook (<span class="fb-comments-count_fluid_desktop" data-href="https://www.nettruyen.uk/truyen-tranh/vo-luyen-dinh-phong-17696" fb-xfbml-state="parsed" fb-iframe-plugin-query="app_id=745819368841087&amp;container_width=0&amp;count=true&amp;height=100&amp;href=https%3A%2F%2Fwww.nettruyen.uk%2Ftruyen-tranh%2Fvo-luyen-dinh-phong-17696&amp;locale=en_US&amp;sdk=joey&amp;version=v2.0&amp;width=550"><span class="fb_comments_count">24</span></span>)
+                    </a>
+                    </li>
+                    </ul>
+            </div>
+            <div class="tab-content">
+                <div class="mrt5" style="line-height:35px;">
+                    Like <a rel="nofollow noopener" href="https://www.facebook.com/nettruyen" target="_blank">PAGE</a> để ủng hộ NetTruyen <div class="fb-like fb_iframe_widget" data-href="https://www.facebook.com/nettruyen/" data-send="false" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true" fb-xfbml-state="rendered" fb-iframe-plugin-query="action=like&amp;app_id=745819368841087&amp;container_width=680&amp;href=https%3A%2F%2Fwww.facebook.com%2Fnettruyen%2F&amp;layout=button_count&amp;locale=en_US&amp;sdk=joey&amp;send=false&amp;share=true&amp;show_faces=true"><span style="vertical-align: bottom; width: 150px; height: 28px;"><iframe name="f3eb310c978c864" width="1000px" height="1000px" data-testid="fb:like Facebook Social Plugin" title="fb:like Facebook Social Plugin" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" allow="encrypted-media" src="https://www.facebook.com/v2.0/plugins/like.php?action=like&amp;app_id=745819368841087&amp;channel=https%3A%2F%2Fstaticxx.facebook.com%2Fx%2Fconnect%2Fxd_arbiter%2F%3Fversion%3D46%23cb%3Dfbb53d9288c4f8%26domain%3Dwww.nettruyenus.com%26is_canvas%3Dfalse%26origin%3Dhttps%253A%252F%252Fwww.nettruyenus.com%252Ff898be8993f5b%26relation%3Dparent.parent&amp;container_width=680&amp;href=https%3A%2F%2Fwww.facebook.com%2Fnettruyen%2F&amp;layout=button_count&amp;locale=en_US&amp;sdk=joey&amp;send=false&amp;share=true&amp;show_faces=true" style="border: none; visibility: visible; width: 150px; height: 28px;" class=""></iframe></span></div>
+                    </div>
+                <div class="mrt5" style="color:red;font-size:12px;font-style:italic">Bình luận không được tính để tăng cấp độ</div>    
+                <div class="comment-wrapper">
+                    <div class="placeholder hidden" onclick="openComment(this)">
+                        Mời bạn thảo luận, vui lòng không spam, share link kiếm tiền, thiếu lành mạnh,... để tránh bị khóa tài khoản
+                    </div>
+                    <ul class="comment-nav">
+                        <li data-type="0">Tất cả</li><li class="active" data-type="1">Bình luận chap</li>
+                    </ul>
+                    <span class="sort-comments comment-action"><i class="icons"></i>Mới nhất</span>
+                </div>
+                <div class="comment-list">
+                    <div class="item clearfix" id="comment_25512667">
+                        <figure class = "avatar">
+                            <img src="//st.ntcdntempv3.com/data/sites/1/useravatars/1169113.jpg?v=2790" alt="Ta T&amp;#234;n Ph&amp;#224;m">
+                        </figure>
+                        <div class="summary">
+                            <i class="fa fa-angle-left fa-arrow"></i>
+                            <div class="info">
+                                <div class="comment-header">
+                                    <span class="authorname name-4">Ta Tên Phàm</span>
+                                    <span class="member level-4">
+                                        <span data-level="4">Vũ Trụ</span>
+                                        <span class="progress-bar" style="width:20%"></span>
+                                    </span>
+                                </div>
+                                <div class="comment-content">Tội mấy ông già tu luyện vai trăm, nghìn năm tuổi mới đc phản hư cảnh&nbsp;<br>Mấy đứa này tu luyên chưa tới trăm năm&nbsp;
+                                    <img src="//p.ntcdntempv26.com/content/image.jpg?url=https://1.bp.blogspot.com/-DFdQ1q2SaUs/WtuC0Utob9I/AAAAAAABiEc/rRQ9PtVAFVwNPT5zcebGqOzsr_jXV8hwACKgBGAs/h120/14-yaoming.gif" alt="emo">
+                                </div>
+                                
+                            </div>
+                            <ul class = comment-footer >
+                                <li>
+                                    <span onclick="replyComment(25512667)">
+                                      <i class="fa fa-comment">
+                                      </i> Trả lời</span>
+                                </li>
+                                <li>
+                                    <span class="vote-up" onclick="voteComment(25512667, 1, this)">
+                                      <i class="fa fa-thumbs-up">
+                                      </i>
+                                      <span class="vote-up-count">0</span>
+                                    </span>
+                                </li> 
+                                <li>
+                                    <span class="vote-down" onclick="voteComment(25512667, 0, this)">
+                                      <i class="fa fa-thumbs-down">
+                                      </i>
+                                      <span class="vote-down-count">0</span>
+                                    </span>
+                                </li>
+                                <li>
+                                    <abbr title="12/31/2022 9:29:10 PM">
+                                      <i class="fa fa-clock-o">
+                                      </i> 48 giây trước</abbr>
+                                </li>      
+                            
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="item clearfix" id="comment_25512667">
+                        <figure class = "avatar">
+                            <img src="//st.ntcdntempv3.com/data/sites/1/useravatars/1169113.jpg?v=2790" alt="Ta T&amp;#234;n Ph&amp;#224;m">
+                        </figure>
+                        <div class="summary">
+                            <i class="fa fa-angle-left fa-arrow"></i>
+                            <div class="info">
+                                <div class="comment-header">
+                                    <span class="authorname name-4">Ta Tên Phàm</span>
+                                    <span class="member level-4">
+                                        <span data-level="4">Vũ Trụ</span>
+                                        <span class="progress-bar" style="width:20%"></span>
+                                    </span>
+                                </div>
+                                <div class="comment-content">Tội mấy ông già tu luyện vai trăm, nghìn năm tuổi mới đc phản hư cảnh&nbsp;<br>Mấy đứa này tu luyên chưa tới trăm năm&nbsp;
+                                    <img src="//p.ntcdntempv26.com/content/image.jpg?url=https://1.bp.blogspot.com/-DFdQ1q2SaUs/WtuC0Utob9I/AAAAAAABiEc/rRQ9PtVAFVwNPT5zcebGqOzsr_jXV8hwACKgBGAs/h120/14-yaoming.gif" alt="emo">
+                                </div>
+                                
+                            </div>
+                            <ul class = comment-footer >
+                                <li>
+                                    <span onclick="replyComment(25512667)">
+                                      <i class="fa fa-comment">
+                                      </i> Trả lời</span>
+                                </li>
+                                <li>
+                                    <span class="vote-up" onclick="voteComment(25512667, 1, this)">
+                                      <i class="fa fa-thumbs-up">
+                                      </i>
+                                      <span class="vote-up-count">0</span>
+                                    </span>
+                                </li> 
+                                <li>
+                                    <span class="vote-down" onclick="voteComment(25512667, 0, this)">
+                                      <i class="fa fa-thumbs-down">
+                                      </i>
+                                      <span class="vote-down-count">0</span>
+                                    </span>
+                                </li>
+                                <li>
+                                    <abbr title="12/31/2022 9:29:10 PM">
+                                      <i class="fa fa-clock-o">
+                                      </i> 48 giây trước</abbr>
+                                </li>      
+                            
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="item clearfix" id="comment_25512667">
+                        <figure class = "avatar">
+                            <img src="//st.ntcdntempv3.com/data/sites/1/useravatars/1169113.jpg?v=2790" alt="Ta T&amp;#234;n Ph&amp;#224;m">
+                        </figure>
+                        <div class="summary">
+                            <i class="fa fa-angle-left fa-arrow"></i>
+                            <div class="info">
+                                <div class="comment-header">
+                                    <span class="authorname name-4">Ta Tên Phàm</span>
+                                    <span class="member level-4">
+                                        <span data-level="4">Vũ Trụ</span>
+                                        <span class="progress-bar" style="width:20%"></span>
+                                    </span>
+                                </div>
+                                <div class="comment-content">Tội mấy ông già tu luyện vai trăm, nghìn năm tuổi mới đc phản hư cảnh&nbsp;<br>Mấy đứa này tu luyên chưa tới trăm năm&nbsp;
+                                    <img src="//p.ntcdntempv26.com/content/image.jpg?url=https://1.bp.blogspot.com/-DFdQ1q2SaUs/WtuC0Utob9I/AAAAAAABiEc/rRQ9PtVAFVwNPT5zcebGqOzsr_jXV8hwACKgBGAs/h120/14-yaoming.gif" alt="emo">
+                                </div>
+                                
+                            </div>
+                            <ul class = comment-footer >
+                                <li>
+                                    <span onclick="replyComment(25512667)">
+                                      <i class="fa fa-comment">
+                                      </i> Trả lời</span>
+                                </li>
+                                <li>
+                                    <span class="vote-up" onclick="voteComment(25512667, 1, this)">
+                                      <i class="fa fa-thumbs-up">
+                                      </i>
+                                      <span class="vote-up-count">0</span>
+                                    </span>
+                                </li> 
+                                <li>
+                                    <span class="vote-down" onclick="voteComment(25512667, 0, this)">
+                                      <i class="fa fa-thumbs-down">
+                                      </i>
+                                      <span class="vote-down-count">0</span>
+                                    </span>
+                                </li>
+                                <li>
+                                    <abbr title="12/31/2022 9:29:10 PM">
+                                      <i class="fa fa-clock-o">
+                                      </i> 48 giây trước</abbr>
+                                </li>      
+                            
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="item clearfix" id="comment_25512667">
+                        <figure class = "avatar">
+                            <img src="//st.ntcdntempv3.com/data/sites/1/useravatars/1169113.jpg?v=2790" alt="Ta T&amp;#234;n Ph&amp;#224;m">
+                        </figure>
+                        <div class="summary">
+                            <i class="fa fa-angle-left fa-arrow"></i>
+                            <div class="info">
+                                <div class="comment-header">
+                                    <span class="authorname name-4">Ta Tên Phàm</span>
+                                    <span class="member level-4">
+                                        <span data-level="4">Vũ Trụ</span>
+                                        <span class="progress-bar" style="width:20%"></span>
+                                    </span>
+                                </div>
+                                <div class="comment-content">Tội mấy ông già tu luyện vai trăm, nghìn năm tuổi mới đc phản hư cảnh&nbsp;<br>Mấy đứa này tu luyên chưa tới trăm năm&nbsp;
+                                    <img src="//p.ntcdntempv26.com/content/image.jpg?url=https://1.bp.blogspot.com/-DFdQ1q2SaUs/WtuC0Utob9I/AAAAAAABiEc/rRQ9PtVAFVwNPT5zcebGqOzsr_jXV8hwACKgBGAs/h120/14-yaoming.gif" alt="emo">
+                                </div>
+                                
+                            </div>
+                            <ul class = comment-footer >
+                                <li>
+                                    <span onclick="replyComment(25512667)">
+                                      <i class="fa fa-comment">
+                                      </i> Trả lời</span>
+                                </li>
+                                <li>
+                                    <span class="vote-up" onclick="voteComment(25512667, 1, this)">
+                                      <i class="fa fa-thumbs-up">
+                                      </i>
+                                      <span class="vote-up-count">0</span>
+                                    </span>
+                                </li> 
+                                <li>
+                                    <span class="vote-down" onclick="voteComment(25512667, 0, this)">
+                                      <i class="fa fa-thumbs-down">
+                                      </i>
+                                      <span class="vote-down-count">0</span>
+                                    </span>
+                                </li>
+                                <li>
+                                    <abbr title="12/31/2022 9:29:10 PM">
+                                      <i class="fa fa-clock-o">
+                                      </i> 48 giây trước</abbr>
+                                </li>      
+                            
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="item clearfix" id="comment_25512667">
+                        <figure class = "avatar">
+                            <img src="//st.ntcdntempv3.com/data/sites/1/useravatars/1169113.jpg?v=2790" alt="Ta T&amp;#234;n Ph&amp;#224;m">
+                        </figure>
+                        <div class="summary">
+                            <i class="fa fa-angle-left fa-arrow"></i>
+                            <div class="info">
+                                <div class="comment-header">
+                                    <span class="authorname name-4">Ta Tên Phàm</span>
+                                    <span class="member level-4">
+                                        <span data-level="4">Vũ Trụ</span>
+                                        <span class="progress-bar" style="width:20%"></span>
+                                    </span>
+                                </div>
+                                <div class="comment-content">Tội mấy ông già tu luyện vai trăm, nghìn năm tuổi mới đc phản hư cảnh&nbsp;<br>Mấy đứa này tu luyên chưa tới trăm năm&nbsp;
+                                    <img src="//p.ntcdntempv26.com/content/image.jpg?url=https://1.bp.blogspot.com/-DFdQ1q2SaUs/WtuC0Utob9I/AAAAAAABiEc/rRQ9PtVAFVwNPT5zcebGqOzsr_jXV8hwACKgBGAs/h120/14-yaoming.gif" alt="emo">
+                                </div>
+                                
+                            </div>
+                            <ul class = comment-footer >
+                                <li>
+                                    <span onclick="replyComment(25512667)">
+                                      <i class="fa fa-comment">
+                                      </i> Trả lời</span>
+                                </li>
+                                <li>
+                                    <span class="vote-up" onclick="voteComment(25512667, 1, this)">
+                                      <i class="fa fa-thumbs-up">
+                                      </i>
+                                      <span class="vote-up-count">0</span>
+                                    </span>
+                                </li> 
+                                <li>
+                                    <span class="vote-down" onclick="voteComment(25512667, 0, this)">
+                                      <i class="fa fa-thumbs-down">
+                                      </i>
+                                      <span class="vote-down-count">0</span>
+                                    </span>
+                                </li>
+                                <li>
+                                    <abbr title="12/31/2022 9:29:10 PM">
+                                      <i class="fa fa-clock-o">
+                                      </i> 48 giây trước</abbr>
+                                </li>      
+                            
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="item clearfix" id="comment_25512667">
+                        <figure class = "avatar">
+                            <img src="//st.ntcdntempv3.com/data/sites/1/useravatars/1169113.jpg?v=2790" alt="Ta T&amp;#234;n Ph&amp;#224;m">
+                        </figure>
+                        <div class="summary">
+                            <i class="fa fa-angle-left fa-arrow"></i>
+                            <div class="info">
+                                <div class="comment-header">
+                                    <span class="authorname name-4">Ta Tên Phàm</span>
+                                    <span class="member level-4">
+                                        <span data-level="4">Vũ Trụ</span>
+                                        <span class="progress-bar" style="width:20%"></span>
+                                    </span>
+                                </div>
+                                <div class="comment-content">Tội mấy ông già tu luyện vai trăm, nghìn năm tuổi mới đc phản hư cảnh&nbsp;<br>Mấy đứa này tu luyên chưa tới trăm năm&nbsp;
+                                    <img src="//p.ntcdntempv26.com/content/image.jpg?url=https://1.bp.blogspot.com/-DFdQ1q2SaUs/WtuC0Utob9I/AAAAAAABiEc/rRQ9PtVAFVwNPT5zcebGqOzsr_jXV8hwACKgBGAs/h120/14-yaoming.gif" alt="emo">
+                                </div>
+                                
+                            </div>
+                            <ul class = comment-footer >
+                                <li>
+                                    <span onclick="replyComment(25512667)">
+                                      <i class="fa fa-comment">
+                                      </i> Trả lời</span>
+                                </li>
+                                <li>
+                                    <span class="vote-up" onclick="voteComment(25512667, 1, this)">
+                                      <i class="fa fa-thumbs-up">
+                                      </i>
+                                      <span class="vote-up-count">0</span>
+                                    </span>
+                                </li> 
+                                <li>
+                                    <span class="vote-down" onclick="voteComment(25512667, 0, this)">
+                                      <i class="fa fa-thumbs-down">
+                                      </i>
+                                      <span class="vote-down-count">0</span>
+                                    </span>
+                                </li>
+                                <li>
+                                    <abbr title="12/31/2022 9:29:10 PM">
+                                      <i class="fa fa-clock-o">
+                                      </i> 48 giây trước</abbr>
+                                </li>      
+                            
+                            </ul>
+                        </div>
+                    </div>
+    
+                </div>
+                <div id="ctl00_mainContent_divPager" class="pagination-outter commentpager">
+                    <ul class = "pagination">
+                        <li class="active"><a href="#1" title="Showing Results 1 to 15 of 284182">1</a> </li>
+                        <li><a href="#2" title="Show Result 16 to 30 of 284182">2</a> </li>
+                        <li><a href="#3" title="Show Result 31 to 45 of 284182">3</a> </li>
+                        <li class="PagerSSCCells"><a href="#20" title="Show Result 47386 to 47400 of 284182">20</a> </li>
+                        <li class="PagerSSCCells"><a href="#25" title="Show Result 47386 to 47400 of 284182">26</a> </li>
+                        <li class="PagerSSCCells"><a href="#26" title="Show Result 47386 to 47400 of 284182">27</a> </li>
+                        <li class="PagerSSCCells"><a href="#27" title="Show Result 47386 to 47400 of 284182">28</a> </li>
+
+
+
+                    </ul>
+                    
+                </div>    
+            </div>
+            
+
+
+        </div>
+
+    </div>
+    <%- include('partials/footer') %>

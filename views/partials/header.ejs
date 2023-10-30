@@ -33,8 +33,12 @@
     </div>
 
     <div class="sign-group">
-      <a href="/dangnhap.html">Đăng nhập</a> /
-      <a href="/dangky.html">Đăng ký</a>
+      <% if(isLoggedIn) {%>
+        <a href="/profile"><%= user %></a>
+        <% } else {%>
+      <a href="/login">Đăng nhập</a>
+      <a href="/signup">Đăng ký</a>
+      <% } %>
     </div>
   </div>
 </header>

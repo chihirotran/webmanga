@@ -111,7 +111,8 @@ exports.createChapter = async (req, res) => {
       filename: (req, file, cb) => {
         const order = req.body.order || 1; 
        // const randomString = crypto.randomBytes(6).toString('hex');
-        cb(null, "_"+order+  user + file.originalname  ); 
+        cb(null, "_"+order+  user + file.originalname);
+        
       },
     });
   
@@ -124,29 +125,113 @@ exports.createChapter = async (req, res) => {
         return res.status(500).json({ error: err.message });
       }
   
-      // Không có lỗi tải lên tệp, tiếp tục tạo chương
-      // const p = await Chapter.create({
-      //   title: req.body.title,
-      //   description: req.body.content,
-      //   author_id: user,
-      //   linkimg: req.file.path, // Đường dẫn hình ảnh sau khi đã tải lên bằng Multer
-      //   chapnumber: req.body.chapnumber,
-      // });
+    //   Không có lỗi tải lên tệp, tiếp tục tạo chương
+      const p = await Chapter.create({
+
+        title: req.body.title,
+        description: req.body.content,
+        author_id: user,
+        linkimg: "uploads/"+"", // Đường dẫn hình ảnh sau khi đã tải lên bằng Multer
+        chapnumber: req.body.chapnumber,
+      });
   
-      // console.log(req.body.type);
-      // const u = await Comic.findOneAndUpdate(
-      //   { title: req.body.type },
-      //   {
-      //     $push: {
-      //       chapter_comic: p.chapnumber,
-      //     },
-      //   }
-      // );
+      console.log(req.body.type);
+      const u = await Comic.findOneAndUpdate(
+        { title: req.body.type },
+        {
+          $push: {
+            chapter_comic: p._id,
+          },
+        }
+      );
   
       res.redirect('/');
     });
   };
+exports.createChapterS3 = async (req, res) => {
+    const isLoggedIn = req.session.isLoggedIn;
+    const user = req.session.username;
+    
+    // Cấu hình S3Client
+    const s3 = new S3Client({
+        credentials: {
+            accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+            secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+        },
+        region: process.env.AWS_BUCKET_REGION,
+    });
 
+    const storage = multer.memoryStorage();
+    const upload = multer({ storage: storage }).array('avatar');
+
+    upload(req, res, async (err) => {
+        if (err) {
+            // Xử lý lỗi tải lên tệp
+            return res.status(500).json({ error: err.message });
+        }
+
+        // Không có lỗi tải lên tệp, tiếp tục tạo chương hoặc thực hiện các thao tác cần thiết
+
+        const uploadPromises = req.files.map((file) => {
+            const order = req.body.order || 1;
+            const randomString = crypto.randomBytes(6).toString('hex');
+            const extension = path.extname(file.originalname);
+            const filename = `_${order}_${randomString}_${user}${extension}`;
+            
+            const params = {
+                Bucket: process.env.AWS_BUCKET_NAME,
+                Key: filename,
+                Body: new Readable({
+                    read() {
+                        this.push(file.buffer);
+                        this.push(null);
+                    }
+                }),
+                // Thêm ACL để cấu hình quyền truy cập công khai
+                ACL: 'public-read'
+            };
+
+            const upload = new Upload({
+                client: s3,
+                params: params,
+                leavePartsOnError: false,
+                queueSize: 1 // Số lượng phần được tải lên một lúc
+            });
+
+            return upload.done();
+        });
+
+        // Xây dựng đường dẫn đến tệp
+        
+
+        Promise.all(uploadPromises)
+        .then(async (results) => {
+            const p = await Chapter.create({
+
+                title: req.body.title,
+                description: req.body.content,
+                author_id: user,
+                linkimg: results.map((result) => result.Location), // Đường dẫn hình ảnh sau khi đã tải lên S3
+                chapnumber: req.body.chapnumber,
+              });
+          
+              console.log(req.body.type);
+              const u = await Comic.findOneAndUpdate({ title: req.body.type },
+                {
+                  $push: {
+                    chapter_comic: p._id,
+                  },
+                }
+              );
+          
+              res.redirect('/');
+            })
+            .catch((error) => {
+                console.error(error);
+                res.status(500).send('Error uploading to S3');
+            });
+    });
+};
 
 exports.createIMGChapter = async (req, res) => {
     const isLoggedIn = req.session.isLoggedIn;
@@ -205,9 +290,10 @@ exports.createIMGChapter = async (req, res) => {
         
 
         Promise.all(uploadPromises)
-            .then(() => {
-                res.send('Files uploaded to S3');
-            })
+        .then((results) => {
+            const imageUrls = results.map((result) => result.Location);
+            res.json({ imageUrls });
+          })
             .catch((error) => {
                 console.error(error);
                 res.status(500).send('Error uploading to S3');

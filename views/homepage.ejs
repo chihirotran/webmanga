@@ -113,33 +113,23 @@
               </div>
               <h3><%= comics[i].title %></h3>
               <ul class="comic-item">
+                <%
+                let count = 0;
+                for (let index = comics1[i].chapter_comic.length - 1; index >= 0 && count < 3; index--) {
+                %>
                 <li class="chapter clearfix">
-                  <a
+                <a
                     data-id="942585"
-                    href="<%= comics1[i].title %>"
-                    title="Chapter 34"
-                    >Chapter 34</a
-                  >
-                  <i class="time">1 giờ trước</i>
+                    href="/read:<%= comics1[i].chapter_comic[index] %>"
+                    title="Chapter <%= index %>"
+                    >Chapter <%= index %></a
+                >
+                <i class="time">1 giờ trước</i>
                 </li>
-                <li class="chapter clearfix">
-                  <a
-                    data-id="942585"
-                    href="<%= comics1[i].linkimg %>"
-                    title="Chapter 34"
-                    >Chapter 34</a
-                  >
-                  <i class="time">1 giờ trước</i>
-                </li>
-                <li class="chapter clearfix">
-                  <a
-                    data-id="942585"
-                    href="<%= comics1[i].title %>"
-                    title="Chapter 34"
-                    >Chapter 34</a
-                  >
-                  <i class="time">1 giờ trước</i>
-                </li>
+                <%
+                count++;
+                }
+                %>
               </ul>
             </div>
             <% } %>

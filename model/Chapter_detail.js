@@ -22,7 +22,7 @@ const chapterSchema=new Mongoose.Schema({
         required:true
     },
     linkimg: {
-        type:Array,
+        type:String,
         required:true
     },
     author_id: {

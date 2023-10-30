@@ -7,22 +7,50 @@ const Comic = require("../model/comic");
 const Chapter = require("../model/Chapter");
 const window=require('window')
 const router= express.Router();
-
+const mongoose = require('mongoose');
+const ObjectId = mongoose.Types.ObjectId;
 const month=['Jan',"Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 
 router.get("/read:id",async(req,res)=>{
     const isLoggedIn=req.session.isLoggedIn;
     const user=req.session.username;
-
+    
     const id=req.params.id.split(":")[1];
-    const blogs=await Post.find({_id:id});
+    // const targetObjectId = new ObjectId(id)
+    // const comic=await Comic.find({ chapter_comic: targetObjectId });
+    // console.log(comic.title);
+    const targetObjectId = new ObjectId(id);
+
+   Comic.find({ 'chapter_comic': targetObjectId }, async (err, comic) => {
+  if (err) {
+    console.error(err);
+    // Xử lý lỗi tại đây
+  } else {
+    // console.log(comic);
+    // Xử lý kết quả tại đây
+    // console.log(id);
+    let number = comic[0].chapter_comic.findIndex(objId => objId.equals(targetObjectId));
+    number += 1;
+    const chapters=await Chapter.find({_id:id});
     let comment=await Comment.find({blogid:id});
     if(comment.length>0)
         comment=comment[0].content;
     
     // console.log(blogs);
     
-    res.render('read.ejs',{blogs:blogs[0],isLoggedIn,user,comment,month});
+    res.render('read-comic.ejs',{chapters:chapters[0],comic:comic[0],isLoggedIn,user,comment,month,number});
+  }
+});
+    
+    // console.log(id);
+    // const chapters=await Chapter.find({_id:id});
+    // let comment=await Comment.find({blogid:id});
+    // if(comment.length>0)
+    //     comment=comment[0].content;
+    
+    // // console.log(blogs);
+    
+    // res.render('read-comic.ejs',{chapters:chapters[0],comic,isLoggedIn,user,comment,month});
 });
 
 router.post("/read:id",async(req,res)=>{
