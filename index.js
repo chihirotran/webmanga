@@ -19,6 +19,7 @@ const readRoutes=require("./routers/read");
 const profileRoutes=require("./routers/profile");
 const detailRoutes=require("./routers/detail");
 const deleteRoutes=require("./routers/delete");
+const followerRoutes=require("./routers/folower");
 
 
 const MONGODB_URI="mongodb+srv://chihirotran:Trungtran1501@cluster0.9by4fi3.mongodb.net/?retryWrites=true&w=majority";
@@ -53,7 +54,7 @@ app.use(readRoutes);
 app.use(profileRoutes);
 app.use(detailRoutes);
 app.use(deleteRoutes);
-
+app.use(followerRoutes);
 
 app.listen(port,()=>{
     console.log("connected at ",port);

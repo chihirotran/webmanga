@@ -5,11 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="style3.css">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="./assets/font/fontawesome-free-6.2.1-web/css/all.min.css">
+    <link rel="stylesheet" href="/style3.css">
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/font/fontawesome-free-6.2.1-web/css/all.min.css">
     <!-- <link rel="stylesheet" href="./assetss/img"> -->
-    <script src="docchuyen.js"></script>
+    
     </head>
     <div class="main" style="margin: 8px 0">
 
@@ -73,7 +73,7 @@
                     <i class="fa fa-info-circle"></i> <em>Sử dụng mũi tên trái (←) hoặc phải (→) để chuyển chapter</em>
                     </div>
 
-                    <div class="chapter-nav" id="chapterNav" style="z-index: auto; position: static; top: auto;">
+                    <div class="chapter-nav" id="chapterNav" style="z-index: auto;display: flex;position: static;top: auto;flex-direction: row;align-content: center;justify-content: center;">
                         <a class="home" href="/" title="Trang chủ">
                             <i class="fa fa-home"></i>
                         </a>
@@ -84,18 +84,37 @@
                             <i class="fa fa-undo change"></i>
                     
                         </a>
+                        <% if(number <= 1) {%>
                         <a href="#" class="prev a_prev disabled">
                             <i class="fa fa-chevron-left"></i>
                         </a>
-                        <select name="ctl00$mainContent$ddlSelectChapter" id="ctl00_mainContent_ddlSelectChapter" class="select-chapter">
-                        <option value="/truyen-tranh/vo-luyen-dinh-phong/chap-1/361803">Chapter 1</option></select>
-                        <a href="https://www.nettruyenus.com/truyen-tranh/vo-luyen-dinh-phong/chap-2/361892" class="next a_next">
+                        <% }
+                        if(number>1) {
+                        %>
+                        <a href="/read:<%= comic.chapter_comic[number-2] %>" class="prev a_prev">
+                            <i class="fa fa-chevron-left"></i>
+                        </a>     
+
+                        <% } %>
+                        <select name="ctl00$mainContent$ddlSelectChapter" id="ctl00_mainContent_ddlSelectChapter" class="select-chapter" value = "Chapter <%= number %>">
+                        <%  for (let i = 1; i <= comic.chapter_comic.length; i++) {
+                            if(i == number){
+                        %>
+                        <option value="/read:<%= comic.chapter_comic[i-1] %> " selected >Chapter <%= i %></option>
+                        <% } else { %>
+                        <option value="/read:<%= comic.chapter_comic[i-1] %> " >Chapter <%= i %></option>
+                        <% }
+                        }   
+                        %>
+
+                        </select>
+                        <a href="/read:<%= comic.chapter_comic[number] %>" class="next a_next">
                             <i class="fa fa-chevron-right"></i>
                         </a>
-                        <a class="follow-link btn btn-success" href="javascript:void(0)" data-id="17696">
-                            <i class="fa fa-heart"></i> 
-                            <span>Theo dõi</span>
-                        </a>
+                        <form action="/follower:<%= comic._id %>" method="post">
+                            <button class="follow-link btn btn-success" type="submit"><i class="fa fa-heart"></i > 
+                                <span>Theo dõi</span></button>
+                        </form>
                         </div>    
             </div>
             <script>gOpts.comicId=17696;gOpts.chapterId=361803;gOpts.key="72869ef1-129c-f5fd-dc2b-0cdc7df19e35";gOpts.siteRoot="https://www.nettruyenus.com";gOpts.cdn="//cdn.ntcdntempv26.com";gOpts.cdn2="//cdn.ntcdntempv3.com";</script>    

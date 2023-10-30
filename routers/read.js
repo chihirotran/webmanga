@@ -29,7 +29,7 @@ router.get("/read:id",async(req,res)=>{
     // console.log(comic);
     // Xử lý kết quả tại đây
     // console.log(id);
-    let number = comic[0].chapter_comic.findIndex(objId => objId.equals(targetObjectId));
+    let number = comic[0].chapter_comic.findIndex(objId => objId.toString() === targetObjectId.toString());
     number += 1;
     const chapters=await Chapter.find({_id:id});
     let comment=await Comment.find({blogid:id});

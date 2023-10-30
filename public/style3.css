@@ -114,6 +114,9 @@ a.btn.btn-danger.next:hover{
 a.prev.a_prev.disabled:hover{
     background-color: #c04844;
 }
+a.prev.a_prev:hover{
+    background-color: #c04844;
+}
 a.chapter-nav-bottom.text-center:hover{
     background-color: #c04844;
 }
@@ -216,7 +219,19 @@ a.home{
 .prev{
     display: inline-block;
     width: 33px;
-    background: #d9534f;
+    background:red;
+    color: #fff;
+    text-align: center;
+    border-color: #d43f3a;
+    height: 34px;
+    padding-top: 7px;
+    border-radius: 4px 0 0 4px;
+    
+}
+.prev.disabled{
+    display: inline-block;
+    width: 33px;
+    background:red;
     color: #fff;
     text-align: center;
     border-color: #d43f3a;
@@ -229,7 +244,7 @@ a.home{
     border-radius: 0 4px 4px 0;
     display: inline-block;
     width: 33px;
-    background: #d9534f;
+    background: red;
     color: #fff;
     text-align: center;
     border-color: #d43f3a;

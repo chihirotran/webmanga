@@ -29,6 +29,12 @@ const userSchema= new mongoose.Schema({
     },
     blog:{
         type:Array
+    },
+    follower:{
+    type: Array
+    },
+    history:{
+    type:Array
     }
     
 });
