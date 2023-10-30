@@ -7,6 +7,7 @@ const MongoDBStore=require("connect-mongodb-session")(session);
 const req = require("express/lib/request");
 const port =process.env.PORT || 3000;
 const Post=require("./model/post");
+const Comic=require("./model/comic");
 const month=['Jan',"Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 
 
@@ -33,14 +34,15 @@ app.use(session({secret: "my secret", resave: false, saveUninitialized: false, s
 app.get('/',async(req,res)=>{
     const isLoggedIn=req.session.isLoggedIn;
     const user=req.session.username;
-    let blogs=await Post.find({});
-    let l=blogs.length;
+    let comics=await Comic.find({});
+    let comics1 =await Comic.find({});
+    let l=comics.length;
     // console.log(l,l-5);
     let l1=0;
     if(l-5>0)
         l1=l-5;
-    blogs=blogs.slice(l1,l);
-    res.render("home.ejs",{isLoggedIn,user,blogs,month});
+    comics=comics.slice(l1,l);
+    res.render("homepage.ejs",{isLoggedIn,user,comics,comics1,month});
 });
 
 app.use(registerRoutes);
