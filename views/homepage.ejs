@@ -96,7 +96,9 @@
             >
               <i class="fa fa-filter"> </i>
             </a>
-            <% for(let i in comics1){ %>
+            <% for(let i in comics1){
+              
+            %>
             <div class="item">
               <div class="image">
                 <img
@@ -123,8 +125,13 @@
                     href="/read:<%= comics1[i].chapter_comic[index] %>"
                     title="Chapter <%= index %>"
                     >Chapter <%= index %></a
-                >
-                <i class="time">1 giờ trước</i>
+                ><%
+                let timeUpload = new Date(comics1[i].time_upload);
+
+                let timeDifference = dateNow - timeUpload; 
+                let minutesDifference = Math.floor(timeDifference / (1000 * 60));
+                 %>
+                <i class="time"><%= minutesDifference %></i>
                 </li>
                 <%
                 count++;

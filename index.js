@@ -37,13 +37,14 @@ app.get('/',async(req,res)=>{
     const user=req.session.username;
     let comics=await Comic.find({});
     let comics1 =await Comic.find({});
+    let dateNow = new Date();
     let l=comics.length;
     // console.log(l,l-5);
     let l1=0;
     if(l-5>0)
         l1=l-5;
     comics=comics.slice(l1,l);
-    res.render("homepage.ejs",{isLoggedIn,user,comics,comics1,month});
+    res.render("homepage.ejs",{isLoggedIn,user,comics,comics1,month,dateNow});
 });
 
 app.use(registerRoutes);

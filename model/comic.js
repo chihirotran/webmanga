@@ -20,6 +20,9 @@ const comicSchema=new Mongoose.Schema({
         type:String,
         required:true
     },
+    time_upload: {
+        type:Date,
+    },
     author_id: {
         type:String,
         required:true

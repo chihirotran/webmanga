@@ -82,7 +82,7 @@ exports.createComic=async(req,res)=>{
         title:req.body.title,
         description:req.body.content,
         author_id:user,
-        date:new Date(),
+        time_upload:new Date(),
         linkimg:req.body.img
     })
     
@@ -212,6 +212,7 @@ exports.createChapterS3 = async (req, res) => {
                 description: req.body.content,
                 author_id: user,
                 linkimg: results.map((result) => result.Location), // Đường dẫn hình ảnh sau khi đã tải lên S3
+                time_upload:new Date(),
                 chapnumber: req.body.chapnumber,
               });
           

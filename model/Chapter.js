@@ -25,6 +25,9 @@ const chapterSchema=new Mongoose.Schema({
         type:Array,
         required:true
     },
+    time_upload: {
+        type:Date,
+    },
     author_id: {
         type:String,
         required:true
