@@ -41,31 +41,31 @@
                   transform: translate3d(0px, 0px, 0px);
                 "
               >
-              <% for(let i in comics){ %>
+              <% for(let i in result){ %>
                 <div class="owl-item" style="width: 208px">
                     
                   <div class="item">
                     <a
-                      href="<%='/'+ comics[i].title %>"
-                      title="<%= comics[i].title %>"
+                      href="<%='/'+ result[i].title %>"
+                      title="<%= result[i].title %>"
                     >
                       <img
                         class="lazyOwl center"
-                        src="<%= comics[i].linkimg %>"
-                        alt="<%= comics[i].title %>"
+                        src="<%= result[i].linkimg %>"
+                        alt="<%= result[i].title %>"
                         style="width: 200px;height: 260px;"
                       />
                     </a>
                     <div class="slide-caption">
                       <h3>
                         <a
-                          href="<%= comics[i].linkimg %>"
-                          title="<%= comics[i].title %>"
-                          ><%= comics[i].title %></a
+                          href="<%= result[i].linkimg %>"
+                          title="<%= result[i].title %>"
+                          ><%= result[i].title %></a
                         >
                       </h3>
                       <a
-                        href="<%= comics[i].title %>"
+                        href="<%= result[i].title %>"
                         title="Chapter 213"
                         >Chapter 213</a
                       >
@@ -96,13 +96,13 @@
             >
               <i class="fa fa-filter"> </i>
             </a>
-            <% for(let i in comics1){
+            <% for(let i in result){
               
             %>
             <div class="item">
               <div class="image">
                 <img
-                  src="<%= comics1[i].linkimg %>"
+                  src="<%= result[i].linkimg %>"
                   alt=""
                 />
                 <div class="view clearfix">
@@ -113,29 +113,63 @@
                   >
                 </div>
               </div>
-              <h3><%= comics[i].title %></h3>
+              <h3><%= result[i].title %></h3>
               <ul class="comic-item">
                 <%
                 let count = 0;
-                for (let index = comics1[i].chapter_comic.length - 1; index >= 0 && count < 3; index--) {
+                for (let index = result[i].matchedChapters.length ; index >= 0 && count <= 3; index--) {
+                  let chapter_i = index + 1;
+                  if (result[i].matchedChapters[index] == undefined){
+
+                  } else {
+                  let id_chapters = result[i].matchedChapters[index]._id;
                 %>
                 <li class="chapter clearfix">
                 <a
                     data-id="942585"
-                    href="/read:<%= comics1[i].chapter_comic[index] %>"
+                    href="/read:<%= id_chapters %>"
                     title="Chapter <%= index %>"
-                    >Chapter <%= index %></a
+                    >Chapter <%= chapter_i %></a
                 ><%
-                let timeUpload = new Date(comics1[i].time_upload);
+                let timeUpload = new Date(result[i].matchedChapters[index].time_upload);
+                const date = new Date(timeUpload);
+
+                const day = String(date.getDate()).padStart(2, '0');
+                const month = String(date.getMonth() + 1).padStart(2, '0'); // Tháng trong JavaScript bắt đầu từ 0
+                const year = date.getFullYear();
+                
+                const formattedDate = `${day}-${month}-${year}`;
+
 
                 let timeDifference = dateNow - timeUpload; 
+                let timeChapterUpload = 0;
                 let minutesDifference = Math.floor(timeDifference / (1000 * 60));
+                if(minutesDifference < 60){
+                  timeChapterUpload = minutesDifference;
                  %>
-                <i class="time"><%= minutesDifference %></i>
+                <i class="time"><%= timeChapterUpload %> phút trước</i>
                 </li>
                 <%
-                count++;
-                }
+              } else if(minutesDifference< 1440){
+                   timeChapterUpload = Math.floor(minutesDifference / 60);
+                %>
+                <i class="time"><%= timeChapterUpload %> giờ trước</i>
+                </li>
+                <%
+              } else if(minutesDifference< 43200){
+                   timeChapterUpload = Math.floor(minutesDifference / 1440);
+                %>
+                <i class="time"><%= timeChapterUpload %> ngày trước</i>
+                </li>
+                <%
+              } else{
+                   timeChapterUpload = formattedDate;
+                %>
+                <i class="time"><%= timeChapterUpload %> </i>
+                </li>
+                <%
+                 }
+              } count++;}
                 %>
               </ul>
             </div>
