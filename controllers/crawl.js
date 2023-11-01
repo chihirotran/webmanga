@@ -1,3 +1,10 @@
+require('dotenv').config();
+const AWS = require('aws-sdk');
+const { S3Client, PutObjectCommand } = require('@aws-sdk/client-s3');
+const fs = require('fs');
+const crypto = require('crypto');
+const path = require('path');
+const { Upload } = require('@aws-sdk/lib-storage');
 const crawpcategory =  (browser , url) => new Promise(async(resolve, reject) => {
     try {
         console.log("mo tab");
@@ -96,7 +103,7 @@ function pad(n, len) {
     while (str.length < len) str = '0' + str;
     return str;
   }
-const crawSrcImgChapter =  (browser , url , folder) => new Promise(async(resolve, reject) => {
+const crawSrcImgChapter =  (browser , url , folder,user) => new Promise(async(resolve, reject) => {
     try {
         console.log("mo tab");
         let page = await browser.newPage();
@@ -105,6 +112,42 @@ const crawSrcImgChapter =  (browser , url , folder) => new Promise(async(resolve
         console.log("Tr Cap: "+url);
         await page.waitForSelector('.reading-detail.box_doc')
         console.log("Load Xong");
+        let linkimgss = [];
+        async function uploadFileToS3(filePath,nameimg) {
+            const s3Client = new S3Client({
+              region: process.env.AWS_BUCKET_REGION,
+              credentials: {
+                accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+                secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+              },
+            });
+          
+            const fileStream = fs.createReadStream(filePath);
+            const order = 1;
+            const randomString = crypto.randomBytes(6).toString('hex');
+            const extension = nameimg;
+            const filename = `_${order}_${randomString}_${user}${extension}`;
+          
+            const uploadParams = {
+              Bucket: process.env.AWS_BUCKET_NAME,
+              Key: filename,
+              Body: fileStream,
+              ACL: "public-read",
+            };
+          
+            const command = new PutObjectCommand(uploadParams);
+          
+            try {
+              const response = await s3Client.send(command);
+            //   console.log("File uploaded successfully");
+                let linkfinal = "https://"+process.env.AWS_BUCKET_NAME+".s3."+process.env.AWS_BUCKET_REGION+".amazonaws.com/"+filename;
+              linkimgss.push(linkfinal);
+
+
+            } catch (err) {
+              console.log("Error uploading file:", err);
+            }
+          }
         
         const datascrimgchapter = await page.$$eval('.page-chapter', cb => {
             datascrimgchapter = cb.map(c => {
@@ -141,14 +184,16 @@ const crawSrcImgChapter =  (browser , url , folder) => new Promise(async(resolve
       
               const photoBuffer = await page.goto(datascrimgchapter[i].src).then((response) => response.buffer());
               fs.writeFileSync(imagePath, photoBuffer);
-            
+            //   console.log(imagePath);
+              
+              uploadFileToS3(imagePath,imageName);
         }
            
 
         // console.log(datascrimgchapter);
         await page.close();
         console.log(">> Da Dong tab");
-        resolve(datascrimgchapter)
+        resolve(linkimgss)
 
     } catch (error) {
         console.log("loi category error1: " + error);

@@ -75,7 +75,7 @@ exports.createPost=async(req,res)=>{
 exports.createComic=async(req,res)=>{
     const isLoggedIn=req.session.isLoggedIn;
     const user=req.session.username;
-
+    
     // console.log(req.body);
     // console.log(isLoggedIn," in createpost ",user);
     const p=await Comic.create({

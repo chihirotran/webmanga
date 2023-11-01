@@ -9,7 +9,7 @@ const port =process.env.PORT || 3000;
 const Post=require("./model/post");
 const Comic=require("./model/comic");
 const month=['Jan',"Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
-
+const mongoose = require('mongoose');
 
 const authRoutes=require("./routers/auth");
 const registerRoutes=require("./routers/register");
@@ -22,7 +22,8 @@ const deleteRoutes=require("./routers/delete");
 const followerRoutes=require("./routers/folower");
 const crawlRoutes=require("./routers/craw");
 
-const MONGODB_URI="mongodb+srv://chihirotran:Trungtran1501@cluster0.9by4fi3.mongodb.net/?retryWrites=true&w=majority";
+// const MONGODB_URI="mongodb+srv://chihirotran:Trungtran1501@cluster0.9by4fi3.mongodb.net/?retryWrites=true&w=majority";
+const MONGODB_URI="mongodb://127.0.0.1:27017/test";
 
 const store=new MongoDBStore({uri:MONGODB_URI,collection:"sessions"});
 
