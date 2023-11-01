@@ -90,7 +90,7 @@ header {
 }
 
 .inner {
-    background-color: #f5dcdc;
+    background-color: #e4e4e4;
 
 }
 
@@ -115,7 +115,7 @@ header {
     display: block;
     position: relative;
     list-style: none;
-    padding: 15px;
+    padding: 12px;
 }
 
 .navbar-nav>li a {
@@ -127,19 +127,39 @@ header {
 }
 
 ul.dropdown-content {
-    display: none;
+    /* display: none;
     position: absolute;
     background-color: #f9f9f9;
     width: 600px;
     z-index: 999;
     left: 0px;
-    margin-top: 20px;
+    margin-top: 20px; */
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 999;
+    display: none;
+    float: left;
+    min-width: 650px;
+    padding: 5px 0;
+    margin: 2px 0 0;
+    font-size: 14px;
+    text-align: left;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border: 1px solid rgba(0,0,0,.15);
+    border-radius: 4px;
+    -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
+    box-shadow: 0 6px 12px rgba(0,0,0,.175);
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    
 }
 
 ul.dropdown-content li {
-    list-style-type: none;
+    list-style-type:none;
     padding: 10px 10px;
-    display: inline-block;
+    display: inline-table;
 }
 
 ul.dropdown-content ul>li {
@@ -830,4 +850,98 @@ footer .keyword ul li a {
         transform: scale(3);
         opacity: 0;
     }
+}
+.relative.Module:hover {
+    z-index: 1000!important
+}
+.comic-filter .nav-tabs {
+    margin-top: 0;
+    border-bottom: none;
+    text-align: center
+}
+
+.comic-filter .nav-tabs li {
+    float: none;
+    display: inline-block;
+    min-width: 90px;
+    background-color: transparent
+}
+
+.comic-filter .nav-tabs li a {
+    border-radius: 5px;
+    background: #fff;
+    border: 1px solid #ddd;
+    margin: 0;
+    padding: 0 6px;
+    color: #555;
+    font-weight: 400;
+    outline: 0;
+    white-space: nowrap;
+    display: block;
+    line-height: 32px
+}
+
+.comic-filter .nav-tabs li a:hover {
+    border: 1px solid #ddd;
+    cursor: pointer
+}
+
+.comic-filter .nav-tabs li.active a {
+    color: #fff!important;
+    background: #00b9f2;
+    border: none;
+    position: relative;
+    margin-bottom: 7px;
+    outline: 0;
+    border-top: none!important
+}
+
+.comic-filter h1 {
+    text-align: center;
+    margin: 0;
+    font-size: 25px;
+    font-weight: 400
+}
+
+.comic-filter .description {
+    margin-top: 10px;
+    margin-bottom: 15px
+}
+
+.comic-filter .description .info {
+    padding: 10px;
+    border: 1px solid #ddd
+}
+
+.comic-filter .sort-by {
+    margin-top: 15px;
+    margin-bottom: 20px
+}
+
+.comic-filter .sort-by a {
+    border-radius: 5px;
+    width: 112px;
+    margin-bottom: 2px;
+    display: inline-block;
+    text-align: center;
+    background: #f4f4f4;
+    border: 1px solid #ccc;
+    font-size: 13px;
+    padding: 4px 2px;
+    color: #555;
+    font-weight: 400;
+    outline: 0
+}
+
+.comic-filter .sort-by a:hover,.comic-filter .sort-by a.active {
+    text-decoration: none
+}
+
+.comic-filter .sort-by a.active {
+    background-color: #f7941d;
+    border-color: #f28809;
+    color: #fff
+}
+.text-center {
+    text-align: center
 }
