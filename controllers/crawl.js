@@ -158,6 +158,7 @@ const crawSrcImgChapter =  (browser , url , folder,user) => new Promise(async(re
             return datascrimgchapter
         })
         const fs = require('fs');
+        const uploadPromises = [];
         for (let i = 1; i <datascrimgchapter.length ; i++) {
             await page.setExtraHTTPHeaders({
                 referer: url
@@ -186,10 +187,12 @@ const crawSrcImgChapter =  (browser , url , folder,user) => new Promise(async(re
               fs.writeFileSync(imagePath, photoBuffer);
             //   console.log(imagePath);
               
-              uploadFileToS3(imagePath,imageName);
+            //   uploadFileToS3(imagePath,imageName);
+            uploadPromises.push(uploadFileToS3(imagePath, imageName));
+              
         }
            
-
+        await Promise.all(uploadPromises);
         // console.log(datascrimgchapter);
         await page.close();
         console.log(">> Da Dong tab");
