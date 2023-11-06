@@ -10,7 +10,7 @@ const Post=require("./model/post");
 const Comic=require("./model/comic");
 const month=['Jan',"Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 const mongoose = require('mongoose');
-
+const category = require('./model/Category');
 const authRoutes=require("./routers/auth");
 const registerRoutes=require("./routers/register");
 const postRoutes=require("./routers/post");
@@ -38,6 +38,8 @@ app.get('/',async(req,res)=>{
     const isLoggedIn=req.session.isLoggedIn;
     const user=req.session.username;
     let comics=await Comic.find({});
+    req.session.catess=await category.find({});;   
+    let categoryy = req.session.catess;
     let comics1 =await Comic.find({});
     let dateNow = new Date();
     let l=comics.length;
@@ -109,7 +111,7 @@ app.get('/',async(req,res)=>{
     if(l-5>0)
         l1=l-5;
     comics=comics.slice(l1,l);
-    res.render("homepage.ejs",{isLoggedIn,user,comics,comics1,month,dateNow,result});});
+    res.render("homepage.ejs",{isLoggedIn,user,categoryy,comics,comics1,month,dateNow,result});});
 });
 
 app.use(registerRoutes);

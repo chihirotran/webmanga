@@ -48,3 +48,5 @@ const setFixedNav = () => {
         navdom.setAttribute("style", "")
     }
 }
+
+

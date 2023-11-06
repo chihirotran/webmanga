@@ -12,37 +12,47 @@ const crypto = require('crypto');
 const path = require('path');
 const { Upload } = require('@aws-sdk/lib-storage');
 const AWS = require('aws-sdk');
+const Cate = require("../model/Category")
 exports.getInputForm=(req,res)=>{
     const isLoggedIn=req.session.isLoggedIn;
     const user=req.session.username;
-
+    const categoryy = req.session.catess;
     // console.log(isLoggedIn," in crete post get ");
-    res.render("create-post.ejs",{isLoggedIn,user});
+    res.render("create-post.ejs",{isLoggedIn,user,categoryy});
+};
+exports.getInputFormcate=(req,res)=>{
+    const isLoggedIn=req.session.isLoggedIn;
+    const user=req.session.username;
+    const categoryy = req.session.catess;
+    // console.log(isLoggedIn," in crete post get ");
+    res.render("create-category.ejs",{isLoggedIn,user,categoryy});
 };
 exports.getInputFormComic=(req,res)=>{
     const isLoggedIn=req.session.isLoggedIn;
     const user=req.session.username;
-    
+    const categoryy = req.session.catess;
     // console.log(isLoggedIn," in crete post get ");
-    res.render("create-comic.ejs",{isLoggedIn,user});
+    res.render("create-comic.ejs",{isLoggedIn,user,categoryy});
 };
 exports.getInputFormChapter=async(req,res)=>{
     const isLoggedIn=req.session.isLoggedIn;
     const user=req.session.username;
     const comic = await Comic.find({author_id:user})
+    const categoryy = req.session.catess;
     // console.log(req.body);
     // console.log(comic);
     // console.log(isLoggedIn," in crete post get ");
-    res.render("create-chapter.ejs",{isLoggedIn,user,comic});
+    res.render("create-chapter.ejs",{isLoggedIn,user,comic,categoryy});
 };
 exports.getInputFormIMGChapter=async(req,res)=>{
     const isLoggedIn=req.session.isLoggedIn;
     const user=req.session.username;
     const comic = await Comic.find({author_id:user})
+    const categoryy = req.session.catess;
     // console.log(req.body);
     // console.log(comic);
     // console.log(isLoggedIn," in crete post get ");
-    res.render("create-imgchapter.ejs",{isLoggedIn,user,comic});
+    res.render("create-imgchapter.ejs",{isLoggedIn,user,comic,categoryy});
 };
 
 exports.createPost=async(req,res)=>{
@@ -98,6 +108,20 @@ exports.createComic=async(req,res)=>{
     res.redirect("/");
 
 };
+exports.createCate=async(req,res)=>{
+    const isLoggedIn=req.session.isLoggedIn;
+    const user=req.session.username;
+    
+    // console.log(req.body);
+    // console.log(isLoggedIn," in createpost ",user);
+    const p=await Cate.create({
+        title:req.body.title,
+        description:req.body.content,
+    })
+    // u[0].posts.push(p._id);
+    // console.log(u);
+    res.redirect("/");
+}
 exports.createChapter = async (req, res) => {
     const isLoggedIn = req.session.isLoggedIn;
     const user = req.session.username;

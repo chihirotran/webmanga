@@ -54,3 +54,41 @@ document.addEventListener("DOMContentLoaded", function() {
             }, 10000);
         });
     }); 
+
+
+////////////////////////////////
+//#region Validate
+
+// $(document).ready(function () {
+//     // Dữ liệu test
+//     var testCategories = ['Thể loại 1', 'att', 'nu', 'nam', 'xuyen', 'ko'];
+
+//     var categoriesNames = new Bloodhound({
+//       datumTokenizer: Bloodhound.tokenizers.obj.whitespace('text'),
+//       queryTokenizer: Bloodhound.tokenizers.whitespace,
+//       local: testCategories  // Sử dụng dữ liệu test thay vì prefetch
+//     });
+
+//     categoriesNames.initialize();
+
+//     $('#cate').typeahead({
+//       highlight: true,
+//       hint: true,
+//     }, {
+//       name: 'categoriesNames',
+//       displayKey: 'text',
+//       source: categoriesNames.ttAdapter()
+//     });
+
+//     $('#cate').on('typeahead:select', function (event, suggestion) {
+//       // Xử lý khi một mục được chọn từ danh sách gợi ý
+//       console.log('Selected category:', suggestion);
+//     });
+//   });
+
+//     $('.bootstrap-tagsinput').on('typeahead:selected', function (e, datum) {
+//         //alert(datum);
+//     });
+
+
+// //#endregion

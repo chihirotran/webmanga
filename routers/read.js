@@ -17,7 +17,7 @@ const fs = require('fs');
 router.get("/read:id",async(req,res)=>{
     const isLoggedIn=req.session.isLoggedIn;
     const user=req.session.username;
-    
+    const categoryy = req.sessio.catess;
     const id=req.params.id.split(":")[1];
     // const targetObjectId = new ObjectId(id)
     // const comic=await Comic.find({ chapter_comic: targetObjectId });
@@ -41,7 +41,7 @@ router.get("/read:id",async(req,res)=>{
     
     // console.log(blogs);
     
-    res.render('read-comic.ejs',{chapters:chapters[0],comic:comic[0],isLoggedIn,user,comment,month,number});
+    res.render('read-comic.ejs',{chapters:chapters[0],comic:comic[0],isLoggedIn,user,categoryy,comment,month,number});
   }
 });
     
