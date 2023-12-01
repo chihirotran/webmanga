@@ -1,7 +1,7 @@
 const express = require("express");
 const req = require("express/lib/request");
 const Comment = require("../model/comment");
-const Post = require("../model/post");
+const Comic = require("../model/comic");
 const User = require("../model/user");
 const mongoose =require("mongoose")
 const router= express.Router();
@@ -31,7 +31,7 @@ router.get("/delete:id",async(req,res)=>{
     }
     else
     {
-        const post=await Post.findOneAndDelete({_id:id});
+        const post=await Comic.findOneAndDelete({_id:id});
 
         const redirectory="/";
         res.redirect(redirectory);        

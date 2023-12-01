@@ -36,6 +36,9 @@ const chapterSchema=new Mongoose.Schema({
         type: Number,
         bigint: true,
         required:true
+    },
+    view :{
+        type: Number,
     }
 });
 

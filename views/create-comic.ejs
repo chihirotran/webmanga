@@ -46,11 +46,17 @@
       </div>
       <p>Chọn Thể Loại</p>
 <div>
-  <input type="text" id="search" placeholder="Nhập từ khóa" onkeyup="showSuggestions(event)">
+  <!-- <input type="text" id="search" placeholder="Nhập từ khóa" onkeyup="showSuggestions(event)">
   <div id="selected-items"></div>
   <div id="suggestions">
-    <!-- Thay thế các thẻ <p> bằng các mục chọn -->
-  </div>
+  Thay thế các thẻ <p> bằng các mục chọn -->
+ <!-- </div> -->
+ <% for (let i = 0; i < categoryy.length; i++) { 
+  %>
+  <input type="checkbox" id="tag" name="tag" value="<%= categoryy[i].title %>">
+  <label for="<%= categoryy[i].title %>"><%= categoryy[i].title %></label><br>
+  <% } %>
+    
 </div>
       <br />
       <p>Content</p>

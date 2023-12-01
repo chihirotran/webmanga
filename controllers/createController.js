@@ -93,7 +93,8 @@ exports.createComic=async(req,res)=>{
         description:req.body.content,
         author_id:user,
         time_upload:new Date(),
-        linkimg:req.body.img
+        linkimg:req.body.img,
+        tag: req.body.tag
     })
     
     const u=await User.findOneAndUpdate({username:user},

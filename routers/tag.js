@@ -4,93 +4,93 @@ const  createController  = require("../controllers/createController");
 const mongoose = require('mongoose');
 const Comic = require("../model/comic");
 const ObjectId = mongoose.Types.ObjectId;
-
-
 const router= express.Router();
-router.post("/tag:id",async(req,res)=>{
-    const isLoggedIn=req.session.isLoggedIn;
-    const user=req.session.username;
-    
-    const id=req.params.id.split(":")[1];
+const fs = require('fs');
 
-    const u=await User.findOneAndUpdate({username:user},
-        {
-            $push:{
-                follower:id,
-            }
-    });
+router.get("/tag:Name",async(req,res)=>{
+  const isLoggedIn=req.session.isLoggedIn;
+  const user=req.session.username;
+  const categoryy = req.session.catess;
+  const Name=req.params.Name.split(":")[1];
+  // const targetObjectId = new ObjectId(id)
+  // const comic=await Comic.find({ chapter_comic: targetObjectId });
+  // console.log(comic.title);
 
-})
-
-router.get("/tag",async(req,res)=>{
-    const isLoggedIn=req.session.isLoggedIn;
-    const user=req.session.username;
-
-    Comic.aggregate([
-        {
-            $unwind: "$chapter_comic" // Mở rộng mảng chapter_comic
-          },
-          {
-            $lookup: {
-              from: 'chapters',
-              localField: 'chapter_comic',
-              foreignField: '_id',
-              as: 'matchedChapters'
-            }
-          },
-          {
-            $group: {
-              _id: "$_id",
-              title: { $first: "$title" },
-              description: { $first: "$description" },
-              linkimg: { $first: "$linkimg" },
-              time_upload: { $first: "$time_upload " },
-              author_id: { $first: "$author_id"},
-              // Thêm các trường khác của collection Comic mà bạn muốn bao gồm
-              matchedChapters: { $push: "$matchedChapters" }
-            }
-          },
-          {
-            $project: {
-              _id: 1,
-              title: 1,
-              description: 1,
-              linkimg: 1,
-              time_upload: 1,
-              author_id: 1,
-              matchedChapters: {
-                $reduce: {
-                  input: "$matchedChapters",
-                  initialValue: [],
-                  in: { $concatArrays: ["$$value", "$$this"] }
-                }
-              }
-            }
+  Comic.aggregate([
+    {
+      $unwind: "$tag"
+    },
+    {
+      $lookup: {
+        from: 'categories',
+        localField: 'tag',
+        foreignField: 'title',
+        as: 'matchedTag'
+      }
+    },
+    {
+      $match: { "tag": { $regex: Name, $options: "i" } } // Thay "Anime" bằng giá trị cụ thể hoặc biến Name
+    },
+    {
+      $unwind: "$chapter_comic"
+    },
+    {
+      $lookup: {
+        from: 'chapters',
+        localField: 'chapter_comic',
+        foreignField: '_id',
+        as: 'matchedChapters'
+      }
+    },
+    {
+      $group: {
+        _id: "$_id",
+        title: { $first: "$title" },
+        description: { $first: "$description" },
+        linkimg: { $first: "$linkimg" },
+        time_upload: { $first: "$time_upload" },
+        author_id: { $first: "$author_id" },
+        matchedChapters: { $push: "$matchedChapters" },
+        matchedTag: { $push: "$matchedTag" }
+      }
+    },
+    {
+      $project: {
+        _id: 1,
+        title: 1,
+        description: 1,
+        linkimg: 1,
+        time_upload: 1,
+        author_id: 1,
+        matchedChapters: {
+          $reduce: {
+            input: "$matchedChapters",
+            initialValue: [],
+            in: { $concatArrays: ["$$value", "$$this"] }
           }
-        ], (err, result) => {
-        if (err) {
-          console.error(err);
-          return;
         }
-        // let test_key = 0;    
-        // let test_1 = null; 
-        // for (const item of result) {
-        //     test_1 = item.matchedChapters.find(element => element._id == id);
-        //     if (test_1) {
-        //         break;
-        //     }
-        //     test_key += 1;
-        // }
-        // Hiển thị thông tin của các bản ghi trong kết quả
-        // console.log(result);
-        
-      
-    // console.log(l,l-5);
-    for(let i in result){
-        // console.log(result[i]);
-        
-    }
-    let dateNow = new Date();
-    res.render("tag.ejs",{isLoggedIn,user,dateNow,result});});
-});
+      }
+    }  
+  ], (err, result) => {
+if (err) {
+  console.error(err);
+  // Xử lý lỗi tại đây
+} else {
+  // console.log(comic);
+  // Xử lý kết quả tại đây
+  // console.log(id);
+  const jsonResult = JSON.stringify(result);
+    fs.writeFile('comic.json', jsonResult, 'utf8', (err) => {
+      if (err) {
+        console.error(err);
+      } else {
+        console.log('Kết quả đã được ghi vào tệp tin comic.json');
+      }
+    });
+  
+  // console.log(blogs);
+  let dateNow = new Date();
+  res.render('search-tag.ejs',{isLoggedIn,user,categoryy,dateNow,result});
+}
+});});
 module.exports=router;

@@ -48,5 +48,17 @@ const setFixedNav = () => {
         navdom.setAttribute("style", "")
     }
 }
+document.addEventListener("DOMContentLoaded", function () {
+    const searchButton = document.getElementById("searchButton");
+    const searchInput = document.getElementById("searchInput");
+  
+    searchButton.addEventListener("click", function () {
+      const searchTerm = searchInput.value;
+      if (searchTerm.trim() !== "") {
+        // Chuyển hướng đến URL với tham số tìm kiếm
+        window.location.href = "/search:" + searchTerm;
+      }
+    });
+  });
 
 

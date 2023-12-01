@@ -29,6 +29,9 @@ const comicSchema=new Mongoose.Schema({
     },
     chapter_comic: {
         type: Array
+    },
+    tag: {
+        type: Array
     }
 });
 

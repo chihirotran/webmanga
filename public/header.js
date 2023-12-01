@@ -3,13 +3,14 @@ document.addEventListener("DOMContentLoaded", function() {
     
         
     });
-    const data1 = ["apple", "banana", "cherry", "date", "grape", "kiwi", "lemon", "mango", "orange", "pear", "strawberry", "watermelon"];
+    const data1 = ["Action", "Adult", "Adventure", "Anime", "Chuyển Sinh", "Comedy", "Comic", "Xuyên Không"];
 let selectedItems = [];
 
 function showSuggestions(event) {
   const input = document.getElementById("search");
   const suggestions = document.getElementById("suggestions");
   const selectedItemsDiv = document.getElementById("selected-items");
+  const tagInput = document.getElementById("tag"); // Thêm dòng này để lấy thẻ input có id "tag"
   const keyword = input.value.toLowerCase();
   const filteredData = data1.filter(item => item.toLowerCase().startsWith(keyword));
 
@@ -35,6 +36,8 @@ function showSuggestions(event) {
       clickableItem.addEventListener("click", function() {
         selectedItems.push(item); // Thêm mục vào mảng selectedItems
         selectedItemsDiv.innerHTML = selectedItems.join(', '); // Hiển thị các mục đã chọn trong selectedItemsDiv
+        tagInput.value = item; // Ghi giá trị vào thẻ input có id "tag"
+        console.log(tagInput.value);
         input.value = ''; // Xóa trường nhập dữ liệu
         suggestions.style.display = "none"; // Ẩn danh sách gợi ý
       });
@@ -44,6 +47,7 @@ function showSuggestions(event) {
   if (event.key === "Enter") {
     selectedItems.push(keyword);
     selectedItemsDiv.innerHTML = selectedItems.join(', ');
+    tagInput.value = keyword;
     input.value = '';
     suggestions.style.display = "none";
   }

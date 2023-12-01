@@ -7,7 +7,8 @@ const isLoggedIn= require("../index").isLoggedIn;
 router.get('/login',(req,res)=>{
     const user=req.session.username;
     const isLoggedIn=req.session.isLoggedIn;
-    res.render("login.ejs",{isLoggedIn,user});
+    const categoryy = req.session.catess;
+    res.render("login.ejs",{isLoggedIn,user,categoryy});
 });
 router.get('/signup',(req,res)=>{
     const isLoggedIn =req.session.isLoggedIn;

@@ -44,7 +44,7 @@
                                     
                                     <% } %>
                                     <p style="padding: 10px; background-color: rgb(164, 231, 209);" class="card-text">
-                                        <b>Articles :</b>
+                                        <b>Comic :</b>
                                         <%= user_data.blog.length %>
                                     </p>
                                     <p style="padding: 10px; background-color: rgb(164, 231, 209);" class="card-text">
@@ -72,10 +72,13 @@
 
             <div class="card">
               <div class="contain">
-                <img class="card-img" src=<%=blogs[i].img %> alt="Bologna">
+                <img class="card-img" src=<%=blogs[i].linkimg %> alt="Bologna">
                 <div class="top-left">
-                  <a href="/blog" class="btn btn-light btn-sm">
+                  <a href="/" class="btn btn-light btn-sm">
                     <%= blogs[i].type %>
+                  </a>
+                  <a href="/delete:<%=blogs[i]._id%>" class="btn btn-light btn-sm">
+                    delete
                   </a>
                 </div>
   
@@ -88,17 +91,14 @@
                 </h4>
                 <small class="text-muted cat">
                   <i class="far fa-clock text-info"></i>
-                  <%=String(blogs[i].date.getHours())+":"+String(blogs[i].date.getMinutes())+":"+String(blogs[i].date.getSeconds())%>
                 </small>
                 <p class="card-text">
-                  <%- blogs[i].content.slice(0,100).replace(/\r\n\r\n/g, "<br>" )+". . . " %>
+        
                 </p>
-                <a href="/read:<%= blogs[i]._id %>" class="btn btn-info">Read More</a>
               </div>
               <div class="card-footer text-muted d-flex justify-content-between bg-transparent border-top-0">
                 <div class="views">
-                  <%=" Date: "+String(blogs[i].date.getDate())+" /"+month[blogs[i].date.getMonth()]+"/"+
-                    String(blogs[i].date.getFullYear())%>
+                 
                 </div>
 
                 

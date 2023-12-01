@@ -25,10 +25,11 @@
 
 <header>
   <div class="navbar">
-    <img src="https://st.nettruyenus.com/data/logos/logo-nettruyen.png" alt="" />
+    <a href="/">
+    <img src="https://st.nettruyenus.com/data/logos/logo-nettruyen.png" alt="" href="/" /></a>
     <div class="search-box">
-      <input type="text" placeholder="Tìm truyện..." />
-      <button>
+      <input type="text" id="searchInput" placeholder="Tìm truyện..." />
+      <button id="searchButton">
         <i class="fa-solid fa-magnifying-glass"></i>
       </button>
     </div>
@@ -77,7 +78,7 @@
                         <li>
                           <a title="<%= categoryy[i].title %>"
                             data-title="<%= categoryy[i].description %>"
-                            href="https://www.nettruyenus.com/tim-truyen/action-95" target="_self"><%= categoryy[i].title %></a>
+                            href="/tag:<%= categoryy[i].title %>" target="_self"><%= categoryy[i].title %></a>
                         </li>
                         <%}%>
                       </ul>

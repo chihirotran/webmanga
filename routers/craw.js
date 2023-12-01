@@ -9,8 +9,9 @@ const router= express.Router();
 router.get("/craw",async(req,res)=>{
     const isLoggedIn=req.session.isLoggedIn;
     const user=req.session.username;
+    const categoryy = req.session.catess;
 
-    res.render("craw.ejs",{isLoggedIn,user});
+    res.render("craw.ejs",{isLoggedIn,user,categoryy});
     
 });
 

@@ -35,7 +35,8 @@
               <i class="fa fa-filter"> </i>
             </a>
             <% for(let i in result){
-              
+              if(result[i].matchedChapters.length > 0){
+                if(result[i].matchedChapters[0].username == user) {
             %>
             <div class="item">
               <div class="image">
@@ -111,7 +112,7 @@
                 %>
               </ul>
             </div>
-            <% } %>
+            <% }}} %>
           </div>
           <br />
           <div class="pagination-outer">
