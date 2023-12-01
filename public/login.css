@@ -25,6 +25,7 @@ input {
   height: 100%;
   top: 0;
   left: 0;
+  
 }
 
 .signin-signup {
@@ -37,6 +38,7 @@ input {
   display: grid;
   grid-template-columns: 1fr;
   z-index: 5;
+  
 }
 
 form {
@@ -158,7 +160,13 @@ form.sign-in-form {
   left: 0;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  
+
 }
+/* .bglogin{
+  background: url("img/login1.jpg");
+  background: rgba(255, 0, 0, 0.1);
+} */
 
 .container1:before {
   content: "";
@@ -197,8 +205,8 @@ form.sign-in-form {
 .right-panel {
   pointer-events: none;
   padding: 3rem 12% 2rem 17%;
+  
 }
-
 .panel .content {
   color: #fff;
   transition: transform 0.9s ease-in-out;
@@ -217,13 +225,21 @@ form.sign-in-form {
 }
 
 .btn.transparent {
-  margin: 0;
-  background: none;
-  border: 2px solid #fff;
-  width: 130px;
-  height: 41px;
+  width: 150px;
+  background-color: #ffffff;
+  border: none;
+  outline: none;
+  height: 49px;
+  border-radius: 49px;
+  color: #050000;
+  text-transform: uppercase;
   font-weight: 600;
-  font-size: 0.8rem;
+  margin: 10px 0;
+  cursor: pointer;
+  transition: 0.5s;
+}
+.btn.transparent:hover {
+  background-color: #d3cece;
 }
 
 .right-panel .image,
@@ -280,6 +296,7 @@ form.sign-in-form {
     top: 95%;
     transform: translate(-50%, -100%);
     transition: 1s 0.8s ease-in-out;
+    
   }
 
   .signin-signup,
@@ -298,10 +315,12 @@ form.sign-in-form {
     align-items: center;
     padding: 2.5rem 8%;
     grid-column: 1 / 2;
+    background-image: url("img/login1.jpg");
   }
 
   .right-panel {
     grid-row: 3 / 4;
+    
   }
 
   .left-panel {

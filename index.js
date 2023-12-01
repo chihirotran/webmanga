@@ -23,8 +23,8 @@ const followerRoutes=require("./routers/folower");
 const crawlRoutes=require("./routers/craw");
 const tagRoutes=require("./routers/tag");
 
-// const MONGODB_URI="mongodb+srv://chihirotran:Trungtran1501@cluster0.9by4fi3.mongodb.net/?retryWrites=true&w=majority";
-const MONGODB_URI="mongodb://127.0.0.1:27017/test";
+const MONGODB_URI="mongodb+srv://chihirotran:Trungtran1501@cluster0.9by4fi3.mongodb.net/?retryWrites=true&w=majority";
+// const MONGODB_URI="mongodb://127.0.0.1:27017/test";
 
 const store=new MongoDBStore({uri:MONGODB_URI,collection:"sessions"});
 
