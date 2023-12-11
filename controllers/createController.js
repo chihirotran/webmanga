@@ -246,6 +246,7 @@ exports.createChapterS3 = async (req, res) => {
                 {
                   $push: {
                     chapter_comic: p._id,
+                    time_upload:new Date(),
                   },
                 }
               );

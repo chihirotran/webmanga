@@ -18,40 +18,28 @@
   <%- include('partials/header') %>
     <section>
       <div class="app">
-
-
         <div class="clearfix">
           <div>
           <article id="item-detail">
-            <h1 class="title-detail">Ta Nuôi Quỷ Ở Trấn Ma Ty</h1>
+            <h1 class="title-detail"><%= detailcomic.title %></h1>
             <time class="small">
-              [Cập nhật lúc: 00:33 24/11/2023]
+              [Cập nhật lúc: <%= detailcomic.time_upload %>]
             </time>
             <div class="detail-info">
               <div class="row">
                 <div class="col-xs-4 col-image">
-                  <img src="//st.nettruyenus.com/data/comics/60/ta-nuoi-quy-o-tran-ma-ty-5992.jpg"
-                    alt="Ta Nuôi Quỷ Ở  Trấn Ma Ty">
+                  <img src="<%= detailcomic.linkimg %>"
+                    alt="<%= detailcomic.title %>">
                 </div>
                 <div class="col-xs-8 col-info">
                   <ul class="list-info">
-                    <li class="othername row">
-                      <p class="name col-xs-4">
-                        <i class="fa fa-plus">
-                        </i> Tên khác
-                      </p>
-                      <h2 class="other-name col-xs-8">Ta Tại Trấn Ma Ty Nuôi Ma; Ta Nuôi Ma
-                        Quỷ Ở Trấn Ma Ti; I Am Using My Body as Bait for Demons at the Demon
-                        Suppression Bureau</h2>
-                    </li>
                     <li class="author row">
                       <p class="name col-xs-4">
                         <i class="fa fa-user">
                         </i> Tác giả
                       </p>
                       <p class="col-xs-8"><a
-                          href="https://www.nettruyenus.com/tim-truyen?tac-gia=L%e1%bb%a5c+C%c3%a1+H%e1%bb%93+L%c3%b4">Lục
-                          Cá Hồ Lô</a></p>
+                          href=""><%= detailcomic.author_id %></a></p>
                     </li>
                     <li class="status row">
                       <p class="name col-xs-4">
@@ -65,11 +53,11 @@
                         <i class="fa fa-tags">
                         </i> Thể loại
                       </p>
-                      <p class="col-xs-8"><a href="https://www.nettruyenus.com/tim-truyen/fantasy-1050">Fantasy</a>
-                        - <a href="https://www.nettruyenus.com/tim-truyen/manhua">Manhua</a>
-                        - <a href="https://www.nettruyenus.com/tim-truyen/truyen-mau-214">Truyện
-                          Màu</a> - <a href="https://www.nettruyenus.com/tim-truyen/xuyen-khong-205">Xuyên
-                          Không</a></p>
+                      <p class="col-xs-8">
+                        <% for(const tag of detailcomic.tag){ %>
+                        <a href="/tag:<%= tag %>"><%= tag %></a>
+                        <% } %>
+                        </p>
                     </li>
                     <li class="row">
                       <p class="name col-xs-4">
@@ -80,8 +68,8 @@
                     </li>
                   </ul>
                   <div class="mrt5 mrb10" itemscope itemtype="http://schema.org/Book">
-                    <a href="https://www.nettruyenus.com/truyen-tranh/ta-nuoi-quy-o-tran-ma-ty-77628">
-                      <span itemprop="name">Ta Nuôi Quỷ Ở Trấn Ma Ty</span>
+                    <a href="/detailmanga:<%= detailcomic.title %>">
+                      <span itemprop="name"><%= detailcomic.title %></span>
                     </a>
                     <span itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating"> Xếp hạng:
                       <span itemprop="ratingValue">3.5</span>/<span itemprop="bestRating">5</span> - <span
@@ -110,11 +98,12 @@
                       <b>412.927</b> Lượt theo dõi</span>
                   </div>
                   <div class="read-action mrt10">
+                    
                     <a class="btn btn-warning mrb5"
-                      href="https://www.nettruyenus.com/truyen-tranh/ta-nuoi-quy-o-tran-ma-ty/chap-1/948690">
+                      href="/read:<%= detailcomic.matchedChapters[0]._id %>">
                       Đọc từ đầu</a>
                     <a class="btn btn-warning mrb5"
-                      href="https://www.nettruyenus.com/truyen-tranh/ta-nuoi-quy-o-tran-ma-ty/chap-250/1087717">
+                      href="/read:<%= detailcomic.matchedChapters[number]._id %>">
                       Đọc mới nhất</a>
                   </div>
                 </div>
@@ -125,10 +114,7 @@
                 <i class="fa fa-file-text-o">
                 </i> Nội dung
               </h3>
-              <p>Lâu năm xã súc xuyên không đến dị thế giới, vốn định bình an sống qua ngày, lại ngoài
-                ý muốn trói định "Bị yêu ma công kích liền biến mạnh hệ thống", từ nay về sau yêu ma
-                tại Cố Thanh Phong trong mắt đột nhiên trở nên mi thanh mục tú lên?! Đánh ta thêm
-                một roi!</p>
+              <p>Truyện được cập nhật sớm tại nettruyen!</p>
             </div>
             <div class="list-chapter" id="nt_listchapter">
               <h2 class="list-title clearfix">
@@ -142,14 +128,16 @@
               </div>
               <nav>
                 <ul>
+                  <% for (let index = detailcomic.matchedChapters.length -1 ; index >= 0; index--){ %>
                   <li class="row less">
                     <div class="col-xs-5 chapter">
-                      <a href="https://www.nettruyenus.com/truyen-tranh/ta-nuoi-quy-o-tran-ma-ty/chap-1/948690"
-                        data-id="948690">Chapter 1</a>
+                      <a href="/read:<%= detailcomic.matchedChapters[index]._id %>"
+                        data-id="948690">Chapter <%= index %></a>
                     </div>
-                    <div class="col-xs-4 text-center no-wrap small">09:14 17/01</div>
+                    <div class="col-xs-4 text-center no-wrap small"><%= detailcomic.matchedChapters[index].time_upload %></div>
                     <div class="col-xs-3 text-center small">136.714</div>
                   </li>
+                  <% } %>
                 </ul>
                 <a class="hidden view-more" href="#">
                   <i class="fa fa-plus">

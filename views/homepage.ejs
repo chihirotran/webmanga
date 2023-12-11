@@ -41,31 +41,31 @@
                   transform: translate3d(0px, 0px, 0px);
                 "
               >
-              <% for(let i = 0; i < result.length ; i ++){ %>
+              <% for(let i = 0; i < comicspage.length ; i ++){ %>
                 <div class="owl-item" style="width: 208px">
                     
                   <div class="item">
                     <a
-                      href="<%='/'+ result[i].title %>"
-                      title="<%= result[i].title %>"
+                      href="<%='/'+ comicspage[i].title %>"
+                      title="<%= comicspage[i].title %>"
                     >
                       <img
                         class="lazyOwl center"
-                        src="<%= result[i].linkimg %>"
-                        alt="<%= result[i].title %>"
+                        src="<%= comicspage[i].linkimg %>"
+                        alt="<%= comicspage[i].title %>"
                         style="width: 200px;height: 260px;"
                       />
                     </a>
                     <div class="slide-caption">
                       <h3>
                         <a
-                          href="<%= result[i].linkimg %>"
-                          title="<%= result[i].title %>"
-                          ><%= result[i].title %></a
+                          href="<%= comicspage[i].linkimg %>"
+                          title="<%= comicspage[i].title %>"
+                          ><%= comicspage[i].title %></a
                         >
                       </h3>
                       <a
-                        href="<%= result[i].title %>"
+                        href="<%= comicspage[i].title %>"
                         title="Chapter 213"
                         >Chapter 213</a
                       >
@@ -96,13 +96,13 @@
             >
               <i class="fa fa-filter"> </i>
             </a>
-            <% for(let i in result){
+            <% for(const comici of comicspage){
               
             %>
             <div class="item">
               <div class="image">
                 <img
-                  src="<%= result[i].linkimg %>"
+                  src="<%= comici.linkimg %>"
                   alt=""
                 />
                 <div class="view clearfix">
@@ -113,16 +113,16 @@
                   >
                 </div>
               </div>
-              <h3><%= result[i].title %></h3>
+              <h3><a href="/detailmanga:<%= comici._id%>"><%= comici.title %></a></h3>
               <ul class="comic-item">
                 <%
                 let count = 0;
-                for (let index = result[i].matchedChapters.length ; index >= 0 && count <= 3; index--) {
+                for (let index = comici.matchedChapters.length ; index >= 0 && count <= 3; index--) {
                   let chapter_i = index + 1;
-                  if (result[i].matchedChapters[index] == undefined){
+                  if (comici.matchedChapters[index] == undefined){
 
                   } else {
-                  let id_chapters = result[i].matchedChapters[index]._id;
+                  let id_chapters = comici.matchedChapters[index]._id;
                 %>
                 <li class="chapter clearfix">
                 <a
@@ -131,7 +131,7 @@
                     title="Chapter <%= index %>"
                     >Chapter <%= chapter_i %></a
                 ><%
-                let timeUpload = new Date(result[i].matchedChapters[index].time_upload);
+                let timeUpload = new Date(comici.matchedChapters[index].time_upload);
                 const date = new Date(timeUpload);
 
                 const day = String(date.getDate()).padStart(2, '0');
@@ -178,89 +178,20 @@
           <br />
           <div class="pagination-outer">
             <ul class="pagination">
-              <li class="active">
-                <a
-                  href="https://www.nettruyenus.com/"
-                  title="Đang hiện kết quả 1 tới 36 / 20667"
-                  >1</a
-                >
-              </li>
+              <% for(let i = 1; i <= totalPages ; i ++){ %>
               <li>
                 <a
-                  href="https://www.nettruyenus.com/?page=2"
-                  title="Hiện kết quả 37 tới 72 / 20667"
+                  href="/?page=<%= i %>"
+                  title=""
+                  ><%= i %></a
+                >
+              </li>
+              <%}%>
+              <li>
+                <a
+                  href="/?page=2"
+                  title=""
                   >2</a
-                >
-              </li>
-              <li>
-                <a
-                  href="https://www.nettruyenus.com/?page=3"
-                  title="Hiện kết quả 73 tới 108 / 20667"
-                  >3</a
-                >
-              </li>
-              <li>
-                <a
-                  href="https://www.nettruyenus.com/?page=4"
-                  title="Hiện kết quả 109 tới 144 / 20667"
-                  >4</a
-                >
-              </li>
-              <li>
-                <a
-                  href="https://www.nettruyenus.com/?page=5"
-                  title="Hiện kết quả 145 tới 180 / 20667"
-                  >5</a
-                >
-              </li>
-              <li class="PagerSSCCells">
-                <a
-                  href="https://www.nettruyenus.com/?page=100"
-                  title="Hiện kết quả 3565 tới 3600 / 20667"
-                  >100</a
-                >
-              </li>
-              <li class="PagerSSCCells">
-                <a
-                  href="https://www.nettruyenus.com/?page=190"
-                  title="Hiện kết quả 6805 tới 6840 / 20667"
-                  >190</a
-                >
-              </li>
-              <li class="PagerSSCCells">
-                <a
-                  href="https://www.nettruyenus.com/?page=290"
-                  title="Hiện kết quả 10405 tới 10440 / 20667"
-                  >290</a
-                >
-              </li>
-              <li class="PagerSSCCells">
-                <a
-                  href="https://www.nettruyenus.com/?page=380"
-                  title="Hiện kết quả 13645 tới 13680 / 20667"
-                  >380</a
-                >
-              </li>
-              <li class="PagerSSCCells">
-                <a
-                  href="https://www.nettruyenus.com/?page=480"
-                  title="Hiện kết quả 17245 tới 17280 / 20667"
-                  >480</a
-                >
-              </li>
-              <li>
-                <a
-                  class="next-page"
-                  href="https://www.nettruyenus.com/?page=2"
-                  title="Chuyển đến trang 2"
-                  >›</a
-                >
-              </li>
-              <li>
-                <a
-                  href="https://www.nettruyenus.com/?page=575"
-                  title="Trang cuối"
-                  >»</a
                 >
               </li>
             </ul>
