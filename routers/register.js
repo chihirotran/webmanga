@@ -13,8 +13,9 @@ router.get('/login',(req,res)=>{
 router.get('/signup',(req,res)=>{
     const isLoggedIn =req.session.isLoggedIn;
     const user=req.session.username;
+    const categoryy = req.session.catess;
 
-    res.render("signup.ejs",{isLoggedIn,user});
+    res.render("signup.ejs",{isLoggedIn,user,categoryy});
 });
 module.exports =router;
 
