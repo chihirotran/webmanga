@@ -29,7 +29,7 @@
         <meta itemprop="position" content="2">
       </li>
       <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a
-          href="https://www.nettruyenus.com/Secure/Dashboard.aspx" class="selectedcrumb">Thông tin chung</a></li>
+          href="https://www.nettruyenus.com/Secure/Dashboard.aspx" class="selectedcrumb">Thông tin tài khoản</a></li>
     </ul>
   </div>
   <div class="row">
@@ -99,9 +99,9 @@
           </section>
           <nav class="user-sidelink clearfix">
             <ul>
-              <li class="hvr-sweep-to-right active"><a href="/profile"><i
+              <li class="hvr-sweep-to-right "><a href="/profile"><i
                     class="fa "></i> Thông tin chung</a></li>
-              <li class="hvr-sweep-to-right"><a href="/profiledetail"><i
+              <li class="hvr-sweep-to-right active"><a href="/profiledetail"><i
                     class="fa "></i> Thông tin tài khoản</a></li>
               <li class="hvr-sweep-to-right"><a href="/profilefollow"><i
                     class="fa "></i> Truyện theo dõi</a></li>
@@ -119,89 +119,100 @@
           </nav>
         </div>
         <div class="col-md-9 col-sm-8">
-          <div class="user-page clearfix">
-            <h1 class="postname">
-              Thông tin chung
-            </h1>
-            <div class="row">
-              <div class="col-xs-12 col-md-6">
-                <div class="account-info clearfix">
-                  <h2 class="posttitle">
+          <!-- <div id="ctl00_mainContent_pnlUser" class="user-page clearfix"
+                  onkeypress="javascript:return WebForm_FireDefaultButton(event, &#39;ctl00_mainContent_btnUpdate&#39;)"> -->
+                  <h1 class="postname">
                     Thông tin tài khoản
-                  </h2>
-                  <a class="link" href="https://www.nettruyenus.com/Secure/UserProfile.aspx">Chỉnh sửa</a>
-                  <div class="info-detail">
-                    <div class="group">
-                      <div class="skillbox">
-                        <span class="level level-current" data-level="4">Cấp 4</span>
-                        <span class="level level-next" data-level="5">Cấp 5</span>
-                        <div class="progress">
-                          <span class="progress-bar" style="width:57%">57%</span>
+                  </h1>
+                  <div class="account-info clearfix">
+                    <h2 class="posttitle">Cập nhật thông tin tài khoản</h2>
+                    <div class="account-form clearfix">
+                      <div class="row">
+                        <div class="col-sm-9">
+                          <div id="ctl00_mainContent_divUserName" class="form-group">
+                            <label for="ctl00_mainContent_txtName" class="control-label">Tài khoản</label>
+                            <input name="ctl00$mainContent$txtName" type="text" value="vuonglam28122002" maxlength="100"
+                              id="ctl00_mainContent_txtName" disabled="disabled" tabindex="10"
+                              class="aspNetDisabled form-control" />
+                            <span id="ctl00_mainContent_rfvName" style="display:none;"></span>
+                            <span id="ctl00_mainContent_regexUserName" style="display:none;"></span>
+                          </div>
+                          <div class="form-group">
+                            <label for="ctl00_mainContent_txtEmail" class="control-label">Địa chỉ email</label>
+                            <input name="ctl00$mainContent$txtEmail" type="text" value="vuonglam28122002@gmail.com"
+                              id="ctl00_mainContent_txtEmail" disabled="disabled" tabindex="10"
+                              class="aspNetDisabled form-control" />
+                            <span id="ctl00_mainContent_regexEmail" style="display:none;"></span>
+                            <span id="ctl00_mainContent_rfvEmail" style="display:none;"></span>
+                            <p class="mrt5 mrb0">
+                              <!-- <a onclick="return confirm(&#39;Đổi email sẽ có thể đăng nhập qua tài khoản Google. Bạn chắn chắn muốn thực hiện?&#39;);"
+                                id="ctl00_mainContent_lkbLinkGoogle"
+                                href="javascript:__doPostBack(&#39;ctl00$mainContent$lkbLinkGoogle&#39;,&#39;&#39;)">Thay
+                                đổi Email</a> -->
+                            </p>
+                          </div>
+                          <div class="form-group">
+                            <label for="ctl00_mainContent_txtFirstName" class="control-label">Tên</label>
+                            <input name="ctl00$mainContent$txtFirstName" type="text" value="Eternal" maxlength="100"
+                              id="ctl00_mainContent_txtFirstName" class="form-control" />
+                            <span id="ctl00_mainContent_FirstNameRequired" class="error" style="display:none;">Vui lòng
+                              nhập Tên</span>
+                          </div>
+                          <div class="form-group">
+                            <label for="ctl00_mainContent_txtLastName" class="control-label">Họ</label>
+                            <input name="ctl00$mainContent$txtLastName" type="text" value="God" maxlength="100"
+                              id="ctl00_mainContent_txtLastName" class="form-control" />
+                            <span id="ctl00_mainContent_LastNameRequired" class="error" style="display:none;">Vui lòng
+                              nhập Họ</span>
+                          </div>
+                          <div class="form-group">
+                            <label for="ctl00_mainContent_ddGender" class="control-label">Giới tính</label>
+                            <select name="ctl00$mainContent$ddGender" id="ctl00_mainContent_ddGender"
+                              class="form-control">
+                              <option value></option>
+                              <option value="M">Nam</option>
+                              <option selected="selected" value="F">Nữ</option>
+                            </select>
+                            <span id="ctl00_mainContent_GenderRequired" class="error" style="display:none;">Vui lòng
+                              nhập Giới tính</span>
+                          </div>
+                          
+                        </div>
+                        <div class="col-sm-3">
+                          <div id="ctl00_mainContent_divAvatar" class="form-group avatar-control">
+                            <label class="control-label">Avatar</label>
+                            <div class="forminput">
+                              <img alt src="//st.nettruyenus.com/data/sites/1/useravatars/723879.jpg?v=1221"
+                                class="avatar user-img">
+                              <label for="ctl00_mainContent_fileUploader" class="btn btn-danger">Upload ảnh</label>
+                              <input type="file" name="ctl00$mainContent$fileUploader"
+                                id="ctl00_mainContent_fileUploader" class="hidden" accept=".jpg,.jpeg,.gif,.png"
+                                onchange="showImage(event)" />
+                              <span class="avatar-note">jpg,jpeg,gif,png &lt;2MB</span>
+                              <div class="avatar-note error">Avatar tục tĩu sẽ bị khóa vĩnh viễn</div>
+                              <script>
+                                var showImage = function (event) {
+                                  var img = document.getElementsByClassName("avatar user-img");
+                                  if (img.length > 1) {
+                                    img[1].src = URL.createObjectURL(event.target.files[0]);
+                                    img[1].onload = function () {
+                                      URL.revokeObjectURL(img[1].src)
+                                    }
+                                  }
+                                }
+                              </script>
+                            </div>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    <div class="group">
-                      <div class="label">Họ và tên</div>
-                      <div class="detail">
-                        God Eternal
-                      </div>
-                    </div>
-                    <div class="group">
-                      <div class="label">Email</div>
-                      <div class="detail">
-                        vuonglam28122002@gmail.com
-                      </div>
-                    </div>
-                    <div class="group">
-                      <div class="label">Loại cấp bậc</div>
-                      <div class="detail error">
-                        Bình thường
-                        <a href="/Secure/UserProfile.aspx" style="display:inline-block;padding-left:6px">Thay
-                          đổi</a>
+                      <div class="button-wrap" style="padding-bottom: 30px;">
+                        <input type="submit" name="ctl00$mainContent$btnUpdate" value="Cập nhật"
+                          
+                          id="ctl00_mainContent_btnUpdate" class="btn btn-primary" />
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div class="col-xs-12 col-md-6">
-                <div class="account-info clearfix">
-                  <h2 class="posttitle">
-                    Liên kết Tài khoản Google
-                  </h2>
-                  <div class="info-detail">
-                    <div class="group">
-                      <div class="label">Trạng thái</div>
-                      <div class="detail">
-                        Chưa liên kết
-                      </div>
-                    </div>
-                    <div class="group">
-                      <div class="label"></div>
-                      <div class="detail">
-                        <a id="ctl00_mainContent_lkbLinkGoogle"
-                          href="javascript:__doPostBack(&#39;ctl00$mainContent$lkbLinkGoogle&#39;,&#39;&#39;)">Liên
-                          kết</a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-xs-12">
-                <div class="relative">
-                  <h2 class="posttitle">Truyện theo dõi</h2>
-                  <a class="link" href="https://www.nettruyenus.com/Secure/ComicFollowed.aspx">Xem tất cả</a>
-                </div>
-                <section class="comics-followed comics-followed-nopaging user-table clearfix"></section>
-              </div>
-              <div class="col-xs-12">
-                <div class="relative">
-                  <h2 class="posttitle">Bình luận</h2>
-                  <a class="link" href="https://www.nettruyenus.com/Secure/Comments.aspx">Xem tất cả</a>
-                </div>
-                
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </div>

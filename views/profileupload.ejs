@@ -29,7 +29,7 @@
         <meta itemprop="position" content="2">
       </li>
       <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a
-          href="https://www.nettruyenus.com/Secure/Dashboard.aspx" class="selectedcrumb">Thông tin chung</a></li>
+          href="https://www.nettruyenus.com/Secure/Dashboard.aspx" class="selectedcrumb">Truyện đã đăng</a></li>
     </ul>
   </div>
   <div class="row">
@@ -99,13 +99,13 @@
           </section>
           <nav class="user-sidelink clearfix">
             <ul>
-              <li class="hvr-sweep-to-right active"><a href="/profile"><i
+              <li class="hvr-sweep-to-right "><a href="/profile"><i
                     class="fa "></i> Thông tin chung</a></li>
               <li class="hvr-sweep-to-right"><a href="/profiledetail"><i
                     class="fa "></i> Thông tin tài khoản</a></li>
-              <li class="hvr-sweep-to-right"><a href="/profilefollow"><i
+              <li class="hvr-sweep-to-right "><a href="/profilefollow"><i
                     class="fa "></i> Truyện theo dõi</a></li>
-              <li class="hvr-sweep-to-right"><a href="/profileupload"><i
+              <li class="hvr-sweep-to-right active"><a href="/profileupload"><i
                     class="fa "></i> Truyện đã đăng</a></li>
               <li class="hvr-sweep-to-right"><a href="/profilecomment"><i
                     class="fa "></i> Bình luận</a></li>
@@ -120,87 +120,47 @@
         </div>
         <div class="col-md-9 col-sm-8">
           <div class="user-page clearfix">
-            <h1 class="postname">
-              Thông tin chung
-            </h1>
-            <div class="row">
-              <div class="col-xs-12 col-md-6">
-                <div class="account-info clearfix">
-                  <h2 class="posttitle">
-                    Thông tin tài khoản
-                  </h2>
-                  <a class="link" href="https://www.nettruyenus.com/Secure/UserProfile.aspx">Chỉnh sửa</a>
-                  <div class="info-detail">
-                    <div class="group">
-                      <div class="skillbox">
-                        <span class="level level-current" data-level="4">Cấp 4</span>
-                        <span class="level level-next" data-level="5">Cấp 5</span>
-                        <div class="progress">
-                          <span class="progress-bar" style="width:57%">57%</span>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="group">
-                      <div class="label">Họ và tên</div>
-                      <div class="detail">
-                        God Eternal
-                      </div>
-                    </div>
-                    <div class="group">
-                      <div class="label">Email</div>
-                      <div class="detail">
-                        vuonglam28122002@gmail.com
-                      </div>
-                    </div>
-                    <div class="group">
-                      <div class="label">Loại cấp bậc</div>
-                      <div class="detail error">
-                        Bình thường
-                        <a href="/Secure/UserProfile.aspx" style="display:inline-block;padding-left:6px">Thay
-                          đổi</a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-xs-12 col-md-6">
-                <div class="account-info clearfix">
-                  <h2 class="posttitle">
-                    Liên kết Tài khoản Google
-                  </h2>
-                  <div class="info-detail">
-                    <div class="group">
-                      <div class="label">Trạng thái</div>
-                      <div class="detail">
-                        Chưa liên kết
-                      </div>
-                    </div>
-                    <div class="group">
-                      <div class="label"></div>
-                      <div class="detail">
-                        <a id="ctl00_mainContent_lkbLinkGoogle"
-                          href="javascript:__doPostBack(&#39;ctl00$mainContent$lkbLinkGoogle&#39;,&#39;&#39;)">Liên
-                          kết</a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-xs-12">
-                <div class="relative">
-                  <h2 class="posttitle">Truyện theo dõi</h2>
-                  <a class="link" href="https://www.nettruyenus.com/Secure/ComicFollowed.aspx">Xem tất cả</a>
-                </div>
-                <section class="comics-followed comics-followed-nopaging user-table clearfix"></section>
-              </div>
-              <div class="col-xs-12">
-                <div class="relative">
-                  <h2 class="posttitle">Bình luận</h2>
-                  <a class="link" href="https://www.nettruyenus.com/Secure/Comments.aspx">Xem tất cả</a>
-                </div>
-                
+            <div id="ctl00_mainContent_message" class="notifybox">
+              <div class="warning">
+                Bạn chưa có quyền upload truyện. Nếu bạn muốn trở thành Tác giả/Dịch giả để upload truyện, vui
+                lòng đăng ký form bên dưới<span class="close">×</span>
               </div>
             </div>
+            <div id="ctl00_mainContent_divRegister" class="mrb10">
+              <div class="form-group">
+                <textarea name="ctl00$mainContent$txtAuthorBio" rows="4" cols="20"
+                  id="ctl00_mainContent_txtAuthorBio" class="form-control"
+                  placeholder="Giới thiệu sơ về bản thân hoặc nhóm dịch. Thông tin này rất quan trọng để được kiểm duyệt.">
+                </textarea>
+                <span id="ctl00_mainContent_reqAuthorBio" class="error" style="display:none;">Vui lòng nhập thông
+                  tin</span>
+              </div>
+              <input type="submit" name="ctl00$mainContent$btnRegister" value="Đăng ký thành Tác giả/Dịch giả"
+                id="ctl00_mainContent_btnRegister" class="btn btn-warning" />
+                <a  class="btn btn-warning " href="/create-chapter">Đăng truyện</a>
+            </div>
+            <h1 class="postname">
+              Truyện đã đăng
+            </h1>
+            <section class="user-table clearfix">
+              <div class="mrb5">
+              </div>
+              <div class="table-responsive">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th></th>
+                      <th class="nowrap">Tên truyện</th>
+                      <th class="nowrap">Chap mới nhất</th>
+                      <th class="nowrap">Lượt xem</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  </tbody>
+                </table>
+              </div>
+            </section>
           </div>
         </div>
       </div>
