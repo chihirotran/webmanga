@@ -113,10 +113,11 @@
                   Đổi mật khẩu
                 </h1>
                 <div class="row">
+                  <form action="/change-pass" method="POST" enctype="multipart/form-data">
                   <div class="col-sm-9">
                     <div class="form-group">
                       <label for="ctl00_mainContent_txtNewPassword" class="control-label">Mật khẩu mới</label>
-                      <input name="ctl00$mainContent$txtNewPassword" type="password"
+                      <input name="NewPassword" type="password"
                         id="ctl00_mainContent_txtNewPassword" class="form-control" />
                       <span id="ctl00_mainContent_NewPasswordRequired" class="error" style="display:none;">Vui lòng
                         nhập Mật khẩu mới</span>
@@ -140,6 +141,7 @@
                         id="ctl00_mainContent_btnChangePassword" class="btn btn-primary" />
                     </div>
                   </div>
+                </form>
                 </div>
               </div>
             </div>

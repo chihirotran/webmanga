@@ -123,7 +123,7 @@
             <h1 class="postname">
               Truyện đang theo dõi
             </h1>
-            <!-- <section class="user-table clearfix">
+            <section class="user-table clearfix">
               <div class="mrb5">
               </div>
               <div class="table-responsive">
@@ -133,15 +133,39 @@
                       <th></th>
                       <th class="nowrap">Tên truyện</th>
                       <th class="nowrap">Chap mới nhất</th>
-                      <th class="nowrap">Lượt xem</th>
                       <th></th>
                     </tr>
                   </thead>
                   <tbody>
+                    <% for(let i in result){
+                      let a = result[i].matchedChapters.length - 1;
+                    %>
+                    <tr class="unread">
+                      <td>
+                        <a class="image" href="/detailmanga:<%= result[i]._id %>">
+                          <img src="<%= result[i].linkimg %>" class="lazy" data-original="//st.ntcdntempv3.com/data/comics/44/khoi-tao-nhan-vat-phan-dien.jpg" alt="<%= result[i].title %>">
+                        </a>
+                      </td>
+                      <td>
+                        <a class="comic-name" href="/detailmanga:<%= result[i]._id %>"><%= result[i].title %></a>
+                        <div class="follow-action">
+                          <a href="javascript:void(0)" class="follow-link" data-id="26412" data-key="657864d6-fe3d-b67e-3e34-8322e199b1be">
+                            <i class="fa fa-times">
+                            </i> Bỏ theo dõi
+                        </a>
+                        </div>
+                      </td>
+                      <td class="nowrap chapter">
+                        <a class="visited" href="/read:<%= result[i].matchedChapters[a]._id %>" title="Chapter <%= result[i].matchedChapters.length%>">Chapter <%= result[i].matchedChapters.length%></a>
+                        <br>
+                        <time class="time">09:51 21/10</time>
+                      </td>
+                    </tr>
+                    <%}%>
                   </tbody>
                 </table>
               </div>
-            </section> -->
+            </section>
             <section class="comics-followed comics-followed-withpaging user-table clearfix"></section>
           </div>
         </div>

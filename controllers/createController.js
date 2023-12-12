@@ -31,8 +31,12 @@ exports.getInputFormComic=(req,res)=>{
     const isLoggedIn=req.session.isLoggedIn;
     const user=req.session.username;
     const categoryy = req.session.catess;
+    const roles = req.session.roles;
+    if(roles == 0 ){
+        res.redirect("/profileupload");
+    }else{
     // console.log(isLoggedIn," in crete post get ");
-    res.render("create-comic.ejs",{isLoggedIn,user,categoryy});
+    res.render("create-comic.ejs",{isLoggedIn,user,categoryy});}
 };
 exports.getInputFormChapter=async(req,res)=>{
     const isLoggedIn=req.session.isLoggedIn;
@@ -42,7 +46,12 @@ exports.getInputFormChapter=async(req,res)=>{
     // console.log(req.body);
     // console.log(comic);
     // console.log(isLoggedIn," in crete post get ");
-    res.render("create-chapter.ejs",{isLoggedIn,user,comic,categoryy});
+    const roles = req.session.roles;
+    console.log(roles);
+    if(roles == 0 ){
+        res.redirect("/profileupload");
+    }else{
+    res.render("create-chapter.ejs",{isLoggedIn,user,comic,categoryy});}
 };
 exports.getInputFormIMGChapter=async(req,res)=>{
     const isLoggedIn=req.session.isLoggedIn;

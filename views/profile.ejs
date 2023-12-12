@@ -113,7 +113,7 @@
                     class="fa "></i> Thông báo</a></li>
               <li class="hvr-sweep-to-right"><a href="/profilechangepass"><i
                     class="fa "></i> Đổi mật khẩu</a></li>
-              <li class="hvr-sweep-to-right"><a href="#"><i
+              <li class="hvr-sweep-to-right"><a href="/logout"><i
                     class="fa "></i> Thoát</a></li>
             </ul>
           </nav>
@@ -129,37 +129,23 @@
                   <h2 class="posttitle">
                     Thông tin tài khoản
                   </h2>
-                  <a class="link" href="https://www.nettruyenus.com/Secure/UserProfile.aspx">Chỉnh sửa</a>
+                  <a class="link" href="/profiledetail">Chỉnh sửa</a>
                   <div class="info-detail">
                     <div class="group">
-                      <div class="skillbox">
-                        <span class="level level-current" data-level="4">Cấp 4</span>
-                        <span class="level level-next" data-level="5">Cấp 5</span>
-                        <div class="progress">
-                          <span class="progress-bar" style="width:57%">57%</span>
-                        </div>
-                      </div>
                     </div>
                     <div class="group">
                       <div class="label">Họ và tên</div>
                       <div class="detail">
-                        God Eternal
+                        <%= user_data.name %>
                       </div>
                     </div>
                     <div class="group">
                       <div class="label">Email</div>
                       <div class="detail">
-                        vuonglam28122002@gmail.com
+                        <%= user_data.email %>
                       </div>
                     </div>
-                    <div class="group">
-                      <div class="label">Loại cấp bậc</div>
-                      <div class="detail error">
-                        Bình thường
-                        <a href="/Secure/UserProfile.aspx" style="display:inline-block;padding-left:6px">Thay
-                          đổi</a>
-                      </div>
-                    </div>
+                    
                   </div>
                 </div>
               </div>
@@ -189,9 +175,51 @@
               <div class="col-xs-12">
                 <div class="relative">
                   <h2 class="posttitle">Truyện theo dõi</h2>
-                  <a class="link" href="https://www.nettruyenus.com/Secure/ComicFollowed.aspx">Xem tất cả</a>
+                  <a class="link" href="/profilefollow">Xem tất cả</a>
                 </div>
-                <section class="comics-followed comics-followed-nopaging user-table clearfix"></section>
+                <section class="comics-followed comics-followed-nopaging user-table clearfix">
+                  <div class="table-responsive">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th>
+                          </th>
+                          <th class="nowrap">Tên truyện</th>
+                          
+                          <th class="nowrap">Chap mới nhất</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <% for(let i in result){
+                          let a = result[i].matchedChapters.length - 1;
+                        %>
+                        <tr class="unread">
+                          <td>
+                            <a class="image" href="/detailmanga:<%= result[i]._id %>">
+                              <img src="<%= result[i].linkimg %>" class="lazy" data-original="//st.ntcdntempv3.com/data/comics/44/khoi-tao-nhan-vat-phan-dien.jpg" alt="Khởi Tạo Nhân Vật Phản Diện">
+                            </a>
+                          </td>
+                          <td>
+                            <a class="comic-name" href="/detailmanga:<%= result[i]._id %>"><%= result[i].title %></a>
+                            <div class="follow-action">
+                              <a href="javascript:void(0)" class="mark-as-read" data-id="26412">
+                                <i class="fa fa-check">
+                                </i> Đã đọc
+                              </a>
+                              
+                            </div>
+                          </td>
+                          <td class="nowrap chapter">
+                            <a href="/read:<%= result[i].matchedChapters[a]._id %>" title="Chapter 122">Chapter <%= result[i].matchedChapters.length%></a>
+                            <br>
+                            <time class="time">27 phút trước</time>
+                          </td>
+                        </tr>
+                        <%}%>
+                      </tbody>
+                    </table>
+                  </div>
+                </section>
               </div>
               <div class="col-xs-12">
                 <div class="relative">

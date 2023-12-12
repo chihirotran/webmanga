@@ -127,19 +127,20 @@
                   <div class="account-info clearfix">
                     <h2 class="posttitle">Cập nhật thông tin tài khoản</h2>
                     <div class="account-form clearfix">
+                      <form action="/update-info" method="POST" enctype="multipart/form-data">
                       <div class="row">
                         <div class="col-sm-9">
                           <div id="ctl00_mainContent_divUserName" class="form-group">
                             <label for="ctl00_mainContent_txtName" class="control-label">Tài khoản</label>
-                            <input name="ctl00$mainContent$txtName" type="text" value="vuonglam28122002" maxlength="100"
-                              id="ctl00_mainContent_txtName" disabled="disabled" tabindex="10"
+                            <input name="username" type="text" value="<%= user_data.username %>" disabled="disabled" maxlength="100"
+                              id="ctl00_mainContent_txtName"  tabindex="10"
                               class="aspNetDisabled form-control" />
                             <span id="ctl00_mainContent_rfvName" style="display:none;"></span>
                             <span id="ctl00_mainContent_regexUserName" style="display:none;"></span>
                           </div>
                           <div class="form-group">
                             <label for="ctl00_mainContent_txtEmail" class="control-label">Địa chỉ email</label>
-                            <input name="ctl00$mainContent$txtEmail" type="text" value="vuonglam28122002@gmail.com"
+                            <input name="email" type="text" value="<%= user_data.email %>"
                               id="ctl00_mainContent_txtEmail" disabled="disabled" tabindex="10"
                               class="aspNetDisabled form-control" />
                             <span id="ctl00_mainContent_regexEmail" style="display:none;"></span>
@@ -151,41 +152,35 @@
                                 đổi Email</a> -->
                             </p>
                           </div>
+
                           <div class="form-group">
                             <label for="ctl00_mainContent_txtFirstName" class="control-label">Tên</label>
-                            <input name="ctl00$mainContent$txtFirstName" type="text" value="Eternal" maxlength="100"
+                            <input name="name" type="text" value="<%= user_data.name %>" maxlength="100"
                               id="ctl00_mainContent_txtFirstName" class="form-control" />
                             <span id="ctl00_mainContent_FirstNameRequired" class="error" style="display:none;">Vui lòng
                               nhập Tên</span>
                           </div>
                           <div class="form-group">
-                            <label for="ctl00_mainContent_txtLastName" class="control-label">Họ</label>
-                            <input name="ctl00$mainContent$txtLastName" type="text" value="God" maxlength="100"
-                              id="ctl00_mainContent_txtLastName" class="form-control" />
-                            <span id="ctl00_mainContent_LastNameRequired" class="error" style="display:none;">Vui lòng
-                              nhập Họ</span>
-                          </div>
-                          <div class="form-group">
                             <label for="ctl00_mainContent_ddGender" class="control-label">Giới tính</label>
-                            <select name="ctl00$mainContent$ddGender" id="ctl00_mainContent_ddGender"
+                            <select name="ddGender" id="ctl00_mainContent_ddGender"
                               class="form-control">
-                              <option value></option>
-                              <option value="M">Nam</option>
-                              <option selected="selected" value="F">Nữ</option>
+                              <option selected="selected" value><%= user_data.sex %></option>
+                              <option value="Nam">Nam</option>
+                              <option  value="Nữ">Nữ</option>
                             </select>
                             <span id="ctl00_mainContent_GenderRequired" class="error" style="display:none;">Vui lòng
                               nhập Giới tính</span>
                           </div>
                           
-                        </div>
+                        </div>    
                         <div class="col-sm-3">
                           <div id="ctl00_mainContent_divAvatar" class="form-group avatar-control">
                             <label class="control-label">Avatar</label>
                             <div class="forminput">
-                              <img alt src="//st.nettruyenus.com/data/sites/1/useravatars/723879.jpg?v=1221"
+                              <img alt src="<%= user_data.linkimg %>"
                                 class="avatar user-img">
                               <label for="ctl00_mainContent_fileUploader" class="btn btn-danger">Upload ảnh</label>
-                              <input type="file" name="ctl00$mainContent$fileUploader"
+                              <input type="file" name="avatar"
                                 id="ctl00_mainContent_fileUploader" class="hidden" accept=".jpg,.jpeg,.gif,.png"
                                 onchange="showImage(event)" />
                               <span class="avatar-note">jpg,jpeg,gif,png &lt;2MB</span>
@@ -210,6 +205,7 @@
                           
                           id="ctl00_mainContent_btnUpdate" class="btn btn-primary" />
                       </div>
+                    </form>
                     </div>
                   </div>
                 </div>

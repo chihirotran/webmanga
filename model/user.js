@@ -20,8 +20,14 @@ const userSchema= new mongoose.Schema({
     posts:{
         type:Array,
     },
-    admin:{
-        type:Boolean,
+    sex:{
+        type:String,
+    },
+    linkimg:{
+        type:String,
+    },
+    role:{
+        type:Number,
         required:true
     },
     comment:{

@@ -260,14 +260,14 @@ router.get("/mangadetail",async(req,res)=>{
   }
   let dateNow = new Date();
 
-  const jsonResult = JSON.stringify(result);
-  fs.writeFile('comic.json', jsonResult, 'utf8', (err) => {
-    if (err) {
-      console.error(err);
-    } else {
-      console.log('Kết quả đã được ghi vào tệp tin comic.json');
-    }
-  });
+  // const jsonResult = JSON.stringify(result);
+  // fs.writeFile('comic.json', jsonResult, 'utf8', (err) => {
+  //   if (err) {
+  //     console.error(err);
+  //   } else {
+  //     console.log('Kết quả đã được ghi vào tệp tin comic.json');
+  //   }
+  // });
   res.render("mangadetail.ejs",{isLoggedIn,user,dateNow,result,categoryy});});
 });
 router.get("/history",async(req,res)=>{
