@@ -118,6 +118,56 @@ exports.createComic=async(req,res)=>{
     res.redirect("/");
 
 };
+exports.editComic=async(req,res)=>{
+    const isLoggedIn=req.session.isLoggedIn;
+    const user=req.session.username;
+
+    console.log(req.session.emid);
+    // console.log(isLoggedIn," in createpost ",user);
+    await Comic.updateMany(
+        {
+          _id: req.session.emid
+        },
+        {
+          $set: {
+            title:req.body.title,
+            description:req.body.content,
+            author_id:user,
+            time_upload:new Date(),
+            linkimg:req.body.img,
+            tag: req.body.tag
+          },
+        }
+      );
+    // u[0].posts.push(p._id);
+    // console.log(u);
+    req.session.emid = null;
+    res.redirect("/adminmanga");
+
+};
+exports.editCate=async(req,res)=>{
+    const isLoggedIn=req.session.isLoggedIn;
+    const user=req.session.username;
+
+    console.log(req.session.emid);
+    // console.log(isLoggedIn," in createpost ",user);
+    await Cate.updateMany(
+        {
+          _id: req.session.emid
+        },
+        {
+          $set: {
+            title:req.body.title,
+            description:req.body.content,
+          },
+        }
+      );
+    // u[0].posts.push(p._id);
+    // console.log(u);
+    req.session.emid = null;
+    res.redirect("/admintag");
+
+};
 exports.createCate=async(req,res)=>{
     const isLoggedIn=req.session.isLoggedIn;
     const user=req.session.username;

@@ -133,14 +133,30 @@
                     <table class="table">
                       <thead>
                         <tr>
-                          <th>
-                          </th>
-                          <th class="nowrap">Tên danh mục</th>
                           
-                          <th class="nowrap">???</th>
+                          <th class="nowrap">Tên danh mục</th>
+                          <th class="nowrap">Mô Tả</th>
+                          <th class="nowrap">Thao Tác</th>
                         </tr>
                       </thead>
-                      
+                      <tbody>
+                        <% for(let i in result){
+                          
+                        %>
+                        <tr class="unread">
+                          <td>
+                            <a class="comic-name" href="# %>"><%= result[i].title %></a>
+                          </td>
+                          <td>
+                            <a class="comic-name" href="# %>"><%= result[i].description %></a>
+                          </td>
+                          <td class="nowrap chapter">
+                            <a class="visited" href="/admintag?action=edit&&mid=<%= result[i]._id%>" title="">Sửa</a>
+                            <a class="visited" href="/admintag?action=del&&mid=<%= result[i]._id%>" title="">Xoá </a>
+                          </td>
+                        </tr>
+                        <%}%>
+                      </tbody>
                     </table>
                   </div>
                 </section>

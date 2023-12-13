@@ -133,14 +133,27 @@
                     <table class="table">
                       <thead>
                         <tr>
-                          <th>
-                          </th>
                           <th class="nowrap">Tên tài khoản</th>
                           
-                          <th class="nowrap">Mật khẩu</th>
+                          <th class="nowrap">Thao Tác</th>
                     
                         </tr>
                       </thead>
+                      <tbody>
+                        <% for(let i in user_data){
+                          
+                        %>
+                        <tr class="unread">
+                          <td>
+                            <a class="comic-name" href="/profile?username=<%= user_data[i].username %>"><%= user_data[i].username %></a>
+                            
+                          </td>
+                          <td class="nowrap chapter">
+                            <a class="visited" href="/adminacc?username=<%= user_data[i].username %>&&action=duyet" title="Duyet">Duyet<i class="ion-arrow-return-right" style="color: #29b6f6;"></i></a>
+                          </td>
+                        </tr>
+                        <%}%>
+                      </tbody>
                       
                     </table>
                   </div>

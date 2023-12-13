@@ -7,7 +7,7 @@ const month=['Jan',"Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","
 const router=express.Router();
 const fs = require('fs');
 router.get("/profile",async(req,res)=>{
-    const user=req.session.username;
+    const user= req.query.username || req.session.username;
     const isLoggedIn=req.session.isLoggedIn;
     const user_data=await User.findOne({username:user});
     const categoryy = req.session.catess;
@@ -87,7 +87,7 @@ router.get("/profile",async(req,res)=>{
     res.render('profile.ejs',{isLoggedIn,user,month,user_data,categoryy,result});}
 });});
 router.get("/profiledetail",async(req,res)=>{
-    const user=req.session.username;
+    const user= req.query.username || req.session.username;
     const isLoggedIn=req.session.isLoggedIn;
     const blogs=await Comic.find({author:user});
     const user_data=await User.findOne({username:user});
@@ -98,7 +98,7 @@ router.get("/profiledetail",async(req,res)=>{
     res.render('profiledetail.ejs',{isLoggedIn,user,month,user_data,categoryy});}
 })
 router.get("/profilefollow",async(req,res)=>{
-    const user=req.session.username;
+    const user= req.query.username || req.session.username;
     const isLoggedIn=req.session.isLoggedIn;
     const user_data=await User.findOne({username:user});
     const categoryy = req.session.catess;
@@ -171,7 +171,7 @@ router.get("/profilefollow",async(req,res)=>{
   });
 })
 router.get("/profileupload",async(req,res)=>{
-    const user=req.session.username;
+    const user= req.query.username || req.session.username;
     const isLoggedIn=req.session.isLoggedIn;
     const user_data=await User.findOne({username:user});
     const categoryy = req.session.catess;
@@ -181,7 +181,7 @@ router.get("/profileupload",async(req,res)=>{
     res.render('profileupload.ejs',{isLoggedIn,user,month,user_data,categoryy,result});}
 })
 router.get("/profilecomment",async(req,res)=>{
-    const user=req.session.username;
+    const user= req.query.username || req.session.username;
     const isLoggedIn=req.session.isLoggedIn;
     const blogs=await Comic.find({author:user});
     const user_data=await User.findOne({username:user});
@@ -192,7 +192,7 @@ router.get("/profilecomment",async(req,res)=>{
     res.render('profilecomment.ejs',{blogs,isLoggedIn,user,month,user_data,categoryy});}
 })
 router.get("/profilenotice",async(req,res)=>{
-    const user=req.session.username;
+    const user= req.query.username || req.session.username;
     const isLoggedIn=req.session.isLoggedIn;
     const blogs=await Comic.find({author:user});
     const user_data=await User.findOne({username:user});
@@ -203,7 +203,7 @@ router.get("/profilenotice",async(req,res)=>{
     res.render('profilenotice.ejs',{blogs,isLoggedIn,user,month,user_data,categoryy});}
 })
 router.get("/profilechangepass",async(req,res)=>{
-    const user=req.session.username;
+    const user= req.query.username || req.session.username;
     const isLoggedIn=req.session.isLoggedIn;
     const blogs=await Comic.find({author:user});
     const user_data=await User.findOne({username:user});

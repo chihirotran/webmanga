@@ -133,14 +133,27 @@
                     <table class="table">
                       <thead>
                         <tr>
-                          <th>
-                          </th>
-                          <th class="nowrap">Tên truyện</th>
+                          
+                          <th class="nowrap">Tên</th>
                           
                           <th class="nowrap">Bình luận</th>
                         </tr>
                       </thead>
-                      
+                      <tbody>
+                        <% for(let i in result){
+                          
+                        %>
+                        <tr class="unread">
+                          <td>
+                            <a class="comic-name" href="/profile?username=<%= result[i].name %>"><%= result[i].name %></a>
+                            
+                          </td>
+                          <td class="nowrap chapter">
+                            <a class="visited" href="/read:<%= result[i].chapter_id %>" title="<%= result[i].content %>"><%= result[i].content %><i class="ion-arrow-return-right" style="color: #29b6f6;"></i></a>
+                          </td>
+                        </tr>
+                        <%}%>
+                      </tbody>
                     </table>
                   </div>
                 </section>

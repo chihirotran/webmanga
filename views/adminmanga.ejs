@@ -118,7 +118,7 @@
                     Thao tác
                   </h2>
                   <div class="" >
-                    <a  class="btn btn-warning " href="#">Thêm truyện</a>
+                    <a  class="btn btn-warning " href="/create-comic">Thêm truyện</a>
                   </div>
                 </div>
               </div>
@@ -133,14 +133,43 @@
                     <table class="table">
                       <thead>
                         <tr>
-                          <th>
-                          </th>
+                          <th>#</th>
+                          <th class="nowrap">Ảnh</th>
                           <th class="nowrap">Tên truyện</th>
                           
                           <th class="nowrap">Số chương</th>
+                          <th class="nowrap">Thao Tác</th>
                         </tr>
                       </thead>
-                      
+                      <tbody>
+                        <% for(let i in result){
+                          let a = result[i].chapter_comic.length - 1;
+                        %>
+                        <tr class="unread">
+                          <td><%= i %></td>
+                          <td>
+                            <a class="image" href="/detailmanga:<%= result[i]._id %>">
+                              <img src="<%= result[i].linkimg %>" class="lazy" data-original="//st.ntcdntempv3.com/data/comics/44/khoi-tao-nhan-vat-phan-dien.jpg" alt="<%= result[i].title %>">
+                            </a>
+                          </td>
+                          <td>
+                            <a class="comic-name" href="/detailmanga:<%= result[i]._id %>"><%= result[i].title %></a>
+                            <div class="follow-action">
+                              
+                            </div>
+                          </td>
+                          <td class="nowrap chapter">
+                            <a class="visited" href="/read:<%= result[i].chapter_comic[a] %>" title="Chapter <%= result[i].chapter_comic.length%>">Chapter <%= result[i].chapter_comic.length%></a>
+                            <br>
+                            <time class="time"><%= result[i].time_upload %></time>
+                          </td>
+                          <td class="nowrap chapter">
+                            <a class="visited" href="/adminmanga?action=edit&&mid=<%= result[i]._id%>" title="">Sửa Truyện</a>
+                            <a class="visited" href="/adminmanga?action=del&&mid=<%= result[i]._id%>" title="">Xoá Truyện</a>
+                          </td>
+                        </tr>
+                        <%}%>
+                      </tbody>
                     </table>
                   </div>
                 </section>

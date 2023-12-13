@@ -7,7 +7,7 @@ const ObjectId = mongoose.Types.ObjectId;
 const fs = require('fs');
 const Coment = require('../model/comment');
 const Chapter = require('../model/Chapter');
-
+const Category = require('../model/Category');
 const router= express.Router();
 // router.post("/admin:id",async(req,res)=>{
 //     const isLoggedIn=req.session.isLoggedIn;
@@ -26,7 +26,22 @@ const router= express.Router();
 router.get("/adminacc",async(req,res)=>{
   const user=req.session.username;
   const isLoggedIn=req.session.isLoggedIn;
-  const user_data=await User.findOne({username:user});
+  const user_data=await User.find({});
+  // console.log(user_data);
+  if(req.query.action=="duyet"){
+    
+    await User.updateMany(
+      {
+        username: req.query.username
+      },
+      {
+        $set: {
+          role: 1
+        },
+      }
+    );
+    res.redirect("/adminacc");
+  }
   const categoryy = req.session.catess;
   const result = await Comic.find({author_id:user })
   res.render('adminacc.ejs',{isLoggedIn,user,user_data,categoryy,result});
@@ -36,7 +51,8 @@ router.get("/admincmt",async(req,res)=>{
   const isLoggedIn=req.session.isLoggedIn;
   const user_data=await User.findOne({username:user});
   const categoryy = req.session.catess;
-  const result = await Comic.find({author_id:user })
+  const result = await Coment.find({})
+  
   res.render('admincmt.ejs',{isLoggedIn,user,user_data,categoryy,result});
 })
 router.get("/admincraw",async(req,res)=>{
@@ -60,7 +76,25 @@ router.get("/adminmanga",async(req,res)=>{
   const isLoggedIn=req.session.isLoggedIn;
   const user_data=await User.findOne({username:user});
   const categoryy = req.session.catess;
-  const result = await Comic.find({author_id:user })
+  const result = await Comic.find({})
+  if(req.query.action=="del"){
+    
+    await Comic.deleteOne (
+      {
+        _id: req.query.mid
+      }
+    ); 
+    return  res.redirect("/adminmanga");
+  }
+  if(req.query.action=="edit"){
+    req.session.emid = req.query.mid;
+   const data=  await Comic.findOne (
+      {
+        _id: req.query.mid
+      }
+    ); 
+    return  res.render("edit-comic.ejs",{isLoggedIn,user,categoryy,data});
+  }
   res.render('adminmanga.ejs',{isLoggedIn,user,user_data,categoryy,result});
 })
 router.get("/admintag",async(req,res)=>{
@@ -68,7 +102,25 @@ router.get("/admintag",async(req,res)=>{
   const isLoggedIn=req.session.isLoggedIn;
   const user_data=await User.findOne({username:user});
   const categoryy = req.session.catess;
-  const result = await Comic.find({author_id:user })
+  const result = await Category.find({})
+  if(req.query.action=="del"){
+    
+    await Category.deleteOne (
+      {
+        _id: req.query.mid
+      }
+    ); 
+    return  res.redirect("/admintag");
+  }
+  if(req.query.action=="edit"){
+    req.session.emid = req.query.mid;
+   const data=  await Category.findOne (
+      {
+        _id: req.query.mid
+      }
+    ); 
+    return  res.render("edit-cate.ejs",{isLoggedIn,user,categoryy,data});
+  }
   res.render('admintag.ejs',{isLoggedIn,user,user_data,categoryy,result});
 })
 
