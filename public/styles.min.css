@@ -8096,6 +8096,15 @@ button.close {
     margin: 0 0 20px;
     min-height: 27px
 }
+.user-page .posttitle2 {
+    font-weight: 500;
+    border-left: 3px solid #ee2c74;
+    padding-left: 10px;
+    font-size: 18px;
+    line-height: 1.5;
+    margin: 0 0 20px;
+    min-height: 50px
+}
 
 .user-page .link {
     font-size: 13px;
