@@ -67,17 +67,46 @@ const crawlNameChapter =  (browser , url) => new Promise(async(resolve, reject) 
         reject(error);
     }
 })
-
-const crawllistChapter =  (browser , url) => new Promise(async(resolve, reject) => {
+const crawlInfoChapter =  (browser , url , VTinfo) => new Promise(async(resolve, reject) => {
     try {
         console.log("mo tab");
         let page = await browser.newPage();
         // await page.emulate({ viewport: {width: 920, height: 1080}, userAgent: '' });
         await page.goto(url)
         console.log("Tr Cap");
-        await page.waitForSelector('.list-chapter .chapter')
+        await page.waitForSelector(VTinfo)
         console.log("Load Xong");
-        const datalistchapter = await page.$$eval('.list-chapter .chapter', cb => {
+        const datainfochapter = await page.$$eval(VTinfo , cb => {
+            datainfochapter = cb.map(c => {
+                return{
+                    title: c.querySelector('h1').innerText,
+                    link: c.querySelector('img').src
+                }
+            })
+            return datainfochapter
+        })
+        
+
+        // console.log(datalistchapter);
+        await page.close();
+        console.log(">> Da Dong Browser");
+        resolve(datainfochapter)
+
+    } catch (error) {
+        console.log("loi datainfochapter: " + error);
+        reject(error);
+    }
+})
+const crawllistChapter =  (browser , url , VTlistchapter) => new Promise(async(resolve, reject) => {
+    try {
+        console.log("mo tab");
+        let page = await browser.newPage();
+        // await page.emulate({ viewport: {width: 920, height: 1080}, userAgent: '' });
+        await page.goto(url)
+        console.log("Tr Cap");
+        await page.waitForSelector(VTlistchapter)
+        console.log("Load Xong");
+        const datalistchapter = await page.$$eval(VTlistchapter, cb => {
             datalistchapter = cb.map(c => {
                 return{
                     chap: c.querySelector('a').innerText,
@@ -94,7 +123,7 @@ const crawllistChapter =  (browser , url) => new Promise(async(resolve, reject) 
         resolve(datalistchapter)
 
     } catch (error) {
-        console.log("loi category error1: " + error);
+        console.log("loi datalistchapter: " + error);
         reject(error);
     }
 })
@@ -103,14 +132,14 @@ function pad(n, len) {
     while (str.length < len) str = '0' + str;
     return str;
   }
-const crawSrcImgChapter =  (browser , url , folder,user) => new Promise(async(resolve, reject) => {
+const crawSrcImgChapter =  (browser , url , folder,user,VTread,VTread1) => new Promise(async(resolve, reject) => {
     try {
         console.log("mo tab");
         let page = await browser.newPage();
         // await page.emulate({ viewport: {width: 920, height: 1080}, userAgent: '' });
         await page.goto(url)
         console.log("Tr Cap: "+url);
-        await page.waitForSelector('.reading-detail.box_doc')
+        await page.waitForSelector(VTread)
         console.log("Load Xong");
         let linkimgss = [];
         async function uploadFileToS3(filePath,nameimg) {
@@ -149,7 +178,7 @@ const crawSrcImgChapter =  (browser , url , folder,user) => new Promise(async(re
             }
           }
         
-        const datascrimgchapter = await page.$$eval('.page-chapter', cb => {
+        const datascrimgchapter = await page.$$eval(VTread1, cb => {
             datascrimgchapter = cb.map(c => {
                 return{
                     src: c.querySelector('img').src
@@ -243,5 +272,6 @@ module.exports = {
     crawlNameChapter,
     crawllistChapter,
     crawImgChapter,
-    crawSrcImgChapter
+    crawSrcImgChapter,
+    crawlInfoChapter
 }

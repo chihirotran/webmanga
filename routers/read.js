@@ -37,7 +37,7 @@ router.get("/read:id",async(req,res)=>{
     const chapters=await Chapter.find({_id:id});
     let comment=await Comment.find({chapter_id:id});
     let dateNow = new Date();
-        
+    console.log(comment);
     
     // console.log(blogs);
     // console.log(comment);

@@ -26,13 +26,15 @@ var selectElement = document.getElementById("ctl00_mainContent_ddlSelectChapter"
 document.addEventListener("DOMContentLoaded", function() {
         var threshold = window.innerHeight / 3;
         var scrollTimeout;
-
+        const formElement = document.getElementById('followForm');
+        const comicId = formElement.dataset.comicId;
+        console.log(comicId);
         window.addEventListener("scroll", function() {
             clearTimeout(scrollTimeout);
             scrollTimeout = setTimeout(function() {
                 var url = window.location.href;
                 var message = url.substring(url.lastIndexOf(":") + 1);
-                var newUrl = "/history:" + message;
+                var newUrl = "/history:" + message +"?mid="+comicId;
 
                 fetch(newUrl, {
                     method: 'POST',
@@ -42,7 +44,8 @@ document.addEventListener("DOMContentLoaded", function() {
                     body: JSON.stringify({
                         isLoggedIn: true,
                         user: 'your_username',
-                        id: message
+                        id: message,
+                        comicId: comicId
                     })
                 }).then(response => {
                     // Xử lý phản hồi từ máy chủ nếu cần

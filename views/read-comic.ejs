@@ -65,33 +65,33 @@
                 </div>
                 <div class="error">
                     <a rel="nofollow" href="javascript:void(0)" class="alertError btn btn-warning">
-                        <i class="fa fa-exclamation-triangle">
+                        <i class="fas fa-exclamation-triangle">
                         </i> Báo lỗi</a>
                 </div>
                 <div class="alert alert-info error hidden-xs hidden-sm">
-                    <i class="fa fa-info-circle"></i> <em>Sử dụng mũi tên trái (←) hoặc phải (→) để chuyển chapter</em>
+                    <i class="fas fa-info-circle"></i> <em>Sử dụng mũi tên trái (←) hoặc phải (→) để chuyển chapter</em>
                     </div>
 
                     <div class="chapter-nav" id="chapterNav" style="z-index: auto;display: flex;position: static;top: auto;flex-direction: row;align-content: center;justify-content: center;">
                         <a class="home" href="/" title="Trang chủ">
-                            <i class="fa fa-home"></i>
+                            <i class="fas fa-home"></i>
                         </a>
                         <a class="home backward" href="https://www.nettruyenus.com/truyen-tranh/vo-luyen-dinh-phong-176960#nt_listchapter" title="<%= comic.title%>">
-                            <i class="fa fa-list"></i>
+                            <i class="fas fa-list"></i>
                         </a>
                         <a class="home changeserver" href="#" title="Đổi server">
-                            <i class="fa fa-undo change"></i>
+                            <i class="fas fa-undo change"></i>
                     
                         </a>
                         <% if(number <= 1) {%>
                         <a href="#" class="prev a_prev disabled">
-                            <i class="fa fa-chevron-left"></i>
+                            <i class="fas fa-chevron-left"></i>
                         </a>
                         <% }
                         if(number>1) {
                         %>
                         <a href="/read:<%= comic.chapter_comic[number-2] %>" class="prev a_prev">
-                            <i class="fa fa-chevron-left"></i>
+                            <i class="fas fa-chevron-left"></i>
                         </a>     
 
                         <% } %>
@@ -108,10 +108,10 @@
 
                         </select>
                         <a href="/read:<%= comic.chapter_comic[number] %>" class="next a_next">
-                            <i class="fa fa-chevron-right"></i>
+                            <i class="fas fa-chevron-right"></i>
                         </a>
-                        <form action="/follower:<%= comic._id %>" method="post">
-                            <button class="follow-link btn btn-success" type="submit"><i class="fa fa-heart"></i > 
+                        <form id="followForm" action="/follower:<%= comic._id %>" method="post" data-comic-id="<%= comic._id %>">
+                            <button class="follow-link btn btn-success" type="submit"><i class="fas fa-heart"></i > 
                                 <span>Theo dõi</span></button>
                         </form>
                         </div>    
@@ -143,8 +143,8 @@
             </div>
             <div class="top bottom">
                 <div class="chapter-nav-bottom text-center" id="chapterNavBottom">
-                <a href="#" class="btn btn-danger prev disabled"><em class="fa fa-chevron-left"></em> Chap trước</a>
-                <a href="https://www.nettruyenus.com/truyen-tranh/vo-luyen-dinh-phong/chap-2/361892" class="btn btn-danger next">Chap sau <em class="fa fa-chevron-right"></em></a>
+                <a href="#" class="btn btn-danger prev disabled"><em class="fas fa-chevron-left"></em> Chap trước</a>
+                <a href="https://www.nettruyenus.com/truyen-tranh/vo-luyen-dinh-phong/chap-2/361892" class="btn btn-danger next">Chap sau <em class="fas fa-chevron-right"></em></a>
                 </div>
                 <ul class="breadcrumb" itemscope="" itemtype="http://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem"><a href="/" class="itemcrumb" itemprop="item" itemtype="http://schema.org/Thing"><span itemprop="name">Trang chủ</span></a><meta itemprop="position" content="1"></li><li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem"><a href="/" class="itemcrumb" itemprop="item" itemtype="http://schema.org/Thing"><span itemprop="name">Thể loại</span></a><meta itemprop="position" content="2"></li><li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem"><a href="https://www.nettruyenus.com/truyen-tranh/vo-luyen-dinh-phong-176960" class="itemcrumb" itemprop="item" itemtype="http://schema.org/Thing"><span itemprop="name"><%= comic.title%></span></a><meta itemprop="position" content="3"></li><li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem"><a href="https://www.nettruyenus.com/truyen-tranh/vo-luyen-dinh-phong/chap-1/361803" class="itemcrumb active" itemprop="item" itemtype="http://schema.org/Thing"><span itemprop="name">Chapter <%= number %></span></a><meta itemprop="position" content="4"></li></ul>
                 <div class="social hidden">
@@ -160,12 +160,12 @@
                 <ul class="nav nav-tabs main-tab lazy-module" data-type="facebook">
                     <li class="active">
                     <a data-toggle="tab" href="#nt_comments">
-                    <i class="fa fa-comments"></i> NetTruyen (<span class="comment-count">1.154</span>)
+                    <i class="fas fa-comments"></i> NetTruyen (<span class="comment-count">1.154</span>)
                     </a>
                     </li>
                     <li>
                     <a data-toggle="tab" href="#fb_comments">
-                    <i class="fa fa-facebook-official"></i> Facebook (<span class="fb-comments-count_fluid_desktop" data-href="https://www.nettruyen.uk/truyen-tranh/vo-luyen-dinh-phong-17696" fb-xfbml-state="parsed" fb-iframe-plugin-query="app_id=745819368841087&amp;container_width=0&amp;count=true&amp;height=100&amp;href=https%3A%2F%2Fwww.nettruyen.uk%2Ftruyen-tranh%2Fvo-luyen-dinh-phong-17696&amp;locale=en_US&amp;sdk=joey&amp;version=v2.0&amp;width=550"><span class="fb_comments_count">24</span></span>)
+                    <i class="fas fa-facebook-official"></i> Facebook (<span class="fb-comments-count_fluid_desktop" data-href="https://www.nettruyen.uk/truyen-tranh/vo-luyen-dinh-phong-17696" fb-xfbml-state="parsed" fb-iframe-plugin-query="app_id=745819368841087&amp;container_width=0&amp;count=true&amp;height=100&amp;href=https%3A%2F%2Fwww.nettruyen.uk%2Ftruyen-tranh%2Fvo-luyen-dinh-phong-17696&amp;locale=en_US&amp;sdk=joey&amp;version=v2.0&amp;width=550"><span class="fb_comments_count">24</span></span>)
                     </a>
                     </li>
                     </ul>
@@ -179,7 +179,7 @@
                 
                 <div class="comment-wrapper">
                     <form action="/comment:<%= chapters._id %>" method="POST" >
-                    <div class="placeholder hidden">  
+                    <div class="placeholder">  
                         <input type="textarea" id="comment" name="comment" value="Mời bạn thảo luận, vui lòng không spam, share link kiếm tiền, thiếu lành mạnh,... để tránh bị khóa tài khoản" style="width: 100%;height: 100%; padding: 5px 10px;" >
                     </div>
                     <button class="btn btn-primary" type="submit">Gửi</button>
@@ -197,7 +197,7 @@
                             <img src="//st.ntcdntempv3.com/data/sites/1/useravatars/1169113.jpg?v=2790" alt="Ta T&amp;#234;n Ph&amp;#224;m">
                         </figure>
                         <div class="summary">
-                            <i class="fa fa-angle-left fa-arrow"></i>
+                            <i class="fas fa-angle-left fa-arrow"></i>
                             <div class="info">
                                 <div class="comment-header">
                                     <span class="authorname name-4"><%= comment[i].name %></span>
@@ -213,14 +213,14 @@
                             <ul class = comment-footer >
                                 <li>
                                     <span class="vote-up" onclick="voteComment(25512667, 1, this)">
-                                      <i class="fa fa-thumbs-up">
+                                      <i class="fas fa-thumbs-up">
                                       </i>
                                       <span class="vote-up-count"><%= comment[i].like %></span>
                                     </span>
                                 </li> 
                                 <li>
                                     <span class="vote-down" onclick="voteComment(25512667, 0, this)">
-                                      <i class="fa fa-thumbs-down">
+                                      <i class="fas fa-thumbs-down">
                                       </i>
                                       <span class="vote-down-count"><%= comment[i].dislike %></span>
                                     </span>
@@ -244,7 +244,7 @@
                                 %>
                                 <li>
                                     <abbr title="12/31/2022 9:29:10 PM">
-                                      <i class="fa fa-clock-o">
+                                      <i class="fas fa-clock-o">
                                         
                                       </i><%= timeChapterUpload %> phút trước</abbr>
                                 </li>      
@@ -255,7 +255,7 @@
                                 %>
                                 <li>
                                     <abbr title="12/31/2022 9:29:10 PM">
-                                      <i class="fa fa-clock-o">
+                                      <i class="fas fa-clock-o">
                                         
                                       </i><%= timeChapterUpload %> giờ trước</abbr>
                                 </li>      
@@ -265,7 +265,7 @@
                                  %>
                                  <li>
                                     <abbr title="12/31/2022 9:29:10 PM">
-                                      <i class="fa fa-clock-o">
+                                      <i class="fas fa-clock-o">
                                         
                                       </i><%= timeChapterUpload %> ngày trước</abbr>
                                 </li>
@@ -275,7 +275,7 @@
                                 %>
                                 <li>
                                     <abbr title="12/31/2022 9:29:10 PM">
-                                      <i class="fa fa-clock-o">
+                                      <i class="fas fa-clock-o">
                                         
                                       </i>><%= timeChapterUpload %></abbr>
                                 </li>

@@ -40,7 +40,11 @@ router.get("/detailmanga:id",async(req,res)=>{
     const isLoggedIn=req.session.isLoggedIn;
     const id=req.params.id.split(":")[1];
     const targetObjectId = new ObjectId(id);
-    // console.log(targetObjectId.toString());
+    const user_data = await User.findOne(
+      { username: user, 'history': { $elemMatch: { ComicID: targetObjectId } } },
+      {  'history.chapterId': 1 , _id: 0 }
+    );
+    console.log(user_data);
     Comic.aggregate([
         {
           $match: { "_id": targetObjectId  }
@@ -94,7 +98,7 @@ router.get("/detailmanga:id",async(req,res)=>{
           }
     let dateNow = new Date();
     let number = result[0].matchedChapters.length -1;
-    res.render('mangadetail.ejs',{detailcomic:result[0],isLoggedIn,user,month,categoryy,dateNow,number});
+    res.render('mangadetail.ejs',{detailcomic:result[0],isLoggedIn,user,month,categoryy,dateNow,number,user_data});
     
     // console.log(user_data);
     

@@ -40,7 +40,9 @@ router.post("/history:id",async(req,res)=>{
     const user=req.session.username;
     
     const id=req.params.id.split(":")[1];
+    const mid = req.query.mid;
     const targetObjectId = new ObjectId(id);
+    const targetMangaId = new ObjectId(mid);
     console.log(targetObjectId.toString());
     const u=await Chapter.findOneAndUpdate({_id:targetObjectId},
       {
@@ -48,7 +50,13 @@ router.post("/history:id",async(req,res)=>{
             __v:1,
           }
   });
-    User.find({ 'history': targetObjectId }, async (err, historys) => {
+  const c=await Comic.findOneAndUpdate({_id:targetMangaId},
+    {
+        $inc:{
+          __v:1,
+        }
+});
+  User.find({ 'history': { $elemMatch: { ComicID: targetMangaId } },username:user}, async (err, historys) => {
         if (err) {
             console.error(err);
             // Xử lý lỗi tại đây
@@ -56,26 +64,34 @@ router.post("/history:id",async(req,res)=>{
             if(historys.length === 0 ){
                 const u = await User.findOneAndUpdate({ username: user }, {
                     $push: {
-                        history: targetObjectId,
+                      history: {
+                        ComicID: targetMangaId,
+                        chapterId: targetObjectId,
+                    },
                     }
                 });
 
             }
             else {
-            console.log(historys);
+            // console.log(historys);
             console.log(historys[0].history.length);
             if (historys[0].history.length === 0) {
-                const u = await User.findOneAndUpdate({ username: user }, {
-                    $push: {
-                        history: targetObjectId,
-                    }
-                });
+              const u = await User.findOneAndUpdate({ username: user }, {
+                $push: {
+                  history: {
+                    ComicID: targetMangaId,
+                    chapterId: targetObjectId,
+                },
+                }
+            });
                 // Xử lý sau khi thực hiện findOneAndUpdate
             } else {
-                // Xử lý khi tìm thấy kết quả
-            }
+              console.log(targetMangaId);
+              await User.findOneAndUpdate(
+                { 'history': { $elemMatch: { ComicID: targetMangaId } },username:user},
+                { $set: { 'history.$.chapterId': targetObjectId } },);
         }}
-    });
+   } });
 
 })
 router.get("/following",async(req,res)=>{

@@ -1,23 +1,18 @@
 const { default: mongoose } = require("mongoose");
 const  Mongoose = require("mongoose");
 
-const chapterSchema=new Mongoose.Schema({
+const sourceSchema=new Mongoose.Schema({
     id: {
         type: Number,
         bigint: true,
         auto: true,
         primaryKey: true
     },
-    chapter_id: {
-        type: Number,
-        bigint: true,
-        auto: true,     
-    },
-    title: {
+    linksorce: {
         type:String,
-        required:true
+        required:true  
     },
-    description: {
+    titlesource: {
         type:String,
         required:true
     },
@@ -25,15 +20,15 @@ const chapterSchema=new Mongoose.Schema({
         type:String,
         required:true
     },
-    author_id: {
+    chapter: {
         type:String,
         required:true
     },
-    chapnumber:{
+    number:{
         type: Number,
         bigint: true,
         required:true
     }
 });
 
-module.exports=mongoose.model('Chapter',chapterSchema);
+module.exports=mongoose.model('Source',sourceSchema);

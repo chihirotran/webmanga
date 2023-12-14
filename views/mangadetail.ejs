@@ -98,7 +98,12 @@
                       <b>412.927</b> Lượt theo dõi</span>
                   </div>
                   <div class="read-action mrt10">
-                    
+                    <% if(user_data) { %>
+                      <a class="btn btn-warning mrb5"
+                      href="/read:<%= user_data.history[0].chapterId %>">
+                      Đọc tiếp</a>
+
+                      <%}%>
                     <a class="btn btn-warning mrb5"
                       href="/read:<%= detailcomic.matchedChapters[0]._id %>">
                       Đọc từ đầu</a>
