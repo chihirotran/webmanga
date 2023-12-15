@@ -20,7 +20,20 @@ router.post("/follower:id",async(req,res)=>{
                 follower:targetObjectId,
             }
     });
-
+    res.redirect('back');
+})
+router.post("/unfollower:id",async(req,res)=>{
+  const isLoggedIn=req.session.isLoggedIn;
+  const user=req.session.username;
+  const id=req.params.id.split(":")[1];
+  const targetObjectId = new ObjectId(id);
+  const u=await User.findOneAndUpdate({username:user},
+      {
+          $pull:{
+              follower:targetObjectId,
+          }
+  });
+  res.redirect('back');
 })
 router.post("/mangadetail:id",async(req,res)=>{
   const isLoggedIn=req.session.isLoggedIn;

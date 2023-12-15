@@ -59,6 +59,18 @@ document.addEventListener("DOMContentLoaded", function() {
     }); 
 
 
+
+
+
+    function maskEmail(email) {
+        if (!email) return '';
+      
+        const atIndex = email.indexOf('@');
+        if (atIndex <= 0) return email;
+      
+        const maskedPart = email.substring(0, atIndex - 2) + '**' + email.substring(atIndex);
+        return maskedPart;
+      }
 ////////////////////////////////
 //#region Validate
 

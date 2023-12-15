@@ -140,7 +140,17 @@
                           </div>
                           <div class="form-group">
                             <label for="ctl00_mainContent_txtEmail" class="control-label">Địa chỉ email</label>
-                            <input name="email" type="text" value="<%= user_data.email %>"
+                            <% 
+                            function maskEmail(email) {
+                              if (!email) return '';
+                            
+                              const atIndex = email.indexOf('@');
+                              if (atIndex <= 0) return email;
+                            
+                              const maskedPart = email.substring(0, atIndex - 6) + '**' + email.substring(atIndex);
+                              return maskedPart;}
+                            %>
+                            <input name="email" type="text" value="<%= maskEmail(user_data.email) %>"
                               id="ctl00_mainContent_txtEmail" disabled="disabled" tabindex="10"
                               class="aspNetDisabled form-control" />
                             <span id="ctl00_mainContent_regexEmail" style="display:none;"></span>

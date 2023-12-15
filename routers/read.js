@@ -17,6 +17,7 @@ const fs = require('fs');
 router.get("/read:id",async(req,res)=>{
     const isLoggedIn=req.session.isLoggedIn;
     const user=req.session.username;
+    
     const categoryy = req.session.catess;
     const id=req.params.id.split(":")[1];
     // const targetObjectId = new ObjectId(id)
@@ -31,17 +32,25 @@ router.get("/read:id",async(req,res)=>{
     // console.log(comic);
     // Xử lý kết quả tại đây
     // console.log(id);
-    
+    const comicuserfollew = await User.findOne(
+        { username: user, 'follower':  comic[0]._id },
+        {  'follower': 1 , _id: 0 }
+      );
     let number = comic[0].chapter_comic.findIndex(objId => objId.toString() === targetObjectId.toString());
     number += 1;
     const chapters=await Chapter.find({_id:id});
     let comment=await Comment.find({chapter_id:id});
     let dateNow = new Date();
-    console.log(comment);
-    
+    console.log(comicuserfollew);
+    console.log(comic[0]._id);
+    let userFollow =false;
+    if (comicuserfollew && comicuserfollew.follower.includes(comic[0]._id)) {
+        // Có giá trị trong mảng follower giống với comic[0]._id
+         userFollow =true
+      }
     // console.log(blogs);
     // console.log(comment);
-    res.render('read-comic.ejs',{chapters:chapters[0],comic:comic[0],isLoggedIn,user,categoryy,comment,month,number,dateNow});
+    res.render('read-comic.ejs',{chapters:chapters[0],comic:comic[0],isLoggedIn,user,categoryy,comment,month,number,dateNow,userFollow});
   }
 });
     
