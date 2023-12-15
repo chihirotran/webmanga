@@ -16,6 +16,10 @@ const sourceSchema=new Mongoose.Schema({
         type:String,
         required:true
     },
+    listchapter: {
+        type:String,
+        required:true
+    },
     linkimg: {
         type:String,
         required:true

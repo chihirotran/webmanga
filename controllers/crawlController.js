@@ -126,7 +126,7 @@ exports.crawlController = async (browserInstance,req, res) => {
 
           linksorce: req.body.link,
           titlesource: VTinfo,
-          chapter: VTlistchapter,
+          listchapter: VTlistchapter,
           linkimg: VTread, // Đường dẫn hình ảnh sau khi đã tải lên S3
           chapter: VTread1,
           number: ListChapter.length,

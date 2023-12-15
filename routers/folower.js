@@ -475,6 +475,7 @@ router.post("/comment:id",async(req,res)=>{
     dislike: 0,
 })
 
+res.redirect('back');
 })
 
 

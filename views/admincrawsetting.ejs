@@ -135,15 +135,54 @@
                         <tr>
                           <th>
                           </th>
-                          <th class="nowrap">Tên truyện</th>
+                          <th class="nowrap">Link</th>
                           
-                          <th class="nowrap">Số chương</th>
+                          <th class="nowrap">Title source</th>
 
-                          <th class="nowrap">Ngày cập nhật</th>
+                          <th class="nowrap">linkimg</th>
+                          <th class="nowrap">List Chapter</th>
+                          <th class="nowrap">chapter</th>
+                          <th class="nowrap">Số Chap</th>   
+                          <th class="nowrap">Thao Tác</th>   
                     
                         </tr>
                       </thead>
-                      
+                      <tbody>
+                        <% for(let i in result){
+                          
+                        %>
+                        <tr class="unread">
+                          <td>
+                            <a class="comic-name" href=""><%= i+1 %></a>
+                            
+                          </td>
+                          <td>
+                            <a class="comic-name" href=""><%= result[i].linksorce %></a>
+                            
+                          </td>
+                          <td>
+                            <a class="comic-name" href=" "><%= result[i].titlesource %></a>
+                          </td>
+                          <td>
+                            <a class="comic-name" href=" "><%= result[i].linkimg %></a>
+                          </td>
+                          <td>
+                            <a class="comic-name" href=" "><%= result[i].listchapter %></a>
+                          </td>
+                          <td>
+                            <a class="comic-name" href=" "><%= result[i].chapter %></a>
+                          </td>
+                          <td>
+                            <a class="comic-name" href=" "><%= result[i].number %></a>
+                          </td>
+                          <td>
+                            <a class="comic-name" href="/admincraw?link=<%= result[i].linksorce %>&&titlesource=<%= result[i].titlesource %>&&linkimg=<%= result[i].linkimg %>&&listchapter=<%= result[i].listchapter %>&&chapter=<%= result[i].chapter %>">Sửa</a>
+                            <a class="comic-name" href=" ">Cập Nhật</a>
+                          </td>
+                          
+                        </tr>
+                        <%}%>
+                      </tbody>
                     </table>
                   </div>
                 </section>
