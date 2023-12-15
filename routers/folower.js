@@ -111,68 +111,72 @@ router.get("/following",async(req,res)=>{
     const isLoggedIn=req.session.isLoggedIn;
     const user=req.session.username;
     const categoryy = req.session.catess;
+    const pageSize = 2; // Số lượng truyện trên mỗi trang
+    const page = parseInt(req.query.page) || 1; // Trang hiện tại, mặc định là trang 1
     Comic.aggregate([
-          {
-            $lookup: {
-              from: 'users',
-              localField: '_id',
-              foreignField: 'follower',
-              as: 'matchedChaptersUser'
-            }
-          },  
-          {
-            $unwind: "$chapter_comic" // Mở rộng mảng chapter_comic
-          },
-          {
-            $lookup: {
-              from: 'chapters',
-              localField: 'chapter_comic',
-              foreignField: '_id',
-              as: 'matchedChapters'
-            }
-          },
-          
-          {
-            $group: {
-              _id: "$_id",
-              title: { $first: "$title" },
-              description: { $first: "$description" },
-              linkimg: { $first: "$linkimg" },
-              time_upload: { $first: "$time_upload " },
-              author_id: { $first: "$author_id"},
-              // Thêm các trường khác của collection Comic mà bạn muốn bao gồm
-              matchedChapters: { $push: "$matchedChapters" },
-              matchedChaptersUser: { $push: "$matchedChaptersUser" }
-            }
-          },
-          {
-            $project: {
-              _id: 1,
-              title: 1,
-              description: 1,
-              linkimg: 1,
-              time_upload: 1,
-              author_id: 1,
-              matchedChapters: {
-                $reduce: {
-                  input: "$matchedChapters",
-                  initialValue: [],
-                  in: { $concatArrays: ["$$value", "$$this"] }
-                },
-                $reduce: {
-                  input: "$matchedChaptersUser",
-                  initialValue: [],
-                  in: { $concatArrays: ["$$value", "$$this"] }
-                }               
-              },
-              
-            }
-          }
-        ], (err, result) => {
-        if (err) {
-          console.error(err);
-          return;
+      {
+        $lookup: {
+          from: 'users',
+          localField: '_id',
+          foreignField: 'follower',
+          as: 'matchedChaptersUser'
         }
+      },  
+      {
+        $lookup: {
+          from: 'chapters',
+          localField: 'chapter_comic',
+          foreignField: '_id',
+          as: 'matchedChapters'
+        }
+      },
+      {
+          $match: {
+              matchedChaptersUser: { $ne: [] },
+              "matchedChaptersUser.username": user
+               // Lọc những comic có matchedUsers không rỗng (có ít nhất một follower)
+            }
+      },
+      {
+        $group: {
+          _id: "$_id",
+          title: { $first: "$title" },
+          description: { $first: "$description" },
+          linkimg: { $first: "$linkimg" },
+          time_upload: { $first: "$time_upload " },
+          author_id: { $first: "$author_id"},
+          // Thêm các trường khác của collection Comic mà bạn muốn bao gồm
+          matchedChapters: { $push: "$matchedChapters" },
+          matchedChaptersUser: { $push: "$matchedChaptersUser" }
+        }
+      },
+      {
+        $project: {
+          _id: 1,
+          title: 1,
+          description: 1,
+          linkimg: 1,
+          time_upload: 1,
+          author_id: 1,
+          matchedChapters: {
+              $reduce: {
+                input: "$matchedChapters",
+                initialValue: [],
+                in: { $concatArrays: ["$$value", "$$this"] }
+              }
+                            
+            },
+          
+        }
+      },
+      {
+        $sort: { time_upload: -1 } // Sắp xếp theo trường time_upload, 1 là tăng dần, -1 là giảm dần
+      }
+    ], (err, result) => {
+    if (err) {
+      console.error(err);
+      return;
+    }
         // let test_key = 0;    
         // let test_1 = null; 
         // for (const item of result) {
@@ -187,12 +191,20 @@ router.get("/following",async(req,res)=>{
         
       
     // console.log(l,l-5);
-    for(let i in result){
-        // console.log(result[i]);
+    // for(let i in result){
+    //     console.log(result[i]);
+    //     console.log("********************************");
+    //     console.log(i);
         
-    }
+    // }
     let dateNow = new Date();
+    const totalItems = result.length; // Tổng số truyện từ kết quả aggregate
+    const totalPages = Math.ceil(totalItems / pageSize); // Tổng số trang
 
+    const startIndex = (page - 1) * pageSize; // Vị trí bắt đầu của trang hiện tại
+    const endIndex = startIndex + pageSize; // Vị trí kết thúc của trang hiện tại
+
+    const comicsOnPage = result.slice(startIndex, endIndex); // Truyện trên trang hiện tại
     const jsonResult = JSON.stringify(result);
     fs.writeFile('comic.json', jsonResult, 'utf8', (err) => {
       if (err) {
@@ -201,7 +213,7 @@ router.get("/following",async(req,res)=>{
         console.log('Kết quả đã được ghi vào tệp tin comic.json');
       }
     });
-    res.render("following.ejs",{isLoggedIn,user,dateNow,result,categoryy});});
+    res.render("following.ejs",{isLoggedIn,user,dateNow,result,categoryy,comicspage: comicsOnPage,totalPages,currentPage: page});});
 });
 router.get("/mangadetail",async(req,res)=>{
   const isLoggedIn=req.session.isLoggedIn;
@@ -303,70 +315,71 @@ router.get("/history",async(req,res)=>{
     const isLoggedIn=req.session.isLoggedIn;
     const user=req.session.username;
     const categoryy = req.session.catess;
+    const pageSize = 2; // Số lượng truyện trên mỗi trang
+    const page = parseInt(req.query.page) || 1; // Trang hiện tại, mặc định là trang 1
     Comic.aggregate([
       {
-          $unwind: "$chapter_comic" // Mở rộng mảng chapter_comic
-        },
-        {
-          $lookup: {
-            from: 'chapters',
-            localField: 'chapter_comic',
-            foreignField: '_id',
-            as: 'matchedChapters'
+        $lookup: {
+          from: 'users',
+          localField: 'chapter_comic',
+          foreignField: 'history.chapterId',
+          as: 'matchedChaptershistory'
+        }
+      },
+      {
+        $lookup: {
+          from: 'chapters',
+          localField: 'chapter_comic',
+          foreignField: '_id',
+          as: 'matchedChapters'
+        }
+      },
+      {
+        $match: {
+          matchedChaptershistory: { $ne: [] },
+            "matchedChaptershistory.username": user
+             // Lọc những comic có matchedUsers không rỗng (có ít nhất một follower)
           }
-        },
-        {
-          $unwind: "$matchedChapters" // Mở rộng mảng chapter_comic
-        },
-        {
-          $lookup: {
-            from: 'users',
-            localField: 'matchedChapters._id',
-            foreignField: 'history',
-            as: 'matchedChaptersUser'
-          }
-        },
-        {
-          $group: {
-            _id: "$_id",
-            title: { $first: "$title" },
-            description: { $first: "$description" },
-            linkimg: { $first: "$linkimg" },
-            time_upload: { $first: "$time_upload " },
-            author_id: { $first: "$author_id"},
-            // Thêm các trường khác của collection Comic mà bạn muốn bao gồm
-            matchedChapters: { $push: "$matchedChapters" },
-            matchedChaptersUser: { $push: "$matchedChaptersUser" }
-          }
-        },
-        {
-          $project: {
-            _id: 1,
-            title: 1,
-            description: 1,
-            linkimg: 1,
-            time_upload: 1,
-            author_id: 1,
-            matchedChapters: {
+    },
+      {
+        $group: {
+          _id: "$_id",
+          title: { $first: "$title" },
+          description: { $first: "$description" },
+          linkimg: { $first: "$linkimg" },
+          time_upload: { $first: "$time_upload " },
+          author_id: { $first: "$author_id"},
+          // Thêm các trường khác của collection Comic mà bạn muốn bao gồm
+          matchedChapters: { $push: "$matchedChapters" },
+        }
+      },
+      {
+        $project: {
+          _id: 1,
+          title: 1,
+          description: 1,
+          linkimg: 1,
+          time_upload: 1,
+          author_id: 1,
+          matchedChapters: {
               $reduce: {
                 input: "$matchedChapters",
                 initialValue: [],
                 in: { $concatArrays: ["$$value", "$$this"] }
-              },
-              $reduce: {
-                input: "$matchedChaptersUser",
-                initialValue: [],
-                in: { $concatArrays: ["$$value", "$$this"] }
-              }               
+              }
+                            
             },
-            
-          }
+          
         }
-      ], (err, result) => {
-        if (err) {
-          console.error(err);
-          return;
-        }
+      },
+      {
+        $sort: { time_upload: -1 } // Sắp xếp theo trường time_upload, 1 là tăng dần, -1 là giảm dần
+      }
+    ], (err, result) => {
+    if (err) {
+      console.error(err);
+      return;
+    }
         // let test_key = 0;    
         // let test_1 = null; 
         // for (const item of result) {
@@ -378,15 +391,29 @@ router.get("/history",async(req,res)=>{
         // }
         // Hiển thị thông tin của các bản ghi trong kết quả
         // console.log(result);
-        
+        const jsonResult = JSON.stringify(result);
+        // fs.writeFile('comic.json', jsonResult, 'utf8', (err) => {
+        //   if (err) {
+        //     console.error(err);
+        //   } else {
+        //     console.log('Kết quả đã được ghi vào tệp tin comic.json');
+        //   }
+        // });
       
     // console.log(l,l-5);
-    for(let i in result){
-        // console.log(result[i]);
+    // for(let i in result){
+    //     // console.log(result[i]);
         
-    }
+    // }
+    const totalItems = result.length; // Tổng số truyện từ kết quả aggregate
+    const totalPages = Math.ceil(totalItems / pageSize); // Tổng số trang
+
+    const startIndex = (page - 1) * pageSize; // Vị trí bắt đầu của trang hiện tại
+    const endIndex = startIndex + pageSize; // Vị trí kết thúc của trang hiện tại
+
+    const comicsOnPage = result.slice(startIndex, endIndex); // Truyện trên trang hiện tại
     let dateNow = new Date();
-    res.render("history.ejs",{isLoggedIn,user,dateNow,result,categoryy});});
+    res.render("history.ejs",{isLoggedIn,user,dateNow,result,categoryy,comicspage: comicsOnPage,totalPages,currentPage: page});});
 });
 
 router.get("/search:Name",async(req,res)=>{
