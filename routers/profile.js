@@ -178,6 +178,14 @@ router.get("/profileupload",async(req,res)=>{
     const result = await Comic.find({author_id:user })
     if(!isLoggedIn) {res.render('login.ejs',{isLoggedIn,user,categoryy})}
     else{
+      const jsonResult = JSON.stringify(result);
+      fs.writeFile('comic.json', jsonResult, 'utf8', (err) => {
+        if (err) {
+          console.error(err);
+        } else {
+          console.log('Kết quả đã được ghi vào tệp tin comic.json');
+        }
+      });
     res.render('profileupload.ejs',{isLoggedIn,user,month,user_data,categoryy,result});}
 })
 router.get("/profilecomment",async(req,res)=>{
