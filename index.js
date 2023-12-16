@@ -27,8 +27,8 @@ const adminRoutes=require("./routers/admin");
 // const fs = require('fs');
 
 
-const MONGODB_URI="mongodb+srv://chihirotran:Trungtran1501@cluster0.9by4fi3.mongodb.net/?retryWrites=true&w=majority";
-// const MONGODB_URI="mongodb://127.0.0.1:27017/test";
+// const MONGODB_URI="mongodb+srv://chihirotran:Trungtran1501@cluster0.9by4fi3.mongodb.net/?retryWrites=true&w=majority";
+const MONGODB_URI="mongodb://127.0.0.1:27017/test";
 
 const store=new MongoDBStore({uri:MONGODB_URI,collection:"sessions"});
 
@@ -47,7 +47,7 @@ app.get('/',async(req,res)=>{
     let comics1 = await Comic.find({}).sort({ __v: -1 });
     let dateNow = new Date();
     let l=comics.length;
-    const pageSize = 2; // Số lượng truyện trên mỗi trang
+    const pageSize = 10; // Số lượng truyện trên mỗi trang
     const page = parseInt(req.query.page) || 1; // Trang hiện tại, mặc định là trang 1
 
     Comic.aggregate([

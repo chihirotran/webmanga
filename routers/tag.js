@@ -15,7 +15,8 @@ router.get("/tag:Name",async(req,res)=>{
   // const targetObjectId = new ObjectId(id)
   // const comic=await Comic.find({ chapter_comic: targetObjectId });
   // console.log(comic.title);
-
+  const pageSize = 10; // Số lượng truyện trên mỗi trang
+    const page = parseInt(req.query.page) || 1; // Trang hiện tại, mặc định là trang 1
   Comic.aggregate([
     {
       $unwind: "$tag"
@@ -87,10 +88,16 @@ if (err) {
         console.log('Kết quả đã được ghi vào tệp tin comic.json');
       }
     });
-  
+    const totalItems = result.length; // Tổng số truyện từ kết quả aggregate
+    const totalPages = Math.ceil(totalItems / pageSize); // Tổng số trang
+
+    const startIndex = (page - 1) * pageSize; // Vị trí bắt đầu của trang hiện tại
+    const endIndex = startIndex + pageSize; // Vị trí kết thúc của trang hiện tại
+
+    const comicsOnPage = result.slice(startIndex, endIndex); 
   // console.log(blogs);
   let dateNow = new Date();
-  res.render('search-tag.ejs',{isLoggedIn,user,categoryy,dateNow,result});
+  res.render('search-tag.ejs',{isLoggedIn,user,categoryy,dateNow,result,comicspage: comicsOnPage,totalPages,currentPage: page,});
 }
 });});
 module.exports=router;
