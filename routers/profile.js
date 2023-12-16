@@ -178,6 +178,24 @@ router.get("/profileupload",async(req,res)=>{
     const result = await Comic.find({author_id:user })
     if(!isLoggedIn) {res.render('login.ejs',{isLoggedIn,user,categoryy})}
     else{
+      if(req.query.action=="del"){
+    
+        await Comic.deleteOne (
+          {
+            _id: req.query.mid
+          }
+        ); 
+        return  res.redirect("/profileupload");
+      }
+      if(req.query.action=="edit"){
+        req.session.emid = req.query.mid;
+       const data=  await Comic.findOne (
+          {
+            _id: req.query.mid
+          }
+        ); 
+        return  res.render("edit-comic.ejs",{isLoggedIn,user,categoryy,data});
+      }
       const jsonResult = JSON.stringify(result);
       fs.writeFile('comic.json', jsonResult, 'utf8', (err) => {
         if (err) {

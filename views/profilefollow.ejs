@@ -149,10 +149,11 @@
                       <td>
                         <a class="comic-name" href="/detailmanga:<%= result[i]._id %>"><%= result[i].title %></a>
                         <div class="follow-action">
-                          <a href="javascript:void(0)" class="follow-link" data-id="26412" data-key="657864d6-fe3d-b67e-3e34-8322e199b1be">
-                            <i class="fa fa-times">
-                            </i> Bỏ theo dõi
-                        </a>
+                          <form id="followForm" action="/unfollower:<%= result[i]._id %>" method="post" data-comic-id="<%= result[i]._id %>">
+                            <button class="follow-link btn btn-danger" type="submit"><i class="fas fa-times"></i > 
+                              <i class="fas fa-times"></i> Bỏ theo dõi</button>
+                        </form>
+                          
                         </div>
                       </td>
                       <td class="nowrap chapter">

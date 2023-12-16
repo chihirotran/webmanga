@@ -152,7 +152,7 @@
                       <th></th>
                       <th class="nowrap">Tên truyện</th>
                       <th class="nowrap">Chap mới nhất</th>
-                      <th class="nowrap">Lượt xem</th>
+                      <th class="nowrap">Thao Tác</th>
                       <th></th>
                     </tr>
                   </thead>
@@ -169,16 +169,19 @@
                       <td>
                         <a class="comic-name" href="/detailmanga:<%= result[i]._id %>"><%= result[i].title %></a>
                         <div class="follow-action">
-                          <a href="javascript:void(0)" class="follow-link" data-id="26412" data-key="657864d6-fe3d-b67e-3e34-8322e199b1be">
-                            <i class="fa fa-times">
-                            </i> Bỏ theo dõi
-                        </a>
+                          
                         </div>
                       </td>
                       <td class="nowrap chapter">
                         <a class="visited" href="/read:<%= result[i].chapter_comic[a] %>" title="Chapter <%= result[i].chapter_comic.length%>">Chapter <%= result[i].chapter_comic.length%></a>
                         <br>
                         <time class="time"><%= result[i].time_upload %></time>
+                      </td>
+                      <td class="nowrap chapter">
+                        <a class="visited" href="/profileupload?action=edit&&mid=<%= result[i]._id%>" title="">Sửa Truyện</a>
+                        <a class="visited" href="/profileupload?action=del&&mid=<%= result[i]._id%>" title="">Xoá Truyện</a>
+                        <br>
+                        
                       </td>
                     </tr>
                     <%}%>
