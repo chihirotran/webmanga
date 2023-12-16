@@ -13,11 +13,11 @@
     <%- include('partials/header') %>
 
     <div class="container1">
-        <div class="forms-container1">
+        <div class="forms-container1 ocubg">
             
             <div class="signin-signup">
                 <form action="/login" method="POST" class="sign-in-form">
-                    <h2 class="title">Đăng nhập</h2>
+                    <h2 class="title" style="color: white;">Đăng nhập</h2>
                     <div class="input-field">
                         <i class="fas fa-user"></i>
                         <input type="text" name="email" placeholder="Email" />
@@ -27,47 +27,29 @@
                         <input type="password" name="password" placeholder="Password" />
                     </div>
                     <input type="submit" value="Đăng nhập" class="btn solid" />
-                    <p class="social-text">Hoặc dùng các tài khoản khác</p>
-                    <div class="social-media">
-                        <a href="#" class="social-icon">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                        <a href="#" class="social-icon">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="#" class="social-icon">
-                            <i class="fab fa-google"></i>
-                        </a>
-                        <a href="#" class="social-icon">
-                            <i class="fab fa-linkedin-in"></i>
-                        </a>
-                    </div>
+                    
+                    
                 </form>
         </div>
         </div>
 
-        <div class="panels-container1">
+        <div class="panels-container1 ">
             <div class="panel left-panel">
-                <div class="content">
-                    <h3>Chưa có tài khoản?</h3>
-                    <p>
+                <div class="content ">
+                    <h3 style="font-size: 50px;">Chưa có tài khoản?</h3>
+                    <p style="font-size: 15px;">
                         Vậy thì hãy đăng kí ngay
-                        Để có thể đọc và thẽo dõi những bộ truyện độc nhất!
+                        để có thể đọc và theo dõi những bộ truyện độc nhất!
                     </p>
                     <button class="btn transparent"  id="sign-up-btn">
-                        <a style="color: black;"="/signup" >Đăng kí</a>
+                        <a style="color: black;" href="/signup" >Đăng kí</a>
                     </button>
                 </div>
                 <img src="img/log.svg" class="image" alt="" />
             </div>
-            <div class="panel right-panel">
-                <div class="content">
-                    
-                    <h3>One of us ?</h3>
-                    <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
-                        laboriosam ad deleniti.
-                    </p>
+            <div class="panel right-panel ">
+                <div class="content ">
+
                     <button class="btn transparent" id="sign-in-btn">
                         Sign in
                     </button>

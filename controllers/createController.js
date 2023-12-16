@@ -180,7 +180,7 @@ exports.createCate=async(req,res)=>{
     })
     // u[0].posts.push(p._id);
     // console.log(u);
-    res.redirect("/");
+    res.redirect("/admintag");
 }
 exports.createChapter = async (req, res) => {
     const isLoggedIn = req.session.isLoggedIn;

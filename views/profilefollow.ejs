@@ -85,12 +85,12 @@
           <section class="user-sidebar clearfix">
             <div class="userinfo clearfix">
               <figure>
-                <img alt src="//st.nettruyenus.com/data/sites/1/useravatars/723879.jpg?v=1221"
+                <img alt src="<%= user_data.linkimg %>"
                   class="avatar user-img">
                 <figcaption>
                   <div class="title">Tài khoản của</div>
                   <div class="user-name">
-                    vuonglam28122002
+                    <%= user_data.username %>
                   </div>
                 </figcaption>
               </figure>
@@ -99,22 +99,22 @@
           </section>
           <nav class="user-sidelink clearfix">
             <ul>
-              <li class="hvr-sweep-to-right "><a href="/profile"><i
-                    class="fa "></i> Thông tin chung</a></li>
-              <li class="hvr-sweep-to-right"><a href="/profiledetail"><i
-                    class="fa "></i> Thông tin tài khoản</a></li>
-              <li class="hvr-sweep-to-right active"><a href="/profilefollow"><i
-                    class="fa "></i> Truyện theo dõi</a></li>
-              <li class="hvr-sweep-to-right"><a href="/profileupload"><i
-                    class="fa "></i> Truyện đã đăng</a></li>
-              <li class="hvr-sweep-to-right"><a href="/profilecomment"><i
-                    class="fa "></i> Bình luận</a></li>
-              <li class="hvr-sweep-to-right"><a href="/profilenotice"><i
-                    class="fa "></i> Thông báo</a></li>
-              <li class="hvr-sweep-to-right"><a href="/profilechangepass"><i
-                    class="fa "></i> Đổi mật khẩu</a></li>
-              <li class="hvr-sweep-to-right"><a href="#"><i
-                    class="fa "></i> Thoát</a></li>
+              <li class="hvr-sweep-to-right "><a href="/profile"><i class="fas fa-tachometer"></i> Thông tin
+                  chung</a></li>
+              <li class="hvr-sweep-to-right "><a href="/profiledetail"><i class="fas fa-info-circle"></i> Thông tin
+                  tài khoản</a>
+              </li>
+              <li class="hvr-sweep-to-right active"><a href="/profilefollow"><i class="fas fa-book"></i> Truyện theo
+                  dõi</a></li>
+              <li class="hvr-sweep-to-right "><a href="/profileupload"><i class="fas fa-list"></i> Truyện đã
+                  đăng</a></li>
+              <li class="hvr-sweep-to-right  "><a href="/profilecomment"><i class="fas fa-comments "></i> Bình
+                  luận</a></li>
+              <li class="hvr-sweep-to-right "><a href="/profilenotice"><i class="fas fa-comment"></i> Thông báo</a>
+              </li>
+              <li class="hvr-sweep-to-right "><a href="/profilechangepass"><i class="fas fa-lock"></i> Đổi mật
+                  khẩu</a></li>
+              <li class="hvr-sweep-to-right"><a href="/logout"><i class="fas fa-sign-out"></i> Thoát</a></li>
             </ul>
           </nav>
         </div>
