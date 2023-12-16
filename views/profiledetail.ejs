@@ -85,12 +85,12 @@
           <section class="user-sidebar clearfix">
             <div class="userinfo clearfix">
               <figure>
-                <img alt src="//st.nettruyenus.com/data/sites/1/useravatars/723879.jpg?v=1221"
+                <img alt src="<%= user_data.linkimg %>"
                   class="avatar user-img">
                 <figcaption>
                   <div class="title">Tài khoản của</div>
                   <div class="user-name">
-                    vuonglam28122002
+                    <%= user_data.username %>
                   </div>
                 </figcaption>
               </figure>
@@ -113,7 +113,7 @@
                     class="fa "></i> Thông báo</a></li>
               <li class="hvr-sweep-to-right"><a href="/profilechangepass"><i
                     class="fa "></i> Đổi mật khẩu</a></li>
-              <li class="hvr-sweep-to-right"><a href="#"><i
+              <li class="hvr-sweep-to-right"><a href="/logout"><i
                     class="fa "></i> Thoát</a></li>
             </ul>
           </nav>
