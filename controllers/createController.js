@@ -304,12 +304,23 @@ exports.createChapterS3 = async (req, res) => {
               const u = await Comic.findOneAndUpdate({ title: req.body.type },
                 {
                   $push: {
-                    chapter_comic: p._id,
-                    time_upload:new Date(),
+                    chapter_comic: p._id
+                  
                   },
                 }
               );
-          
+              const z = await Comic.updateMany
+              (
+                {
+                  title: req.body.type
+                },
+                {
+                  $set: {
+                    time_upload:new Date(),
+                    
+                  },
+                }
+              );
               res.redirect('/');
             })
             .catch((error) => {
