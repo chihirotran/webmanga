@@ -10,19 +10,28 @@ const Chapter = require('../model/Chapter');
 const Category = require('../model/Category');
 const Souce = require('../model/SourceManga')
 const router= express.Router();
-// router.post("/admin:id",async(req,res)=>{
-//     const isLoggedIn=req.session.isLoggedIn;
-//     const user=req.session.username;
-//     const id=req.params.id.split(":")[1];
-//     const targetObjectId = new ObjectId(id);
-//     const u=await User.findOneAndUpdate({username:user},
-//         {
-//             $push:{
-//                 admin:targetObjectId,
-//             }
-//     });
+router.post("/swap-chapter",async(req,res)=>{
+    const isLoggedIn=req.session.isLoggedIn;
+    const user=req.session.username;
+    const vtswap = req.query.cid;
+    const vtswap1 = req.body.title - 1;
+    const docId = req.query.mid;
+    const dataaaaaaaaa = await Comic.findOne({ _id: docId })
+    const swap1 = dataaaaaaaaa.chapter_comic[vtswap1];
+    const swap2 = dataaaaaaaaa.chapter_comic[vtswap];
+    
+    await Comic.updateOne(
+      { _id: docId },
+      {
+        $set: {
+          [`chapter_comic.${vtswap}`]: swap1,
+          [`chapter_comic.${vtswap1}`]: swap2
+        }
+      }
+    );
+    res.redirect('back');
 
-// })
+})
 
 router.get("/adminacc",async(req,res)=>{
   const user=req.session.username;
@@ -144,14 +153,16 @@ router.get("/adminchapter",async(req,res)=>{
     ); 
     return  res.redirect("/adminchapter?mid="+req.query.mid);
   }
-  if(req.query.action=="edit"){
-    req.session.emid = req.query.mid;
+  if(req.query.action=="swap"){
+    const vtswap = req.query.cid;
+    const mid = req.query.mid;
    const data=  await Comic.findOne (
       {
         _id: req.query.mid
       }
     ); 
-    return  res.render("edit-comic.ejs",{isLoggedIn,user,categoryy,data});
+    const chaptermax = data.chapter_comic.length;
+    return  res.render("swap-chapter.ejs",{isLoggedIn,user,categoryy,data,vtswap,chaptermax,mid});
   }
   res.render('adminchapter.ejs',{isLoggedIn,user,user_data,categoryy,result});}
 })

