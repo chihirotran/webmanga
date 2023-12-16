@@ -133,7 +133,9 @@
               </div>
               <nav>
                 <ul>
-                  <% for (let index = detailcomic.matchedChapters.length -1 ; index >= 0; index--){ %>
+                  <% console.log(detailcomic);
+                  if(!detailcomic){
+                  for (let index = detailcomic.matchedChapters.length -1 ; index >= 0; index--){ %>
                   <li class="row less">
                     <div class="col-xs-5 chapter">
                       <a href="/read:<%= detailcomic.matchedChapters[index]._id %>"
@@ -142,7 +144,7 @@
                     <div class="col-xs-4 text-center no-wrap small"><%= detailcomic.matchedChapters[index].time_upload %></div>
                     <div class="col-xs-3 text-center small">136.714</div>
                   </li>
-                  <% } %>
+                  <% }} %>
                 </ul>
                 <a class="hidden view-more" href="#">
                   <i class="fa fa-plus">

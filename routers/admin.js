@@ -125,6 +125,36 @@ router.get("/adminmanga",async(req,res)=>{
   }
   res.render('adminmanga.ejs',{isLoggedIn,user,user_data,categoryy,result});}
 })
+router.get("/adminchapter",async(req,res)=>{
+  const user=req.session.username;
+  const isLoggedIn=req.session.isLoggedIn;
+  const user_data=await User.findOne({username:user});
+  const categoryy = req.session.catess;
+  const useradmin = await User.findOne({ username: user, $or: [{ role: 2 }, { admin: true }] });
+  if(!useradmin){
+    res.redirect("/")
+  }else{
+  const result = await Comic.findOne({_id: req.query.mid})
+  if(req.query.action=="del"){
+    
+    await Chapter.deleteOne (
+      {
+        _id: req.query.mid
+      }
+    ); 
+    return  res.redirect("/adminchapter?mid="+req.query.mid);
+  }
+  if(req.query.action=="edit"){
+    req.session.emid = req.query.mid;
+   const data=  await Comic.findOne (
+      {
+        _id: req.query.mid
+      }
+    ); 
+    return  res.render("edit-comic.ejs",{isLoggedIn,user,categoryy,data});
+  }
+  res.render('adminchapter.ejs',{isLoggedIn,user,user_data,categoryy,result});}
+})
 router.get("/admintag",async(req,res)=>{
   const user=req.session.username;
   const isLoggedIn=req.session.isLoggedIn;

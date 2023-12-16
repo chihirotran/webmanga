@@ -97,6 +97,7 @@ router.get("/detailmanga:id",async(req,res)=>{
             return;
           }
     let dateNow = new Date();
+    console.log(result);
     let number = result[0].matchedChapters.length -1;
     res.render('mangadetail.ejs',{detailcomic:result[0],isLoggedIn,user,month,categoryy,dateNow,number,user_data});
     
