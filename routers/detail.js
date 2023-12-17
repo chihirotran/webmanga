@@ -40,6 +40,24 @@ router.get("/detailmanga:id",async(req,res)=>{
     const isLoggedIn=req.session.isLoggedIn;
     const id=req.params.id.split(":")[1];
     const targetObjectId = new ObjectId(id);
+    const comicread = await Comic.find({ 'chapter_comic': targetObjectId });
+    console.log(comicread);
+    const comicuserfollew = await User.findOne(
+      { username: user, 'follower':  comicread[0]._id },
+      {  'follower': 1 , _id: 0 }
+    );
+  let number = comicread[0].chapter_comic.findIndex(objId => objId.toString() === targetObjectId.toString());
+  number += 1;
+  const chapters=await Chapter.find({_id:id});
+  let comment=await Comment.find({chapter_id:id});
+  let dateNow = new Date();
+  console.log(comicuserfollew);
+  console.log(comicread[0]._id);
+  let userFollow =false;
+  if (comicuserfollew && comicuserfollew.follower.includes(comicread[0]._id)) {
+      // Có giá trị trong mảng follower giống với comic[0]._id
+       userFollow =true
+    }
     const user_data = await User.findOne(
       { username: user, 'history': { $elemMatch: { ComicID: targetObjectId } } },
       {  'history.chapterId': 1 , _id: 0 }
@@ -99,7 +117,7 @@ router.get("/detailmanga:id",async(req,res)=>{
     let dateNow = new Date();
     console.log(result);
     let number = result[0].matchedChapters.length -1;
-    res.render('mangadetail.ejs',{detailcomic:result[0],isLoggedIn,user,month,categoryy,dateNow,number,user_data});
+    res.render('mangadetail.ejs',{detailcomic:result[0],isLoggedIn,userFollow,user,month,categoryy,dateNow,number,user_data});
     
     // console.log(user_data);
     

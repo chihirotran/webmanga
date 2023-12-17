@@ -23,6 +23,7 @@ router.get("/read:id",async(req,res)=>{
     // const targetObjectId = new ObjectId(id)
     // const comic=await Comic.find({ chapter_comic: targetObjectId });
     // console.log(comic.title);
+    const comicread = await Comic.find({ 'chapter_comic': targetObjectId });
     const targetObjectId = new ObjectId(id);
    Comic.find({ 'chapter_comic': targetObjectId }, async (err, comic) => {
   if (err) {

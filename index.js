@@ -27,8 +27,8 @@ const adminRoutes=require("./routers/admin");
 // const fs = require('fs');
 
 
-// const MONGODB_URI="mongodb+srv://chihirotran:Trungtran1501@cluster0.9by4fi3.mongodb.net/?retryWrites=true&w=majority";
-const MONGODB_URI="mongodb://127.0.0.1:27017/test";
+const MONGODB_URI="mongodb+srv://chihirotran:Trungtran1501@cluster0.9by4fi3.mongodb.net/?retryWrites=true&w=majority";
+// const MONGODB_URI="mongodb://127.0.0.1:27017/test";
 
 const store=new MongoDBStore({uri:MONGODB_URI,collection:"sessions"});
 
@@ -140,7 +140,10 @@ app.get('/',async(req,res)=>{
     // if(l-5>0)
     //     l1=l-5;
     // comics=comics.slice(l1,l);
-    res.render("homepage.ejs",{isLoggedIn,user,categoryy,comics,comics1,month,dateNow,comicspage: comicsOnPage,totalPages,currentPage: page,});});
+    res.render("homepage.ejs",{isLoggedIn,user,categoryy,comics,comics1,month,dateNow,comicspage: comicsOnPage,totalPages,currentPage: page,});
+    
+  });
+    
 });
 
 app.use(registerRoutes);

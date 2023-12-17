@@ -115,7 +115,7 @@
               <div class="col-xs-12 col-md-6" >
                 <div class="account-info clearfix">
                   <h2 class="posttitle" >
-                    Thao tác
+                    Công cụ
                   </h2>
                   <div class="" >
                     <a  class="btn btn-warning " href="/create-comic">Thêm truyện</a>
@@ -163,9 +163,12 @@
                             <br>
                             <time class="time"><%= result[i].time_upload %></time>
                           </td>
-                          <td class="nowrap chapter">
-                            <a class="visited" href="/adminmanga?action=edit&&mid=<%= result[i]._id%>" title="">Sửa Truyện</a>
-                            <a class="visited" href="/adminmanga?action=del&&mid=<%= result[i]._id%>" title="">Xoá Truyện</a>
+                          <td class="follow-action" >
+                            <a class="follow-link" href="/adminmanga?action=edit&&mid=<%= result[i]._id%>" title=""><i class="fas fa-info-circle">
+                            </i> Sửa Truyện</a>
+                            <br>
+                            <a class="follow-link" href="/adminmanga?action=del&&mid=<%= result[i]._id%>" title=""> <i class="fas fa-times">
+                            </i> Xoá Truyện</a>
                           </td>
                         </tr>
                         <%}%>

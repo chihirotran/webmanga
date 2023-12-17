@@ -35,7 +35,7 @@
                   <ul class="list-info">
                     <li class="author row">
                       <p class="name col-xs-4">
-                        <i class="fa fa-user">
+                        <i class="fas fa-user">
                         </i> Tác giả
                       </p>
                       <p class="col-xs-8"><a
@@ -43,14 +43,14 @@
                     </li>
                     <li class="status row">
                       <p class="name col-xs-4">
-                        <i class="fa fa-rss">
+                        <i class="fas fa-rss">
                         </i> Tình trạng
                       </p>
                       <p class="col-xs-8">Đang tiến hành</p>
                     </li>
                     <li class="kind row">
                       <p class="name col-xs-4">
-                        <i class="fa fa-tags">
+                        <i class="fas fa-tags">
                         </i> Thể loại
                       </p>
                       <p class="col-xs-8">
@@ -61,41 +61,36 @@
                     </li>
                     <li class="row">
                       <p class="name col-xs-4">
-                        <i class="fa fa-eye">
+                        <i class="fas fa-eye">
                         </i> Lượt xem
                       </p>
                       <p class="col-xs-8">7.834.707</p>
                     </li>
                   </ul>
-                  <div class="mrt5 mrb10" itemscope itemtype="http://schema.org/Book">
-                    <a href="/detailmanga:<%= detailcomic.title %>">
-                      <span itemprop="name"><%= detailcomic.title %></span>
-                    </a>
+                  <div class="mrt5 mrb10" itemscope itemtype="http://schema.org/Book" style="margin-left: 10px;">
+                    
                     <span itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating"> Xếp hạng:
                       <span itemprop="ratingValue">3.5</span>/<span itemprop="bestRating">5</span> - <span
                         itemprop="ratingCount">8222</span> Lượt đánh giá.</span>
                   </div>
-                  <div class="row rating">
-                    <div class="col-xs-6">
-                      <div class="star" data-id="77628" data-rating="3.5" data-allowrating="true">
-                      </div>
-                    </div>
-                    <div class="col-xs-6 lazy-module" data-type="facebook" style="overflow:hidden">
-                      <div data-share="true" data-show-faces="true" data-action="like" data-layout="button_count"
-                        class="fb-like fb_iframe_widget" fb-xfbml-state="rendered"
-                        fb-iframe-plugin-query="action=like&amp;app_id=745819368841087&amp;container_width=0&amp;layout=button_count&amp;locale=vi_VN&amp;sdk=joey&amp;share=true&amp;show_faces=true"
-                        data-href="https://www.nettruyenus.com/truyen-tranh/ta-nuoi-quy-o-tran-ma-ty-77628">
-                      </div>
-                    </div>
-                  </div>
                   <div class="follow">
-                    <a class="follow-hidden btn btn-success" href="#">
-                      <i class="fa fa-heart">
-                      </i>
-                      <span>Theo dõi</span>
-                    </a>
+                    <%
+                        if(!userFollow){
+                        %>
+                        <form id="followForm" action="/follower:<%= comic._id %>" method="post" data-comic-id="<%= comic._id %>">
+                            <button class="follow-link btn btn-success" type="submit"><i class="fas fa-heart"></i > 
+                                <span>Theo dõi</span></button>
+                        </form>
+                        <%}
+                        else{
+                        %>
+                        
+                        </div> <form id="followForm" action="/unfollower:<%= comic._id %>" method="post" data-comic-id="<%= comic._id %>">
+                            <button class="follow-link btn btn-danger" type="submit"><i class="fas fa-times"></i > 
+                                <span>Bỏ theo dõi</span></button>
+                        </form><%}%> 
                     <span>
-                      <b>412.927</b> Lượt theo dõi</span>
+                      <b>79.229</b> Lượt theo dõi</span>
                   </div>
                   <div class="read-action mrt10">
                     <% if(user_data) { %>
@@ -116,14 +111,14 @@
             </div>
             <div class="detail-content">
               <h3 class="list-title">
-                <i class="fa fa-file-text-o">
+                <i class="fas fa-file-text-o">
                 </i> Nội dung
               </h3>
               <p>Truyện được cập nhật sớm tại nettruyen!</p>
             </div>
             <div class="list-chapter" id="nt_listchapter">
               <h2 class="list-title clearfix">
-                <i class="fa fa-list">
+                <i class="fas fa-list">
                 </i> Danh sách chương
               </h2>
               <div class="row heading">
@@ -133,13 +128,14 @@
               </div>
               <nav>
                 <ul>
-                  <% console.log(detailcomic);
-                  if(!detailcomic){
+                  <p>ádasd</p>
+                  <% console.log(detailcomic );
+                  if(!detailcomic ){
                   for (let index = detailcomic.matchedChapters.length -1 ; index >= 0; index--){ %>
-                  <li class="row less">
+                  <li class="row ">
                     <div class="col-xs-5 chapter">
                       <a href="/read:<%= detailcomic.matchedChapters[index]._id %>"
-                        data-id="948690">Chapter <%= index %></a>
+                        data-id="948690" >Chapter <%= index %>  </a>
                     </div>
                     <div class="col-xs-4 text-center no-wrap small"><%= detailcomic.matchedChapters[index].time_upload %></div>
                     <div class="col-xs-3 text-center small">136.714</div>
@@ -147,7 +143,7 @@
                   <% }} %>
                 </ul>
                 <a class="hidden view-more" href="#">
-                  <i class="fa fa-plus">
+                  <i class="fas fa-plus">
                   </i> Xem thêm</a>
               </nav>
             </div>

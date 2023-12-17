@@ -137,7 +137,8 @@
               </div>
               <input type="submit" name="ctl00$mainContent$btnRegister" value="Đăng ký thành Tác giả/Dịch giả"
                 id="ctl00_mainContent_btnRegister" class="btn btn-warning" />
-                <a  class="btn btn-warning " href="/create-chapter">Đăng truyện</a>
+                <a  class="btn btn-warning " href="/create-chapter">Đăng chap</a>
+                <a  class="btn btn-warning " href="/create-comic">Đăng truyện</a>
             </div>
             <h1 class="postname">
               Truyện đã đăng
@@ -170,7 +171,7 @@
                         <a class="comic-name" href="/detailmanga:<%= result[i]._id %>"><%= result[i].title %></a>
                         <div class="follow-action">
                           <a href="javascript:void(0)" class="follow-link" data-id="26412" data-key="657864d6-fe3d-b67e-3e34-8322e199b1be">
-                            <i class="fa fa-times">
+                            <i class="fas fa-times">
                             </i> Bỏ theo dõi
                         </a>
                         </div>
@@ -180,9 +181,12 @@
                         <br>
                         <time class="time"><%= result[i].time_upload %></time>
                       </td>
-                      <td class="nowrap chapter">
-                        <a class="visited" href="/profileupload?action=edit&&mid=<%= result[i]._id%>" title="">Sửa Truyện</a>
-                        <a class="visited" href="/profileupload?action=del&&mid=<%= result[i]._id%>" title="">Xoá Truyện</a>
+                      <td class="follow-action" style="text-align: center;">
+                        <a class="follow-link" href="/profileupload?action=edit&&mid=<%= result[i]._id%>" title=""><i class="fas fa-info-circle">
+                        </i> Sửa </a> 
+                        <br>
+                        <a class="follow-link" href="/profileupload?action=del&&mid=<%= result[i]._id%>" title=""><i class="fas fa-times">
+                        </i> Xoá </a>
                         <br>
                         
                       </td>

@@ -110,6 +110,7 @@ router.post("/history:id",async(req,res)=>{
 router.get("/following",async(req,res)=>{
     const isLoggedIn=req.session.isLoggedIn;
     const user=req.session.username;
+    let comics1 = await Comic.find({}).sort({ __v: -1 });
     const categoryy = req.session.catess;
     const pageSize = 2; // Số lượng truyện trên mỗi trang
     const page = parseInt(req.query.page) || 1; // Trang hiện tại, mặc định là trang 1
@@ -213,7 +214,7 @@ router.get("/following",async(req,res)=>{
         console.log('Kết quả đã được ghi vào tệp tin comic.json');
       }
     });
-    res.render("following.ejs",{isLoggedIn,user,dateNow,result,categoryy,comicspage: comicsOnPage,totalPages,currentPage: page});});
+    res.render("following.ejs",{isLoggedIn,user,dateNow,result,comics1,categoryy,comicspage: comicsOnPage,totalPages,currentPage: page});});
 });
 router.get("/mangadetail",async(req,res)=>{
   const isLoggedIn=req.session.isLoggedIn;
@@ -315,6 +316,7 @@ router.get("/history",async(req,res)=>{
     const isLoggedIn=req.session.isLoggedIn;
     const user=req.session.username;
     const categoryy = req.session.catess;
+    let comics1 = await Comic.find({}).sort({ __v: -1 });
     const pageSize = 2; // Số lượng truyện trên mỗi trang
     const page = parseInt(req.query.page) || 1; // Trang hiện tại, mặc định là trang 1
     Comic.aggregate([
@@ -413,11 +415,12 @@ router.get("/history",async(req,res)=>{
 
     const comicsOnPage = result.slice(startIndex, endIndex); // Truyện trên trang hiện tại
     let dateNow = new Date();
-    res.render("history.ejs",{isLoggedIn,user,dateNow,result,categoryy,comicspage: comicsOnPage,totalPages,currentPage: page});});
+    res.render("history.ejs",{isLoggedIn,user,comics1,dateNow,result,categoryy,comicspage: comicsOnPage,totalPages,currentPage: page});});
 });
 
 router.get("/search:Name",async(req,res)=>{
   const isLoggedIn=req.session.isLoggedIn;
+  let comics1 = await Comic.find({}).sort({ __v: -1 });
   const user=req.session.username;
   const categoryy = req.session.catess;
   const Name=req.params.Name.split(":")[1];
@@ -488,7 +491,7 @@ if (err) {
   const comicsOnPage = result.slice(startIndex, endIndex); 
   // console.log(blogs);
   let dateNow = new Date();
-  res.render('search.ejs',{isLoggedIn,user,categoryy,dateNow,result,comicspage: comicsOnPage,totalPages,currentPage: page,});
+  res.render('search.ejs',{isLoggedIn,user,categoryy,dateNow,comics1,result,comicspage: comicsOnPage,totalPages,currentPage: page,});
 }
 });});
 
